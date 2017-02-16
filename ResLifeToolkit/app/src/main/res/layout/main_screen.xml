@@ -9,18 +9,18 @@
         android:layout_height="wrap_content">
 
         <Button
-            android:text="Button"
+            android:text="Programming"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/button4"
-            android:layout_weight="1" />
+            android:id="@+id/pfBTN"
+            android:layout_weight="2" />
 
         <Button
-            android:text="Button"
+            android:text="Duty Logs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/button3"
-            android:layout_weight="1" />
+            android:id="@+id/dlBTN"
+            android:layout_weight="2" />
     </LinearLayout>
 
     <LinearLayout
@@ -29,17 +29,17 @@
         android:layout_height="wrap_content">
 
         <Button
-            android:text="Button"
+            android:text="IJs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/button6"
+            android:id="@+id/ijBTN"
             android:layout_weight="1" />
 
         <Button
-            android:text="Button"
+            android:text="Documents"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/button5"
+            android:id="@+id/docBTN"
             android:layout_weight="1" />
     </LinearLayout>
 </LinearLayout>
