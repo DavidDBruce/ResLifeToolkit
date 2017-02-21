@@ -2,45 +2,35 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
-    <LinearLayout
-        android:orientation="horizontal"
+    <Button
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:id="@+id/pfBTN"
+        android:layout_weight="1"
+        android:text="Programming"
+        android:onClick="programmingForms" />
 
-        <Button
-            android:text="Programming"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/pfBTN"
-            android:layout_weight="2" />
-
-        <Button
-            android:text="Duty Logs"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/dlBTN"
-            android:layout_weight="2" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
+    <Button
+        android:text="Duty Logs"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:id="@+id/dlBTN"
+        android:layout_weight="1" />
 
-        <Button
-            android:text="IJs"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/ijBTN"
-            android:layout_weight="1" />
+    <Button
+        android:text="Interaction Journals"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ijBTN"
+        android:layout_weight="1" />
 
-        <Button
-            android:text="Documents"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/docBTN"
-            android:layout_weight="1" />
-    </LinearLayout>
+    <Button
+        android:text="Documents"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/docBTN"
+        android:layout_weight="1" />
+
 </LinearLayout>
