@@ -3,7 +3,7 @@ package com.example.a33528.reslifetoolkit;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class DutyLogList extends AppCompatActivity {
+public class DutyLogListActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

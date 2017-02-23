@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
     }
     public void dutyLogs(View view)
     {
-        Intent intent = new Intent(this,DutyLogList.class);
+        Intent intent = new Intent(this,DutyLogListActivity.class);
         startActivity(intent);
     }
 }

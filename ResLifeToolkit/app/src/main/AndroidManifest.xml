@@ -16,7 +16,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ProgrammingListActivity" />
-        <activity android:name=".DutyLogList"></activity>
+        <activity android:name=".DutyLogListActivity"></activity>
     </application>
 
 </manifest>
