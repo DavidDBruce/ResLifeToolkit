@@ -1,5 +1,8 @@
 package com.example.a33528.reslifetoolkit;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Created by s522706 on 2/23/2017.
  */
@@ -15,6 +18,9 @@ public class ProgrammingForm {
     private double cost;
     private int attendees;
     private String goals;
+    private boolean isEvent;
+    private String createDate = "";
+    private String modDate = "";
 
     public ProgrammingForm()
     {
@@ -33,6 +39,10 @@ public class ProgrammingForm {
         this.cost = cost;
         this.attendees = attendees;
         this.goals = goals;
+        isEvent = true;
+
+        createDate = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
+        modDate = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
     }
 
     public String getRaName() {
@@ -79,9 +89,7 @@ public class ProgrammingForm {
         return eventDescription;
     }
 
-    public void setEventDescription(String eventDescription) {
-        this.eventDescription = eventDescription;
-    }
+    public void setEventDescription(String eventDescription) {this.eventDescription = eventDescription;}
 
     public String getEventPublicity() {
         return eventPublicity;
@@ -114,4 +122,14 @@ public class ProgrammingForm {
     public void setGoals(String goals) {
         this.goals = goals;
     }
+
+    public boolean getIsEvent() {return isEvent;}
+
+    public void setEvent(boolean event) {isEvent = event;}
+
+    public String getCreateDate() {return createDate;}
+
+    public String getModDate() {return modDate;}
+
+    public void setModDate(String modDate) {this.modDate = modDate;}
 }
