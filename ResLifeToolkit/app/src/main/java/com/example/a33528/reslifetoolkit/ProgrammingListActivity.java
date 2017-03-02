@@ -22,14 +22,17 @@ public class ProgrammingListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.generic_list);
 
+        //Test input for application testing
         ProgrammingForm testForm = new ProgrammingForm("David","South",2,"Smash Night","Fun","Playing Smash Bros", "Flyers and Emails", 0.0, 12, "yes");
         ArrayList<ProgrammingForm> formsList = new ArrayList<ProgrammingForm>();
         formsList.add(testForm);
 
+        //Test Input for ListView concept proof
         //String[] names = {"David","Cheyanne","Sadie","Priyanka","Addi"};
-
-        ListAdapter programmingListLA = new ArrayAdapter<ProgrammingForm>(this,R.layout.generic_list,R.id.formTypeTV,formsList);
         //ListAdapter programmingListLA = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,names);
+
+        //Initializing ArrayAdapter
+        ListAdapter programmingListLA = new ArrayAdapter<ProgrammingForm>(this,R.layout.generic_list,R.id.formTypeTV,formsList);
         ListView programmingLV = (ListView) findViewById(R.id.genericLV);
         programmingLV.setAdapter(programmingListLA);
 
@@ -39,6 +42,7 @@ public class ProgrammingListActivity extends AppCompatActivity {
 
 class ProgrammingAdapter extends ArrayAdapter<ProgrammingForm>
 {
+    //ArrayAdapter to set the correct information in a ListView for ProgrammingForms
 
     ArrayList<ProgrammingForm> inputForms = new ArrayList<ProgrammingForm>();
 
@@ -67,6 +71,8 @@ class ProgrammingAdapter extends ArrayAdapter<ProgrammingForm>
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ProgrammingForm curForm = inputForms.get(position);
+
+        //Retrieving TextViews from the list item XML, then setting them to their corresponding values.
 
         TextView date = (TextView) convertView.findViewById(R.id.formDateTV);
         TextView type = (TextView) convertView.findViewById(R.id.formTypeTV);

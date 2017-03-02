@@ -41,9 +41,13 @@ public class ProgrammingForm {
         this.goals = goals;
         isEvent = true;
 
+        //Initializing dates
+
         createDate = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
         modDate = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
     }
+
+    //Getters and setters for necessary items.
 
     public String getRaName() {
         return raName;
