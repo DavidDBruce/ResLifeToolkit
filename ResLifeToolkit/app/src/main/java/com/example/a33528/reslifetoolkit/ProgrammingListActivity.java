@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.DataSetObserver;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -32,7 +33,7 @@ public class ProgrammingListActivity extends AppCompatActivity {
         //ListAdapter programmingListLA = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,names);
 
         //Initializing ArrayAdapter
-        ListAdapter programmingListLA = new ArrayAdapter<ProgrammingForm>(this,R.layout.generic_list,R.id.formTypeTV,formsList);
+        ListAdapter programmingListLA = new ArrayAdapter<ProgrammingForm>(this,R.layout.generic_list,R.id.formDateTV,formsList);
         ListView programmingLV = (ListView) findViewById(R.id.genericLV);
         programmingLV.setAdapter(programmingListLA);
 
@@ -40,15 +41,15 @@ public class ProgrammingListActivity extends AppCompatActivity {
     }
 }
 
-class ProgrammingAdapter extends ArrayAdapter<ProgrammingForm>
-{
+class ProgrammingAdapter extends ArrayAdapter<ProgrammingForm> {
     //ArrayAdapter to set the correct information in a ListView for ProgrammingForms
+    Context c;
 
     ArrayList<ProgrammingForm> inputForms = new ArrayList<ProgrammingForm>();
 
     public ProgrammingAdapter(Context context, int resource, int textViewResourceId, ArrayList<ProgrammingForm> objects) {
         super(context, resource, textViewResourceId, objects);
-
+        c = context;
         inputForms = objects;
     }
 
@@ -60,22 +61,26 @@ class ProgrammingAdapter extends ArrayAdapter<ProgrammingForm>
 
     @Override
     public ProgrammingForm getItem(int position) {
-        return null;
+        return inputForms.get(position);
     }
 
     @Override
     public long getItemId(int position) {
-        return 0;
+        return position;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+
+//        LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View row = View.inflate(c,R.layout.programming_list_item,null);
+
         ProgrammingForm curForm = inputForms.get(position);
 
         //Retrieving TextViews from the list item XML, then setting them to their corresponding values.
 
-        TextView date = (TextView) convertView.findViewById(R.id.formDateTV);
-        TextView type = (TextView) convertView.findViewById(R.id.formTypeTV);
+        TextView date = (TextView) row.findViewById(R.id.formDateTV);
+        TextView type = (TextView) row.findViewById(R.id.formTypeTV);
 
         if(curForm.getIsEvent())
         {
@@ -88,7 +93,7 @@ class ProgrammingAdapter extends ArrayAdapter<ProgrammingForm>
 
         date.setText(curForm.getCreateDate());
 
-        return null;
+        return convertView;
     }
 }
 

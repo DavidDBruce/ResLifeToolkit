@@ -49,7 +49,7 @@
             android:text="Event"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/textView3"
+            android:id="@+id/eventTV"
             android:layout_weight="1"
             android:textAlignment="textEnd" />
 
@@ -63,7 +63,7 @@
             android:text="Passive"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/textView2"
+            android:id="@+id/passiveTV"
             android:layout_weight="1"
             android:textAlignment="textStart" />
     </LinearLayout>
