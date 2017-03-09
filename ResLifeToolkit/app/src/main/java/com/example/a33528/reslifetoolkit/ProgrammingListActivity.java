@@ -53,26 +53,9 @@ class ProgrammingAdapter extends ArrayAdapter<ProgrammingForm> {
         inputForms = objects;
     }
 
-
-    @Override
-    public int getCount() {
-        return inputForms.size();
-    }
-
-    @Override
-    public ProgrammingForm getItem(int position) {
-        return inputForms.get(position);
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return position;
-    }
-
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-//        LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View row = View.inflate(c,R.layout.programming_list_item,null);
 
         ProgrammingForm curForm = inputForms.get(position);
