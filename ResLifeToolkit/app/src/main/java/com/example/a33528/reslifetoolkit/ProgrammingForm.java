@@ -43,7 +43,7 @@ public class ProgrammingForm {
 
         //Initializing dates
 
-        createDate = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
+        createDate = new SimpleDateFormat("dd/MM/yyyy").format(new Date()).toString();
         modDate = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
     }
 

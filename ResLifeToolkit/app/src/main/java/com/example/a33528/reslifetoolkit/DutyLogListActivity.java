@@ -8,6 +8,6 @@ public class DutyLogListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.generic_list);
+        setContentView(R.layout.programming_form_list);
     }
 }
