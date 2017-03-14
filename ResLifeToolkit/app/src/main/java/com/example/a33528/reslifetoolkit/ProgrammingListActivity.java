@@ -83,7 +83,7 @@ class ProgrammingAdapter extends ArrayAdapter<ProgrammingForm> {
 
         date.setText("Today");
 
-        return convertView;
+        return view;
     }
 }
 
