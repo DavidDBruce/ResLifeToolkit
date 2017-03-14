@@ -4,16 +4,22 @@
     android:layout_height="wrap_content">
 
     <TextView
-        android:text="Type"
+        android:id="@+id/formTypeTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/formTypeTV"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        android:paddingLeft="14dp"
+        android:text="Type"
+        android:textColor="@android:color/black"
+        android:textSize="18sp" />
 
     <TextView
-        android:text="Date"
+        android:id="@+id/formDateTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/formDateTV"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        android:padding="10dp"
+        android:text="Date"
+        android:textColor="@android:color/black"
+        android:textSize="18sp" />
 </LinearLayout>

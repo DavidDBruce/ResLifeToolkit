@@ -41,7 +41,7 @@ public class ProgrammingListActivity extends AppCompatActivity {
 
     public void buildLV()
     {
-        ListAdapter programmingListLA = new ArrayAdapter<ProgrammingForm>(getApplicationContext(),R.layout.programming_list_item,R.id.formTypeTV,formsList);
+        ProgrammingAdapter programmingListLA = new ProgrammingAdapter(getApplicationContext(),R.layout.programming_list_item,R.id.formDateTV,formsList);
         ListView programmingLV = (ListView) findViewById(R.id.genericLV);
         programmingLV.setAdapter(programmingListLA);
 
@@ -81,7 +81,7 @@ class ProgrammingAdapter extends ArrayAdapter<ProgrammingForm> {
             type.setText("Passive");
         }
 
-        date.setText("Today");
+        date.setText(curForm.getCreateDate());
 
         return view;
     }

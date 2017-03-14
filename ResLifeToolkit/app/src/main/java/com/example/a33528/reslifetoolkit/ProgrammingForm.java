@@ -43,7 +43,7 @@ public class ProgrammingForm {
         isEvent = true;
 
         //Initializing dates
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
         createDate = formatter.format(Calendar.getInstance().getTime());
         modDate = createDate;
     }
