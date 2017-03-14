@@ -1,6 +1,7 @@
 package com.example.a33528.reslifetoolkit;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -42,9 +43,9 @@ public class ProgrammingForm {
         isEvent = true;
 
         //Initializing dates
-
-        createDate = new SimpleDateFormat("dd/MM/yyyy").format(new Date()).toString();
-        modDate = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        createDate = formatter.format(Calendar.getInstance().getTime());
+        modDate = createDate;
     }
 
     //Getters and setters for necessary items.
