@@ -1,11 +1,15 @@
 package com.example.a33528.reslifetoolkit;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -31,6 +35,13 @@ public class ProgrammingListActivity extends AppCompatActivity {
         testForm = new ProgrammingForm("David","South",2,"Smash Night","Fun","Playing Smash Bros", "Flyers and Emails", 0.0, 12, "yes");
         formsList = new ArrayList<ProgrammingForm>();
         formsList.add(testForm);
+        formsList.add(testForm);
+        formsList.add(testForm);
+        formsList.add(testForm);
+        formsList.add(testForm);
+        formsList.add(testForm);
+        formsList.add(testForm);
+        formsList.add(testForm);
 
         buildLV();
         //Added a comment
@@ -45,6 +56,18 @@ public class ProgrammingListActivity extends AppCompatActivity {
         ListView programmingLV = (ListView) findViewById(R.id.genericLV);
         programmingLV.setAdapter(programmingListLA);
 
+        programmingLV.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                ProgrammingForm item = (ProgrammingForm) parent.getItemAtPosition(position);
+
+                Intent intent = new Intent(getApplicationContext(),ProgrammingFormActivity.class);
+                //based on item add info to intent
+                startActivity(intent);
+            }
+
+        });
+
     }
 
 }
@@ -57,7 +80,6 @@ class ProgrammingAdapter extends ArrayAdapter<ProgrammingForm> {
 
     public ProgrammingAdapter(Context context, int resource, int textViewResourceId, List<ProgrammingForm> objects) {
         super(context, resource, textViewResourceId, objects);
-        Log.d("FindThis","Made it to this line.");
     }
 
     @Override
@@ -69,6 +91,7 @@ class ProgrammingAdapter extends ArrayAdapter<ProgrammingForm> {
 
         TextView date = (TextView) view.findViewById(R.id.formDateTV);
         TextView type = (TextView) view.findViewById(R.id.formTypeTV);
+        TextView title = (TextView) view.findViewById(R.id.formTitleTV);
 
         ProgrammingForm curForm = getItem(position);
 
@@ -82,6 +105,7 @@ class ProgrammingAdapter extends ArrayAdapter<ProgrammingForm> {
         }
 
         date.setText(curForm.getCreateDate());
+        title.setText(curForm.getEventTitle());
 
         return view;
     }
