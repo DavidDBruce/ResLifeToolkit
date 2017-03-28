@@ -131,7 +131,7 @@ public class ProgrammingForm implements Serializable{
 
     public boolean getIsEvent() {return isEvent;}
 
-    public void setEvent(boolean event) {isEvent = event;}
+    public void setIsEvent(boolean event) {isEvent = event;}
 
     public String getCreateDate() {return createDate;}
 
