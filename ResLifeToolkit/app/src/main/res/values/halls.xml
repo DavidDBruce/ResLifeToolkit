@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="halls_array">
+        <item>Dieterich</item>
+        <item>Franken</item>
+        <item>Hawthorne</item>
+        <item>Hudson</item>
+        <item>Millikin</item>
+        <item>Phillips</item>
+        <item>Perrin</item>
+        <item>Roberta</item>
+        <item>South Complex</item>
+        <item>Sycamore</item>
+        <item>Tower Suites East</item>
+        <item>Tower Suites West</item>
+        <item>Willow</item>
+    </string-array>
+</resources>
