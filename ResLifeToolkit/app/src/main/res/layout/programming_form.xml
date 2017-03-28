@@ -9,13 +9,13 @@
         android:layout_height="wrap_content">
 
         <EditText
+            android:id="@+id/raNameET"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:text="Name"
+            android:layout_weight="1"
             android:ems="10"
-            android:id="@+id/pfNameET"
-            android:layout_weight="1" />
+            android:inputType="textPersonName"
+            android:text="Name" />
     </LinearLayout>
 
     <LinearLayout
@@ -54,9 +54,9 @@
             android:textAlignment="textEnd" />
 
         <Switch
+            android:id="@+id/formSwitch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/switch1"
             android:layout_weight="0" />
 
         <TextView
@@ -137,21 +137,21 @@
         android:layout_height="wrap_content">
 
         <EditText
+            android:id="@+id/costET"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:text="Cost"
+            android:layout_weight="1"
             android:ems="10"
-            android:id="@+id/editText14"
-            android:layout_weight="1" />
+            android:inputType="textPersonName"
+            android:text="Cost" />
 
         <EditText
+            android:id="@+id/attendeesET"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="number"
-            android:ems="10"
-            android:id="@+id/editText15"
             android:layout_weight="1"
+            android:ems="10"
+            android:inputType="number"
             android:text="# of Attendees" />
 
     </LinearLayout>
@@ -164,10 +164,10 @@
         android:layout_weight="1" />
 
     <EditText
+        android:id="@+id/goalsET"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textMultiLine"
         android:ems="10"
-        android:id="@+id/editText16" />
+        android:inputType="textMultiLine" />
 
 </LinearLayout>

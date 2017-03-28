@@ -1,5 +1,6 @@
 package com.example.a33528.reslifetoolkit;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -8,7 +9,7 @@ import java.util.Date;
  * Created by s522706 on 2/23/2017.
  */
 
-public class ProgrammingForm {
+public class ProgrammingForm implements Serializable{
     private String raName;
     private String hallName;
     private int hallFloor;
@@ -28,7 +29,7 @@ public class ProgrammingForm {
 
     }
 
-    public ProgrammingForm(String raName, String hallName, int hallFloor, String eventTitle, String eventReason, String eventDescription, String eventPublicity, double cost, int attendees, String goals )
+    public ProgrammingForm(String raName, String hallName, int hallFloor, String eventTitle, String eventReason, String eventDescription, String eventPublicity, double cost, int attendees, String goals, boolean isEvent )
     {
         this.raName = raName;
         this.hallName = hallName;
@@ -40,7 +41,7 @@ public class ProgrammingForm {
         this.cost = cost;
         this.attendees = attendees;
         this.goals = goals;
-        isEvent = true;
+        this.isEvent = isEvent;
 
         //Initializing dates
         SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");

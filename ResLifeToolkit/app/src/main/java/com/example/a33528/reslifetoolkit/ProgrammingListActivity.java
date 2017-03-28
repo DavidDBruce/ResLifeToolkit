@@ -23,6 +23,8 @@ import static java.security.AccessController.getContext;
 public class ProgrammingListActivity extends AppCompatActivity {
 
     ProgrammingForm testForm;
+    ProgrammingForm testForm2;
+    ProgrammingForm testForm3;
     ArrayList<ProgrammingForm> formsList;
 
     @Override
@@ -32,22 +34,15 @@ public class ProgrammingListActivity extends AppCompatActivity {
 
         //Test input for application testing
 
-        testForm = new ProgrammingForm("David","South",2,"Smash Night","Fun","Playing Smash Bros", "Flyers and Emails", 0.0, 12, "yes");
+        testForm = new ProgrammingForm("David Bruce","South",2,"Smash Night","Fun","Playing Smash Bros", "Flyers and Emails", 0.0, 12, "yes", true);
+        testForm2 = new ProgrammingForm("Cheyanne Whorton","South",2,"Sleep","Floor needs to learn to sleep.","Bulletin board with points built in.", "", 0.0, 0, "", false);
+        testForm3 = new ProgrammingForm("Sadie Moore","South",3,"Hot Seat","Fun","Playing Hot Seat after floor meeting.", "Flyers and Emails", 0.0, 12, "yes", true);
         formsList = new ArrayList<ProgrammingForm>();
         formsList.add(testForm);
-        formsList.add(testForm);
-        formsList.add(testForm);
-        formsList.add(testForm);
-        formsList.add(testForm);
-        formsList.add(testForm);
-        formsList.add(testForm);
-        formsList.add(testForm);
+        formsList.add(testForm2);
+        formsList.add(testForm3);
 
         buildLV();
-        //Added a comment
-
-
-
     }
 
     public void buildLV()
@@ -62,7 +57,7 @@ public class ProgrammingListActivity extends AppCompatActivity {
                 ProgrammingForm item = (ProgrammingForm) parent.getItemAtPosition(position);
 
                 Intent intent = new Intent(getApplicationContext(),ProgrammingFormActivity.class);
-                //based on item add info to intent
+                intent.putExtra("formSelected", item);
                 startActivity(intent);
             }
 
