@@ -23,6 +23,7 @@ public class ProgrammingForm implements Serializable{
     private boolean isEvent;
     private String createDate = "";
     private String modDate = "";
+    private int positionForDelete;
 
     public ProgrammingForm()
     {
@@ -138,4 +139,8 @@ public class ProgrammingForm implements Serializable{
     public String getModDate() {return modDate;}
 
     public void setModDate(String modDate) {this.modDate = modDate;}
+
+    public void setPositionForDelete(int position){this.positionForDelete = position;}
+
+    public int getPositionForDelete() {return positionForDelete;}
 }

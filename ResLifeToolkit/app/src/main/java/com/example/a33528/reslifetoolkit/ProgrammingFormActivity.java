@@ -1,5 +1,6 @@
 package com.example.a33528.reslifetoolkit;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,6 +19,8 @@ import java.util.Scanner;
 
 public class ProgrammingFormActivity extends AppCompatActivity {
 
+    Intent intent;
+    Intent output = new Intent();
     ProgrammingForm inputForm;
     EditText formTitle;
     EditText raName;
@@ -36,7 +39,7 @@ public class ProgrammingFormActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.programming_form);
-        Intent intent = getIntent();
+        intent = getIntent();
         inputForm = (ProgrammingForm)intent.getSerializableExtra("formSelected");
         formTitle = (EditText) findViewById(R.id.eventTitleET);
         raName = (EditText) findViewById(R.id.raNameET);
@@ -102,6 +105,12 @@ public class ProgrammingFormActivity extends AppCompatActivity {
         inputForm.setRaName(raName.getText().toString());
         SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
         inputForm.setModDate(formatter.format(Calendar.getInstance().getTime()));
+
+        //Log.d("FindThisPlz", "called formSave(View v)");
+
+        output.putExtra("returnForm", inputForm);
+        setResult(RESULT_OK, output);
+        finish();
     }
 
     public void formCancel(View v)
@@ -111,7 +120,9 @@ public class ProgrammingFormActivity extends AppCompatActivity {
 
     public void formDelete(View v)
     {
-        Toast.makeText(this, "Implement Delete", Toast.LENGTH_SHORT).show();
+        output.putExtra("returnForm", inputForm);
+        setResult(RESULT_CANCELED, output);
+        finish();
     }
 
 }

@@ -14,8 +14,10 @@ import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static java.security.AccessController.getContext;
@@ -26,6 +28,7 @@ public class ProgrammingListActivity extends AppCompatActivity {
     ProgrammingForm testForm2;
     ProgrammingForm testForm3;
     ArrayList<ProgrammingForm> formsList;
+    ProgrammingAdapter programmingListLA;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +50,7 @@ public class ProgrammingListActivity extends AppCompatActivity {
 
     public void buildLV()
     {
-        ProgrammingAdapter programmingListLA = new ProgrammingAdapter(getApplicationContext(),R.layout.programming_list_item,R.id.formDateTV,formsList);
+        programmingListLA = new ProgrammingAdapter(getApplicationContext(),R.layout.programming_list_item,R.id.formDateTV,formsList);
         ListView programmingLV = (ListView) findViewById(R.id.genericLV);
         programmingLV.setAdapter(programmingListLA);
 
@@ -55,14 +58,40 @@ public class ProgrammingListActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 ProgrammingForm item = (ProgrammingForm) parent.getItemAtPosition(position);
-
+                item.setPositionForDelete(position);
                 Intent intent = new Intent(getApplicationContext(),ProgrammingFormActivity.class);
                 intent.putExtra("formSelected", item);
-                startActivity(intent);
+                startActivityForResult(intent, 42);
             }
 
         });
 
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        //Log.d("FindThisPlz", "called onActivityReault()");
+        if(requestCode == 42 && resultCode == RESULT_OK && data != null)
+        {
+            ProgrammingForm returnForm = (ProgrammingForm) data.getSerializableExtra("returnForm");
+            formsList.remove(returnForm.getPositionForDelete());
+            Collections.reverse(formsList);
+            formsList.add(returnForm);
+            Collections.reverse(formsList);
+            programmingListLA.notifyDataSetChanged();
+
+        }
+        else if(requestCode == 42 && resultCode == RESULT_CANCELED && data != null)
+        {
+            ProgrammingForm returnForm = (ProgrammingForm) data.getSerializableExtra("returnForm");
+            formsList.remove(returnForm.getPositionForDelete());
+            programmingListLA.notifyDataSetChanged();
+        }
+        else
+        {
+            Toast.makeText(this,"No array action performed.", Toast.LENGTH_SHORT).show();
+        }
     }
 
 }
