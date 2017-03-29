@@ -100,7 +100,7 @@ public class ProgrammingListActivity extends AppCompatActivity {
     public void addForm(View v)
     {
         ProgrammingForm item = new ProgrammingForm();
-        item.setPositionForDelete(formsList.size());
+        item.setPositionForDelete(0);
         Collections.reverse(formsList);
         formsList.add(item);
         Collections.reverse(formsList);
@@ -132,8 +132,12 @@ public class ProgrammingListActivity extends AppCompatActivity {
         }
         else
         {
+            if(formsList.get(0).getEventTitle().equals("No Title") && formsList.get(0).getEventDescription().equals(""))
+            {
+                formsList.remove(0);
+            }
             programmingListLA.notifyDataSetChanged();
-            Toast.makeText(this,"No array action performed.", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this,"No array action performed.", Toast.LENGTH_SHORT).show();
         }
     }
 
