@@ -17,7 +17,7 @@
         </activity>
         <activity android:name=".ProgrammingListActivity" />
         <activity android:name=".DutyLogListActivity" />
-        <activity android:name=".ProgrammingFormActivity"></activity>
+        <activity android:name=".ProgrammingFormActivity" />
     </application>
 
 </manifest>

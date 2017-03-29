@@ -1,8 +1,11 @@
 package com.example.a33528.reslifetoolkit;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -29,6 +32,7 @@ public class ProgrammingListActivity extends AppCompatActivity {
     ProgrammingForm testForm3;
     ArrayList<ProgrammingForm> formsList;
     ProgrammingAdapter programmingListLA;
+    FloatingActionButton addFormsButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,34 +41,72 @@ public class ProgrammingListActivity extends AppCompatActivity {
 
         //Test input for application testing
 
-        testForm = new ProgrammingForm("David Bruce","South Complex",2,"Smash Night","Fun","Playing Smash Bros", "Flyers and Emails", 0.0, 12, "yes", true);
-        testForm2 = new ProgrammingForm("Cheyanne Whorton","South Complex",2,"Sleep","Floor needs to learn to sleep.","Bulletin board with points built in.", "", 0.0, 0, "", false);
-        testForm3 = new ProgrammingForm("Sadie Moore","South Complex",3,"Hot Seat","Fun","Playing Hot Seat after floor meeting.", "Flyers and Emails", 0.0, 12, "yes", true);
+        testForm = new ProgrammingForm("David Bruce", "South Complex", 2, "Smash Night", "Fun", "Playing Smash Bros", "Flyers and Emails", 0.0, 12, "yes", true);
+        testForm2 = new ProgrammingForm("Cheyanne Whorton", "South Complex", 2, "Sleep", "Floor needs to learn to sleep.", "Bulletin board with points built in.", "", 0.0, 0, "", false);
+        testForm3 = new ProgrammingForm("Sadie Moore", "South Complex", 3, "Hot Seat", "Fun", "Playing Hot Seat after floor meeting.", "Flyers and Emails", 0.0, 12, "yes", true);
         formsList = new ArrayList<ProgrammingForm>();
         formsList.add(testForm);
         formsList.add(testForm2);
         formsList.add(testForm3);
+        addFormsButton = (FloatingActionButton) findViewById(R.id.addFormFAB);
 
         buildLV();
     }
 
-    public void buildLV()
-    {
-        programmingListLA = new ProgrammingAdapter(getApplicationContext(),R.layout.programming_list_item,R.id.formDateTV,formsList);
+    public void buildLV() {
+        programmingListLA = new ProgrammingAdapter(getApplicationContext(), R.layout.programming_list_item, R.id.formDateTV, formsList);
         ListView programmingLV = (ListView) findViewById(R.id.genericLV);
         programmingLV.setAdapter(programmingListLA);
 
-        programmingLV.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+        programmingLV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 ProgrammingForm item = (ProgrammingForm) parent.getItemAtPosition(position);
                 item.setPositionForDelete(position);
-                Intent intent = new Intent(getApplicationContext(),ProgrammingFormActivity.class);
+                Intent intent = new Intent(getApplicationContext(), ProgrammingFormActivity.class);
                 intent.putExtra("formSelected", item);
                 startActivityForResult(intent, 42);
             }
 
         });
+
+        programmingLV.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                final int removePosition = position;
+                new AlertDialog.Builder(ProgrammingListActivity.this)
+                        .setTitle("Delete Form")
+                        .setMessage("Are you sure you want to delete " + formsList.get(position).getEventTitle() + "?")
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener(){
+                            public void onClick(DialogInterface dialog, int which)
+                            {
+                                formsList.remove(removePosition);
+                                programmingListLA.notifyDataSetChanged();
+                            }
+                        })
+                        .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener(){
+                            public void onClick(DialogInterface dialog, int which)
+                            {
+
+                            }
+                        })
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show();
+                return true;
+            }
+        });
+    }
+
+    public void addForm(View v)
+    {
+        ProgrammingForm item = new ProgrammingForm();
+        item.setPositionForDelete(formsList.size());
+        Collections.reverse(formsList);
+        formsList.add(item);
+        Collections.reverse(formsList);
+        Intent intent = new Intent(getApplicationContext(), ProgrammingFormActivity.class);
+        intent.putExtra("formSelected", item);
+        startActivityForResult(intent, 42);
 
     }
 
@@ -90,6 +132,7 @@ public class ProgrammingListActivity extends AppCompatActivity {
         }
         else
         {
+            programmingListLA.notifyDataSetChanged();
             Toast.makeText(this,"No array action performed.", Toast.LENGTH_SHORT).show();
         }
     }

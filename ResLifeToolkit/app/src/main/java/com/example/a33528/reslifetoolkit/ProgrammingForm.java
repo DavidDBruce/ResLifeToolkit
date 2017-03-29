@@ -10,16 +10,16 @@ import java.util.Date;
  */
 
 public class ProgrammingForm implements Serializable{
-    private String raName;
-    private String hallName;
+    private String raName = "";
+    private String hallName = "";
     private int hallFloor;
-    private String eventTitle;
-    private String eventReason;
-    private String eventDescription;
-    private String eventPublicity;
+    private String eventTitle = "No Title";
+    private String eventReason = "";
+    private String eventDescription = "";
+    private String eventPublicity = "";
     private double cost;
     private int attendees;
-    private String goals;
+    private String goals = "";
     private boolean isEvent;
     private String createDate = "";
     private String modDate = "";
@@ -27,7 +27,9 @@ public class ProgrammingForm implements Serializable{
 
     public ProgrammingForm()
     {
-
+        SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+        createDate = formatter.format(Calendar.getInstance().getTime());
+        modDate = createDate;
     }
 
     public ProgrammingForm(String raName, String hallName, int hallFloor, String eventTitle, String eventReason, String eventDescription, String eventPublicity, double cost, int attendees, String goals, boolean isEvent )

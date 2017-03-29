@@ -79,9 +79,12 @@ public class ProgrammingFormActivity extends AppCompatActivity {
 
         for(int i = 0; i < halls.length; i++)
         {
-            if(inputForm.getHallName().equals(halls[i]))
+            if(inputForm.getHallName()!=null)
             {
-                hallSpinner.setSelection(i);
+                if (inputForm.getHallName().equals(halls[i]))
+                {
+                    hallSpinner.setSelection(i);
+                }
             }
         }
 
