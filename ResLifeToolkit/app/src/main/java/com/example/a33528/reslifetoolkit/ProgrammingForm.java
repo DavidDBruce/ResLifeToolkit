@@ -17,6 +17,16 @@ public class ProgrammingForm implements Serializable{
     private String eventReason = "";
     private String eventDescription = "";
     private String eventPublicity = "";
+
+    public String getEventDate() {
+        return eventDate;
+    }
+
+    public void setEventDate(String eventDate) {
+        this.eventDate = eventDate;
+    }
+
+    private String eventDate = "";
     private double cost;
     private int attendees;
     private String goals = "";
