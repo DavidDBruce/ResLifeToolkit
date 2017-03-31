@@ -1,34 +1,23 @@
 package com.example.a33528.reslifetoolkit;
 
-import android.app.Activity;
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
-import android.net.Uri;
-import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Switch;
-import android.widget.Toast;
+import android.widget.TimePicker;
 
-import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.pdf.PdfWriter;
-import com.itextpdf.text.pdf.StringUtils;
-import com.itextpdf.text.pdf.codec.Base64;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
+import java.util.EventListener;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class ProgrammingFormActivity extends AppCompatActivity {
@@ -46,10 +35,14 @@ public class ProgrammingFormActivity extends AppCompatActivity {
     EditText cost;
     EditText goals;
     EditText eventDate;
+    EditText eventTime;
     Switch formSwitch;
 
     Spinner hallSpinner;
 
+    Calendar myCalendar = Calendar.getInstance();
+    DatePickerDialog.OnDateSetListener date;
+    TimePickerDialog.OnTimeSetListener time;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,6 +59,7 @@ public class ProgrammingFormActivity extends AppCompatActivity {
         cost = (EditText) findViewById(R.id.costET);
         goals = (EditText) findViewById(R.id.goalsET);
         eventDate = (EditText) findViewById(R.id.eventDateET);
+        eventTime = (EditText) findViewById(R.id.eventTimeET);
         formSwitch = (Switch) findViewById(R.id.formSwitch);
 
         formTitle.setText(inputForm.getEventTitle());
@@ -105,30 +99,71 @@ public class ProgrammingFormActivity extends AppCompatActivity {
             }
         }
 
+
+        date = new DatePickerDialog.OnDateSetListener() {
+
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                  int dayOfMonth) {
+                // TODO Auto-generated method stub
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH, monthOfYear);
+                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                updateDateLabel();
+            }
+
+        };
+
+        eventDate.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                new DatePickerDialog(ProgrammingFormActivity.this, date, myCalendar
+                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+
+            }
+        });
+
+        eventTime.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                Calendar mcurrentTime = Calendar.getInstance();
+                int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
+                int minute = mcurrentTime.get(Calendar.MINUTE);
+                TimePickerDialog mTimePicker;
+                mTimePicker = new TimePickerDialog(ProgrammingFormActivity.this, new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+                        eventTime.setText( selectedHour + ":" + selectedMinute);
+                    }
+                }, hour, minute, true);
+                mTimePicker.setTitle("Select Time");
+                mTimePicker.show();
+
+            }
+        });
+
+
+
+
+    }
+
+    private void updateDateLabel() {
+
+        String myFormat = "MM/dd/yy"; //In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+
+        eventDate.setText(sdf.format(myCalendar.getTime()));
     }
 
     public void formSave(View v)
     {
-        Scanner s = new Scanner(attendees.getText().toString());
-        inputForm.setAttendees(s.nextInt());
-        s = new Scanner(cost.getText().toString());
-        inputForm.setCost(s.nextDouble());
-        inputForm.setIsEvent(!formSwitch.isActivated());
-        inputForm.setEventDescription(description.getText().toString());
-        inputForm.setEventPublicity(publicity.getText().toString());
-        inputForm.setEventReason(why.getText().toString());
-        inputForm.setEventTitle(formTitle.getText().toString());
-        inputForm.setGoals(formTitle.getText().toString());
-        s = new Scanner(floor.getText().toString());
-        inputForm.setHallFloor(s.nextInt());
-        inputForm.setHallName(hallSpinner.getSelectedItem().toString());
-        inputForm.setRaName(raName.getText().toString());
-        inputForm.setEventDate(eventDate.getText().toString());
-        SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
-        inputForm.setModDate(formatter.format(Calendar.getInstance().getTime()));
 
-        //Log.d("FindThisPlz", "called formSave(View v)");
-
+        save();
         output.putExtra("returnForm", inputForm);
         setResult(RESULT_OK, output);
         finish();
@@ -140,7 +175,7 @@ public class ProgrammingFormActivity extends AppCompatActivity {
         inputForm.setAttendees(s.nextInt());
         s = new Scanner(cost.getText().toString());
         inputForm.setCost(s.nextDouble());
-        inputForm.setIsEvent(!formSwitch.isActivated());
+        inputForm.setIsEvent(!formSwitch.isChecked());
         inputForm.setEventDescription(description.getText().toString());
         inputForm.setEventPublicity(publicity.getText().toString());
         inputForm.setEventReason(why.getText().toString());
@@ -153,11 +188,6 @@ public class ProgrammingFormActivity extends AppCompatActivity {
         inputForm.setEventDate(eventDate.getText().toString());
         SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
         inputForm.setModDate(formatter.format(Calendar.getInstance().getTime()));
-
-        //Log.d("FindThisPlz", "called formSave(View v)");
-
-        output.putExtra("returnForm", inputForm);
-        setResult(RESULT_OK, output);
     }
 
     public void formCancel(View v)
@@ -177,22 +207,26 @@ public class ProgrammingFormActivity extends AppCompatActivity {
         save();
         Intent i = new Intent(Intent.ACTION_SEND);
         i.setType("message/rfc822");
-        if(formSwitch.isActivated())
+        if(!inputForm.getIsEvent())
         {
             i.putExtra(Intent.EXTRA_SUBJECT, raName.getText().toString() + " -- " + "Passive");
         }
         else
         {
-            i.putExtra(Intent.EXTRA_SUBJECT, raName.getText().toString() + " -- " + "Event" + " -- " + inputForm.getEventDate());
+            i.putExtra(Intent.EXTRA_SUBJECT, raName.getText().toString() + " -- " + "Event" + " -- " + eventDate.getText().toString());
         }
         i.putExtra(Intent.EXTRA_TEXT,buildForm());
-        startActivity(i.createChooser(i,"Send form..."));
+        startActivity(Intent.createChooser(i,"Send form..."));
+
+        output.putExtra("returnForm", inputForm);
+        setResult(RESULT_OK, output);
+        finish();
     }
 
     public String buildForm()
     {
         String completedForm = "";
-        if(formSwitch.isActivated()) {
+        if(!inputForm.getIsEvent()) {
             completedForm += raName.getText().toString() + " -- " + "Passive" + '\n' + '\n';
         }
         else
@@ -201,7 +235,7 @@ public class ProgrammingFormActivity extends AppCompatActivity {
         }
 
         completedForm += "Title: " + formTitle.getText().toString() + " -- " + hallSpinner.getSelectedItem().toString()+ " Floor " + floor.getText().toString() + '\n' + '\n';
-        if(formSwitch.isActivated())
+        if(!inputForm.getIsEvent())
         {
             completedForm += "Why are you writing this passive?"+ '\n';
             completedForm += "-- " + why.getText().toString() + '\n' + '\n';

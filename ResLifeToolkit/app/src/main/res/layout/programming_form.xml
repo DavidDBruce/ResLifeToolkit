@@ -14,8 +14,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Name" />
+            android:hint="Your Name"
+            android:inputType="textPersonName" />
     </LinearLayout>
 
     <LinearLayout
@@ -30,13 +30,13 @@
             android:layout_weight="1" />
 
         <EditText
+            android:id="@+id/floorET"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="number"
-            android:ems="10"
-            android:id="@+id/floorET"
             android:layout_weight="1"
-            android:text="Floor" />
+            android:ems="10"
+            android:hint="Floor"
+            android:inputType="number" />
 
     </LinearLayout>
 
@@ -48,6 +48,7 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="center_vertical|center_horizontal"
             android:orientation="horizontal">
 
             <TextView
@@ -73,13 +74,31 @@
                 android:textAlignment="textStart" />
         </LinearLayout>
 
-        <EditText
-            android:id="@+id/eventDateET"
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:inputType="date" />
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/eventDateET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:focusable="false"
+                android:hint="Date"
+                android:inputType="date" />
+
+            <EditText
+                android:id="@+id/eventTimeET"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:focusable="false"
+                android:hint="Time"
+                android:inputType="time" />
+        </LinearLayout>
 
     </LinearLayout>
 
@@ -89,13 +108,13 @@
         android:layout_height="wrap_content">
 
         <EditText
+            android:id="@+id/eventTitleET"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:text="Title"
+            android:layout_weight="1"
             android:ems="10"
-            android:id="@+id/eventTitleET"
-            android:layout_weight="1" />
+            android:hint="Event Title"
+            android:inputType="textPersonName" />
 
     </LinearLayout>
 
@@ -157,8 +176,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Cost" />
+            android:hint="Cost"
+            android:inputType="textPersonName" />
 
         <EditText
             android:id="@+id/attendeesET"
@@ -166,8 +185,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
-            android:inputType="number"
-            android:text="# of Attendees" />
+            android:hint="# of Attendees"
+            android:inputType="number" />
 
     </LinearLayout>
 
