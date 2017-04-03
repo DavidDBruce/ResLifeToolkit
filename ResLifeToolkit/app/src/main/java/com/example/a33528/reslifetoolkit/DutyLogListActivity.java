@@ -13,6 +13,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -30,9 +32,9 @@ public class DutyLogListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.general_list);
 
-        testLog1 = new DutyLog("Peeps","Quiet","Quiet","","","David Bruce", new ArrayList<Documentation>(), new ArrayList<WorkOrder>());
-        testLog2 = new DutyLog("Persons","Mixtape","Fire Alarm","Ducks","Nothing","Cheyanne Whorton", new ArrayList<Documentation>(), new ArrayList<WorkOrder>());
-        testLog3 = new DutyLog("People","Stuff","Priyanka's Room","","","Mersadie Moore", new ArrayList<Documentation>(), new ArrayList<WorkOrder>());
+        testLog1 = new DutyLog("Peeps","Quiet","Quiet","","","David Bruce", new ArrayList<Documentation>(), new ArrayList<Documentation>());
+        testLog2 = new DutyLog("Persons","Mixtape","Fire Alarm","Ducks","Nothing","Cheyanne Whorton", new ArrayList<Documentation>(), new ArrayList<Documentation>());
+        testLog3 = new DutyLog("People","Stuff","Priyanka's Room","","","Mersadie Moore", new ArrayList<Documentation>(), new ArrayList<Documentation>());
 
         logList.add(testLog1);
         logList.add(testLog2);
@@ -97,6 +99,19 @@ public class DutyLogListActivity extends AppCompatActivity {
         startActivityForResult(intent, 43);
 
     }
+
+    public void addDoc(View v)
+    {
+        DutyLog item = new DutyLog();
+        item.setPositionForDelete(0);
+        Collections.reverse(logList);
+        logList.add(item);
+        Collections.reverse(logList);
+        Intent intent = new Intent(getApplicationContext(), DutyLogActivity.class);
+        intent.putExtra("logSelected", item);
+        startActivityForResult(intent, 43);
+
+    }
 }
 
 
@@ -123,6 +138,35 @@ class DutyLogAdapter extends ArrayAdapter<DutyLog> {
         DutyLog curLog = getItem(position);
 
         date.setText(curLog.getCreateDate());
+
+        return view;
+    }
+}
+
+class DocumentationAdapter extends ArrayAdapter<Documentation> {
+    //ArrayAdapter to set the correct information in a ListView for ProgrammingForms
+    Context c;
+
+    ArrayList<Documentation> inputForms = new ArrayList<Documentation>();
+
+    public DocumentationAdapter(Context context, int resource, int textViewResourceId, List<Documentation> objects) {
+        super(context, resource, textViewResourceId, objects);
+    }
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+
+        View view = super.getView(position,convertView,parent);
+
+        //Retrieving TextViews from the list item XML, then setting them to their corresponding values.
+
+        TextView date = (TextView) view.findViewById(R.id.docDateTV);
+        TextView time = (TextView) view.findViewById(R.id.docTimeTV);
+
+        Documentation curDoc = getItem(position);
+
+        date.setText(curDoc.getDocCreateDate());
+        time.setText(curDoc.getDocCreateTime());
 
         return view;
     }

@@ -1,5 +1,6 @@
 package com.example.a33528.reslifetoolkit;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,17 +11,24 @@ import android.widget.TextView;
 
 public class DutyLogActivity extends AppCompatActivity {
 
+    private Intent intent;
+    private Intent outputIntent = new Intent();
+    private DutyLog inputLog;
     private TextView dutyLogTitle;
     private EditText raOnDuty;
-    private DutyLog inputLog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.duty_log);
 
+        intent = getIntent();
+        inputLog = (DutyLog) intent.getSerializableExtra("logSelected");
         dutyLogTitle = (TextView) findViewById(R.id.dutyLogDateTV);
         raOnDuty = (EditText) findViewById(R.id.raOnDutyET);
+
+        dutyLogTitle.setText("Duty Log for " + inputLog.getCreateDate());
+        raOnDuty.setText(inputLog.getRaOnDuty());
      }
 
     public void eightRound(View v)
@@ -57,7 +65,4 @@ public class DutyLogActivity extends AppCompatActivity {
     {
         Log.d("FindMePlz", "Button Pushed");
     }
-
-
-
 }

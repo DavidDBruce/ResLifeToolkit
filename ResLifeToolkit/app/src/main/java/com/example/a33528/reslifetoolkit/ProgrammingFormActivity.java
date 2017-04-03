@@ -13,7 +13,6 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TimePicker;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.EventListener;
