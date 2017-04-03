@@ -14,12 +14,13 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class DutyLogListActivity extends AppCompatActivity {
 
     private DutyLogAdapter dutyLogLA;
-    private ArrayList<DutyLog> logList;
+    private ArrayList<DutyLog> logList = new ArrayList<DutyLog>();
     private DutyLog testLog1;
     private DutyLog testLog2;
     private DutyLog testLog3;
@@ -82,6 +83,19 @@ public class DutyLogListActivity extends AppCompatActivity {
                 return true;
             }
         });
+    }
+
+    public void addForm(View v)
+    {
+        DutyLog item = new DutyLog();
+        item.setPositionForDelete(0);
+        Collections.reverse(logList);
+        logList.add(item);
+        Collections.reverse(logList);
+        Intent intent = new Intent(getApplicationContext(), DutyLogActivity.class);
+        intent.putExtra("logSelected", item);
+        startActivityForResult(intent, 43);
+
     }
 }
 

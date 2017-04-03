@@ -31,6 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:onClick="eightRound"
             android:text="8PM ROunds" />
 
         <Button
@@ -38,6 +39,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:onClick="tenRound"
             android:text="10PM Rounds" />
 
     </LinearLayout>
@@ -52,6 +54,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:onClick="twelveRound"
             android:text="12AM Rounds" />
 
         <Button
@@ -59,6 +62,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:onClick="twoRound"
             android:text="2AM Rounds" />
 
     </LinearLayout>
@@ -73,6 +77,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:onClick="launchDoc"
             android:text="Documentations" />
 
         <Button
@@ -80,13 +85,15 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:onClick="launchWO"
             android:text="Work Orders" />
 
     </LinearLayout>
 
     <Button
-        android:text="Day Rounds"
+        android:id="@+id/dayRoundBTN"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/dayRoundBTN" />
+        android:onClick="dayRound"
+        android:text="Day Rounds" />
 </LinearLayout>
