@@ -5,19 +5,20 @@
     android:weightSum="1">
 
     <TextView
-        android:text="Round Time"
+        android:id="@+id/formTimeTV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textView"
+        android:text="Form Time"
         android:textAlignment="center"
-        android:textSize="30sp" />
+        android:textColor="#000000"
+        android:textSize="24sp" />
 
     <EditText
+        android:id="@+id/formET"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:inputType="textMultiLine"
+        android:layout_weight="0.77"
         android:ems="10"
-        android:id="@+id/editText3"
-        android:layout_weight="0.77" />
+        android:inputType="textMultiLine" />
 
 </LinearLayout>

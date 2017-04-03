@@ -1,6 +1,5 @@
 package com.example.a33528.reslifetoolkit;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -8,22 +7,16 @@ import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import static java.security.AccessController.getContext;
 
 public class ProgrammingListActivity extends AppCompatActivity {
 
@@ -37,7 +30,7 @@ public class ProgrammingListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.programming_form_list);
+        setContentView(R.layout.general_list);
 
         //Test input for application testing
 
@@ -113,7 +106,6 @@ public class ProgrammingListActivity extends AppCompatActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data)
     {
-        //Log.d("FindThisPlz", "called onActivityReault()");
         if(requestCode == 42 && resultCode == RESULT_OK && data != null)
         {
             ProgrammingForm returnForm = (ProgrammingForm) data.getSerializableExtra("returnForm");
@@ -137,7 +129,7 @@ public class ProgrammingListActivity extends AppCompatActivity {
                 formsList.remove(0);
             }
             programmingListLA.notifyDataSetChanged();
-            //Toast.makeText(this,"No array action performed.", Toast.LENGTH_SHORT).show();
+
         }
     }
 

@@ -3,13 +3,23 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <EditText
+    <TextView
+        android:id="@+id/dutyLogDateTV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:text="RA on Duty"
+        android:foregroundGravity="center_horizontal"
+        android:gravity="center_horizontal|center"
+        android:text="Duty Log for"
+        android:textColor="@android:color/background_dark"
+        android:textSize="24sp" />
+
+    <EditText
+        android:id="@+id/raOnDutyET"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:ems="10"
-        android:id="@+id/editText" />
+        android:hint="RA on Duty"
+        android:inputType="textPersonName" />
 
     <LinearLayout
         android:orientation="horizontal"
@@ -17,18 +27,19 @@
         android:layout_height="wrap_content">
 
         <Button
-            android:text="8PM ROunds"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:id="@+id/eightRoundBTN"
-            android:layout_weight="1" />
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="8PM ROunds" />
 
         <Button
-            android:text="10PM Rounds"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/tenRoundBTN"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:id="@+id/tenRoundBTN" />
+            android:text="10PM Rounds" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -37,38 +48,40 @@
         android:layout_height="wrap_content">
 
         <Button
-            android:text="12AM Rounds"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/twelveRoundBTN"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:id="@+id/twelveRoundBTN" />
+            android:text="12AM Rounds" />
 
         <Button
-            android:text="2AM Rounds"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:id="@+id/twoRoundBTN"
-            android:layout_weight="1" />
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="2AM Rounds" />
+
     </LinearLayout>
 
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
         <Button
-            android:text="Documentations"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/documentBTN"
-            android:layout_weight="1" />
+            android:id="@+id/documentationBTN"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Documentations" />
 
         <Button
-            android:text="Work Orders"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:id="@+id/workOrderBTN"
-            android:layout_weight="1" />
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Work Orders" />
+
     </LinearLayout>
 
     <Button

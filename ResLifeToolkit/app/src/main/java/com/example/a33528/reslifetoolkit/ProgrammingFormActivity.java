@@ -22,27 +22,27 @@ import java.util.Scanner;
 
 public class ProgrammingFormActivity extends AppCompatActivity {
 
-    Intent intent;
-    Intent output = new Intent();
-    ProgrammingForm inputForm;
-    EditText formTitle;
-    EditText raName;
-    EditText floor;
-    EditText why;
-    EditText description;
-    EditText publicity;
-    EditText attendees;
-    EditText cost;
-    EditText goals;
-    EditText eventDate;
-    EditText eventTime;
-    Switch formSwitch;
+    private Intent intent;
+    private Intent output = new Intent();
+    private ProgrammingForm inputForm;
+    private EditText formTitle;
+    private EditText raName;
+    private EditText floor;
+    private EditText why;
+    private EditText description;
+    private EditText publicity;
+    private EditText attendees;
+    private EditText cost;
+    private EditText goals;
+    private EditText eventDate;
+    private EditText eventTime;
+    private Switch formSwitch;
 
-    Spinner hallSpinner;
+    private Spinner hallSpinner;
 
-    Calendar myCalendar = Calendar.getInstance();
-    DatePickerDialog.OnDateSetListener date;
-    TimePickerDialog.OnTimeSetListener time;
+    private Calendar myCalendar = Calendar.getInstance();
+    private DatePickerDialog.OnDateSetListener date;
+    private TimePickerDialog.OnTimeSetListener time;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
