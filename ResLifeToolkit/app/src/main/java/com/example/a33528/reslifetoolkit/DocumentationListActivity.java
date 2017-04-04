@@ -42,11 +42,11 @@ public class DocumentationListActivity extends AppCompatActivity {
         documentationLV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                DutyLog item = (DutyLog) parent.getItemAtPosition(position);
+                Documentation item = (Documentation) parent.getItemAtPosition(position);
                 item.setPositionForDelete(position);
-                Intent intent = new Intent(getApplicationContext(), DutyLogActivity.class);
-                intent.putExtra("logSelected", item);
-                startActivityForResult(intent, 43);
+                Intent intent = new Intent(getApplicationContext(), DocumentationActivity.class);
+                intent.putExtra("docSelected", item);
+                startActivityForResult(intent, 45);
             }
 
         });
@@ -80,8 +80,6 @@ public class DocumentationListActivity extends AppCompatActivity {
 }
 
 class DocumentationAdapter extends ArrayAdapter<Documentation> {
-    //ArrayAdapter to set the correct information in a ListView for ProgrammingForms
-    Context c;
 
     ArrayList<Documentation> inputForms = new ArrayList<Documentation>();
 
@@ -93,8 +91,6 @@ class DocumentationAdapter extends ArrayAdapter<Documentation> {
     public View getView(int position, View convertView, ViewGroup parent) {
 
         View view = super.getView(position,convertView,parent);
-
-        //Retrieving TextViews from the list item XML, then setting them to their corresponding values.
 
         TextView date = (TextView) view.findViewById(R.id.docDateTV);
         TextView time = (TextView) view.findViewById(R.id.docTimeTV);

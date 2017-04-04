@@ -168,27 +168,6 @@ public class ProgrammingFormActivity extends AppCompatActivity {
         finish();
     }
 
-    public void save()
-    {
-        Scanner s = new Scanner(attendees.getText().toString());
-        inputForm.setAttendees(s.nextInt());
-        s = new Scanner(cost.getText().toString());
-        inputForm.setCost(s.nextDouble());
-        inputForm.setIsEvent(!formSwitch.isChecked());
-        inputForm.setEventDescription(description.getText().toString());
-        inputForm.setEventPublicity(publicity.getText().toString());
-        inputForm.setEventReason(why.getText().toString());
-        inputForm.setEventTitle(formTitle.getText().toString());
-        inputForm.setGoals(formTitle.getText().toString());
-        s = new Scanner(floor.getText().toString());
-        inputForm.setHallFloor(s.nextInt());
-        inputForm.setHallName(hallSpinner.getSelectedItem().toString());
-        inputForm.setRaName(raName.getText().toString());
-        inputForm.setEventDate(eventDate.getText().toString());
-        SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
-        inputForm.setModDate(formatter.format(Calendar.getInstance().getTime()));
-    }
-
     public void formCancel(View v)
     {
         finish();
@@ -220,6 +199,27 @@ public class ProgrammingFormActivity extends AppCompatActivity {
         output.putExtra("returnForm", inputForm);
         setResult(RESULT_OK, output);
         finish();
+    }
+
+    public void save()
+    {
+        Scanner s = new Scanner(attendees.getText().toString());
+        inputForm.setAttendees(s.nextInt());
+        s = new Scanner(cost.getText().toString());
+        inputForm.setCost(s.nextDouble());
+        inputForm.setIsEvent(!formSwitch.isChecked());
+        inputForm.setEventDescription(description.getText().toString());
+        inputForm.setEventPublicity(publicity.getText().toString());
+        inputForm.setEventReason(why.getText().toString());
+        inputForm.setEventTitle(formTitle.getText().toString());
+        inputForm.setGoals(formTitle.getText().toString());
+        s = new Scanner(floor.getText().toString());
+        inputForm.setHallFloor(s.nextInt());
+        inputForm.setHallName(hallSpinner.getSelectedItem().toString());
+        inputForm.setRaName(raName.getText().toString());
+        inputForm.setEventDate(eventDate.getText().toString());
+        SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+        inputForm.setModDate(formatter.format(Calendar.getInstance().getTime()));
     }
 
     public String buildForm()

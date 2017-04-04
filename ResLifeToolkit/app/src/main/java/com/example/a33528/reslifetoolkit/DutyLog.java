@@ -180,8 +180,9 @@ class Documentation implements Serializable
         return docModDate;
     }
 
-    public void setDocModDate(String docModDate) {
-        this.docModDate = docModDate;
+    public void setDocModDate() {
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("MM/dd/yyyy");
+        docModDate = dateFormatter.format(Calendar.getInstance().getTime());
     }
 
     public String getDocCreateTime() {
@@ -192,8 +193,9 @@ class Documentation implements Serializable
         return docModTime;
     }
 
-    public void setDocModTime(String docModTime) {
-        this.docModTime = docModTime;
+    public void setDocModTime() {
+        SimpleDateFormat timeFormatter = new SimpleDateFormat("hh:mm");
+        docModTime = timeFormatter.format(Calendar.getInstance().getTime());
     }
 
     public int getPositionForDelete() {
