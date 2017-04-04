@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 public class DutyLogActivity extends AppCompatActivity {
 
-    private Intent intent;
+    private Intent inputIntent;
     private Intent outputIntent = new Intent();
     private DutyLog inputLog;
     private TextView dutyLogTitle;
@@ -22,8 +22,8 @@ public class DutyLogActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.duty_log);
 
-        intent = getIntent();
-        inputLog = (DutyLog) intent.getSerializableExtra("logSelected");
+        inputIntent = getIntent();
+        inputLog = (DutyLog) inputIntent.getSerializableExtra("logSelected");
         dutyLogTitle = (TextView) findViewById(R.id.dutyLogDateTV);
         raOnDuty = (EditText) findViewById(R.id.raOnDutyET);
 
@@ -58,11 +58,15 @@ public class DutyLogActivity extends AppCompatActivity {
 
     public void launchDoc(View v)
     {
-        Log.d("FindMePlz", "Button Pushed");
+        Intent intent = new Intent(getApplicationContext(), DocumentationListActivity.class);
+        intent.putExtra("inputDocList", inputLog.getDocumentations());
+        startActivityForResult(intent, 44);
     }
 
     public void launchWO(View v)
     {
-        Log.d("FindMePlz", "Button Pushed");
+        Intent intent = new Intent(getApplicationContext(), DocumentationListActivity.class);
+        intent.putExtra("inputDocList", inputLog.getWorkOrders());
+        startActivityForResult(intent, 44);
     }
 }

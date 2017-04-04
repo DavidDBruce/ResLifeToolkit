@@ -40,6 +40,10 @@ public class DutyLog implements Serializable {
         this.raOnDuty = raOnDuty;
         this.documentations = documentations;
         this.workOrders = workOrders;
+
+        SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+        createDate = formatter.format(Calendar.getInstance().getTime());
+        modDate = createDate;
     }
 
     public String getRound8() {
@@ -127,7 +131,7 @@ public class DutyLog implements Serializable {
     }
 }
 
-class Documentation
+class Documentation implements Serializable
 {
 
     private String docMessage = "";
@@ -135,6 +139,7 @@ class Documentation
     private String docModDate = "";
     private String docCreateTime = "";
     private String docModTime = "";
+    private int positionForDelete;
 
     public Documentation(){
         SimpleDateFormat timeFormatter = new SimpleDateFormat("hh:mm");
@@ -147,7 +152,16 @@ class Documentation
     }
 
     public Documentation(String docMessage){
+
         this.docMessage = docMessage;
+
+        SimpleDateFormat timeFormatter = new SimpleDateFormat("hh:mm");
+        docCreateTime = timeFormatter.format(Calendar.getInstance().getTime());
+        docModTime = docCreateTime;
+
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("MM/dd/yyyy");
+        docCreateDate = dateFormatter.format(Calendar.getInstance().getTime());
+        docModDate = docCreateDate;
     }
 
     public String getDocMessage() {
@@ -180,5 +194,13 @@ class Documentation
 
     public void setDocModTime(String docModTime) {
         this.docModTime = docModTime;
+    }
+
+    public int getPositionForDelete() {
+        return positionForDelete;
+    }
+
+    public void setPositionForDelete(int positionForDelete) {
+        this.positionForDelete = positionForDelete;
     }
 }
