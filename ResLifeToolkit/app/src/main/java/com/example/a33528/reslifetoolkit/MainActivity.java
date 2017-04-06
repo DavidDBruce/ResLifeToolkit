@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_screen);
 
-        MySQLiteHelper mDbHelper = new MySQLiteHelper(getApplicationContext());
+
 
 //        SharedPreferences prefs = getSharedPreferences(PREFS,MODE_PRIVATE);
 //        String tmp = prefs.getString("PF 0 raName","Nothing Found");

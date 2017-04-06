@@ -150,4 +150,10 @@ public class ProgrammingForm implements Serializable{
     public void setEventDate(String eventDate) {
         this.eventDate = eventDate;
     }
+
+    public String toString()
+    {
+        return raName + " " + eventTitle;
+    }
+
 }
