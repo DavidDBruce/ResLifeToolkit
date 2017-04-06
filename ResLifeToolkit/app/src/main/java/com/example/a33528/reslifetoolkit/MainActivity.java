@@ -4,6 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.provider.BaseColumns;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,16 +16,16 @@ import java.io.File;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static final String PREFS = "prefs";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_screen);
 
-        SharedPreferences prefs = getSharedPreferences(PREFS,MODE_PRIVATE);
-        String tmp = prefs.getString("PF 0 raName","Nothing Found");
-        Log.d("FindMePlz", tmp);
+        MySQLiteHelper mDbHelper = new MySQLiteHelper(getApplicationContext());
+
+//        SharedPreferences prefs = getSharedPreferences(PREFS,MODE_PRIVATE);
+//        String tmp = prefs.getString("PF 0 raName","Nothing Found");
+//        Log.d("FindMePlz", tmp);
     }
     public void programmingForms(View view)
     {
@@ -35,3 +38,6 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 }
+
+
+

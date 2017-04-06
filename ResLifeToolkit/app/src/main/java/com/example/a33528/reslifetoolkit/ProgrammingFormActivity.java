@@ -65,12 +65,12 @@ public class ProgrammingFormActivity extends AppCompatActivity {
 
         formTitle.setText(inputForm.getEventTitle());
         raName.setText(inputForm.getRaName());
-        floor.setText("" + inputForm.getHallFloor());
+        floor.setText(inputForm.getHallFloor());
         why.setText(inputForm.getEventReason());
         description.setText(inputForm.getEventDescription());
         publicity.setText(inputForm.getEventPublicity());
-        attendees.setText("" + inputForm.getAttendees());
-        cost.setText("" + inputForm.getCost());
+        attendees.setText(inputForm.getAttendees());
+        cost.setText(inputForm.getCost());
         goals.setText(inputForm.getGoals());
         eventDate.setText(inputForm.getEventDate());
         if(inputForm.getIsEvent())

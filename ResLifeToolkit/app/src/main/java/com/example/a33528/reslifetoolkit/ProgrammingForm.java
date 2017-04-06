@@ -11,6 +11,7 @@ import java.util.Date;
 
 public class ProgrammingForm implements Serializable{
 
+    private int id;
     private String raName = "";
     private String hallName = "";
     private String hallFloor = "";
@@ -46,6 +47,15 @@ public class ProgrammingForm implements Serializable{
     }
 
     //Getters and setters for necessary items.
+
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getRaName() {
         return raName;
