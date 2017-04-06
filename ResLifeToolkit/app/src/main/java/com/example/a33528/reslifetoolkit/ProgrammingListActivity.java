@@ -150,14 +150,14 @@ public class ProgrammingListActivity extends AppCompatActivity {
             prefEdit.putBoolean("PF " + i, true);
             prefEdit.putString("PF " + i + " raName", formsList.get(i).getRaName());
             prefEdit.putString("PF " + i + " hallName", formsList.get(i).getHallName());
-            prefEdit.putInt("PF " + i + " floorNum", formsList.get(i).getHallFloor());
+            prefEdit.putString("PF " + i + " floorNum", formsList.get(i).getHallFloor());
             prefEdit.putString("PF " + i + " eventTitle", formsList.get(i).getEventTitle());
             prefEdit.putString("PF " + i + " eventReason", formsList.get(i).getEventReason());
             prefEdit.putString("PF " + i + " eventDescription", formsList.get(i).getEventDescription());
             prefEdit.putString("PF " + i + " eventPublicity", formsList.get(i).getEventPublicity());
             prefEdit.putString("PF " + i + " eventDate", formsList.get(i).getEventDate());
-            prefEdit.putFloat("PF " + i + " cost",    (float) formsList.get(i).getCost()); //find better solution
-            prefEdit.putInt("PF " + i + " attendees", formsList.get(i).getAttendees());
+            prefEdit.putString("PF " + i + " cost", formsList.get(i).getCost()); //find better solution
+            prefEdit.putString("PF " + i + " attendees", formsList.get(i).getAttendees());
             prefEdit.putString("PF " + i + " goals", formsList.get(i).getGoals());
             prefEdit.putInt("PF " + i + " positionForDelete", formsList.get(i).getPositionForDelete());
             prefEdit.putBoolean("PF " + i + " isEvent", formsList.get(i).getIsEvent());
@@ -183,14 +183,14 @@ public class ProgrammingListActivity extends AppCompatActivity {
                 ProgrammingForm pf = new ProgrammingForm();
                 pf.setRaName(prefs.getString("PF " + i + "raName", ""));
                 pf.setHallName(prefs.getString("PF " + i + " hallName", ""));
-                pf.setHallFloor(prefs.getInt("PF " + i + " floorNum", -1));
+                pf.setHallFloor(prefs.getString("PF " + i + " floorNum", ""));
                 pf.setEventTitle(prefs.getString("PF " + i + " eventTitle", "Error"));
                 pf.setEventReason(prefs.getString("PF " + i + " eventReason", ""));
                 pf.setEventDescription(prefs.getString("PF " + i + " eventDescription", ""));
                 pf.setEventPublicity(prefs.getString("PF " + i + " eventPublicity", ""));
                 pf.setEventDate(prefs.getString("PF " + i + " eventDate", ""));
-                pf.setCost((double) prefs.getFloat("PF " + i + " cost", 0.0f)); //find better solution
-                pf.setAttendees(prefs.getInt("PF " + i + " attendees", -1));
+                pf.setCost(prefs.getString("PF " + i + " cost", ""));
+                pf.setAttendees(prefs.getString("PF " + i + " attendees", ""));
                 pf.setGoals(prefs.getString("PF " + i + " goals", ""));
                 pf.setPositionForDelete(prefs.getInt("PF " + i + " positionForDelete", -1));
                 pf.setIsEvent(prefs.getBoolean("PF " + i + " isEvent", true));

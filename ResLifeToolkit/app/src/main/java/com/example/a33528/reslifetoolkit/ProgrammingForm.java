@@ -13,14 +13,14 @@ public class ProgrammingForm implements Serializable{
 
     private String raName = "";
     private String hallName = "";
-    private int hallFloor;
+    private String hallFloor = "";
     private String eventTitle = "No Title";
     private String eventReason = "";
     private String eventDescription = "";
     private String eventPublicity = "";
     private String eventDate = "";
-    private double cost;
-    private int attendees;
+    private String cost = "";
+    private String attendees = "";
     private String goals = "";
     private boolean isEvent;
     private int positionForDelete;
@@ -30,7 +30,7 @@ public class ProgrammingForm implements Serializable{
 
     }
 
-    public ProgrammingForm(String raName, String hallName, int hallFloor, String eventTitle, String eventReason, String eventDescription, String eventPublicity, double cost, int attendees, String goals, boolean isEvent )
+    public ProgrammingForm(String raName, String hallName, String hallFloor, String eventTitle, String eventReason, String eventDescription, String eventPublicity, String cost, String attendees, String goals, boolean isEvent )
     {
         this.raName = raName;
         this.hallName = hallName;
@@ -63,11 +63,11 @@ public class ProgrammingForm implements Serializable{
         this.hallName = hallName;
     }
 
-    public int getHallFloor() {
+    public String getHallFloor() {
         return hallFloor;
     }
 
-    public void setHallFloor(int hallFloor) {
+    public void setHallFloor(String hallFloor) {
         this.hallFloor = hallFloor;
     }
 
@@ -101,19 +101,19 @@ public class ProgrammingForm implements Serializable{
         this.eventPublicity = eventPublicity;
     }
 
-    public double getCost() {
+    public String getCost() {
         return cost;
     }
 
-    public void setCost(double cost) {
+    public void setCost(String cost) {
         this.cost = cost;
     }
 
-    public int getAttendees() {
+    public String getAttendees() {
         return attendees;
     }
 
-    public void setAttendees(int attendees) {
+    public void setAttendees(String attendees) {
         this.attendees = attendees;
     }
 

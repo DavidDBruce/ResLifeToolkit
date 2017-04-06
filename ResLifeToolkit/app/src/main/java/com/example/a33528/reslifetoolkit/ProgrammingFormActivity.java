@@ -205,18 +205,15 @@ public class ProgrammingFormActivity extends AppCompatActivity {
 
     public void save()
     {
-        Scanner s = new Scanner(attendees.getText().toString());
-        inputForm.setAttendees(s.nextInt());
-        s = new Scanner(cost.getText().toString());
-        inputForm.setCost(s.nextDouble());
+        inputForm.setAttendees(attendees.getText().toString());
+        inputForm.setCost(cost.getText().toString());
         inputForm.setIsEvent(!formSwitch.isChecked());
         inputForm.setEventDescription(description.getText().toString());
         inputForm.setEventPublicity(publicity.getText().toString());
         inputForm.setEventReason(why.getText().toString());
         inputForm.setEventTitle(formTitle.getText().toString());
         inputForm.setGoals(formTitle.getText().toString());
-        s = new Scanner(floor.getText().toString());
-        inputForm.setHallFloor(s.nextInt());
+        inputForm.setHallFloor(floor.getText().toString());
         inputForm.setHallName(hallSpinner.getSelectedItem().toString());
         inputForm.setRaName(raName.getText().toString());
         inputForm.setEventDate(eventDate.getText().toString());
