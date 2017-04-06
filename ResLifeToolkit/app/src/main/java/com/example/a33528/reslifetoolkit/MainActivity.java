@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.main_screen);
 
         SharedPreferences prefs = getSharedPreferences(PREFS,MODE_PRIVATE);
-        String tmp = prefs.getString("PF  raName","Nothing Found");
+        String tmp = prefs.getString("PF 0 raName","Nothing Found");
         Log.d("FindMePlz", tmp);
     }
     public void programmingForms(View view)

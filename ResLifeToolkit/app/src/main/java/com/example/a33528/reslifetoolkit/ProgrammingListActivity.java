@@ -39,16 +39,17 @@ public class ProgrammingListActivity extends AppCompatActivity {
 
         //Test input for application testing
 
-        testForm = new ProgrammingForm("David Bruce", "South Complex", 2, "Smash Night", "Fun", "Playing Smash Bros", "Flyers and Emails", 0.0, 12, "yes", true);
-        testForm2 = new ProgrammingForm("Cheyanne Whorton", "South Complex", 2, "Sleep", "Floor needs to learn to sleep.", "Bulletin board with points built in.", "", 0.0, 0, "", false);
-        testForm3 = new ProgrammingForm("Sadie Moore", "South Complex", 3, "Hot Seat", "Fun", "Playing Hot Seat after floor meeting.", "Flyers and Emails", 0.0, 12, "yes", true);
+//        testForm = new ProgrammingForm("David Bruce", "South Complex", 2, "Smash Night", "Fun", "Playing Smash Bros", "Flyers and Emails", 0.0, 12, "yes", true);
+//        testForm2 = new ProgrammingForm("Cheyanne Whorton", "South Complex", 2, "Sleep", "Floor needs to learn to sleep.", "Bulletin board with points built in.", "", 0.0, 0, "", false);
+//        testForm3 = new ProgrammingForm("Sadie Moore", "South Complex", 3, "Hot Seat", "Fun", "Playing Hot Seat after floor meeting.", "Flyers and Emails", 0.0, 12, "yes", true);
         formsList = new ArrayList<ProgrammingForm>();
-        formsList.add(testForm);
-        formsList.add(testForm2);
-        formsList.add(testForm3);
+//        formsList.add(testForm);
+//        formsList.add(testForm2);
+//        formsList.add(testForm3);
         addFormsButton = (FloatingActionButton) findViewById(R.id.addFormFAB);
 
-        initializePrefs();
+//        initializePrefs();
+        initializeForms();
 
         buildLV();
     }
@@ -146,7 +147,7 @@ public class ProgrammingListActivity extends AppCompatActivity {
         SharedPreferences.Editor prefEdit = prefs.edit();
         for(int i = 0; i < formsList.size(); i++)
         {
-
+            prefEdit.putBoolean("PF " + i, true);
             prefEdit.putString("PF " + i + " raName", formsList.get(i).getRaName());
             prefEdit.putString("PF " + i + " hallName", formsList.get(i).getHallName());
             prefEdit.putInt("PF " + i + " floorNum", formsList.get(i).getHallFloor());
@@ -167,6 +168,40 @@ public class ProgrammingListActivity extends AppCompatActivity {
         {
             Log.d("FindMePlz",prefs.getString("PF " + i + " raName",null));
             Log.d("FindMePlz","PF " + i + " raName");
+
+        }
+    }
+
+    private void initializeForms()
+    {
+        SharedPreferences prefs = getSharedPreferences(PREFS,MODE_PRIVATE);
+        int i = 0;
+        while(true)
+        {
+            if(prefs.getBoolean("PF " + i,false))
+            {
+                ProgrammingForm pf = new ProgrammingForm();
+                pf.setRaName(prefs.getString("PF " + i + "raName", ""));
+                pf.setHallName(prefs.getString("PF " + i + " hallName", ""));
+                pf.setHallFloor(prefs.getInt("PF " + i + " floorNum", -1));
+                pf.setEventTitle(prefs.getString("PF " + i + " eventTitle", "Error"));
+                pf.setEventReason(prefs.getString("PF " + i + " eventReason", ""));
+                pf.setEventDescription(prefs.getString("PF " + i + " eventDescription", ""));
+                pf.setEventPublicity(prefs.getString("PF " + i + " eventPublicity", ""));
+                pf.setEventDate(prefs.getString("PF " + i + " eventDate", ""));
+                pf.setCost((double) prefs.getFloat("PF " + i + " cost", 0.0f)); //find better solution
+                pf.setAttendees(prefs.getInt("PF " + i + " attendees", -1));
+                pf.setGoals(prefs.getString("PF " + i + " goals", ""));
+                pf.setPositionForDelete(prefs.getInt("PF " + i + " positionForDelete", -1));
+                pf.setIsEvent(prefs.getBoolean("PF " + i + " isEvent", true));
+                formsList.add(pf);
+                i++;
+            }
+            else
+            {
+                break;
+            }
+
         }
     }
 
