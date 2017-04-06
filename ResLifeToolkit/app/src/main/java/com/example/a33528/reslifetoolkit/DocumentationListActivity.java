@@ -14,6 +14,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class DocumentationListActivity extends AppCompatActivity {
@@ -76,6 +77,36 @@ public class DocumentationListActivity extends AppCompatActivity {
                 return true;
             }
         });
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        if(requestCode == 45 && resultCode == RESULT_OK && data != null)
+        {
+            Documentation returnDoc = (Documentation) data.getSerializableExtra("returnDoc");
+            inputDocList.remove(returnDoc.getPositionForDelete());
+            Collections.reverse(inputDocList);
+            inputDocList.add(returnDoc);
+            Collections.reverse(inputDocList);
+            documentationLA.notifyDataSetChanged();
+
+        }
+        else if(requestCode == 45 && resultCode == RESULT_CANCELED && data != null)
+        {
+            Documentation returnDoc = (Documentation) data.getSerializableExtra("returnDoc");
+            inputDocList.remove(returnDoc.getPositionForDelete());
+            documentationLA.notifyDataSetChanged();
+        }
+        else
+        {
+            if(inputDocList.get(0).getDocMessage().equals(""))
+            {
+                inputDocList.remove(0);
+            }
+            documentationLA.notifyDataSetChanged();
+
+        }
     }
 }
 

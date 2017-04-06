@@ -4,9 +4,12 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -19,6 +22,8 @@ import java.util.Collections;
 import java.util.List;
 
 public class ProgrammingListActivity extends AppCompatActivity {
+
+    public static final String PREFS = "prefs";
 
     ProgrammingForm testForm;
     ProgrammingForm testForm2;
@@ -42,6 +47,8 @@ public class ProgrammingListActivity extends AppCompatActivity {
         formsList.add(testForm2);
         formsList.add(testForm3);
         addFormsButton = (FloatingActionButton) findViewById(R.id.addFormFAB);
+
+        initializePrefs();
 
         buildLV();
     }
@@ -133,6 +140,36 @@ public class ProgrammingListActivity extends AppCompatActivity {
         }
     }
 
+    private void initializePrefs()
+    {
+        SharedPreferences prefs = getSharedPreferences(PREFS,MODE_PRIVATE);
+        SharedPreferences.Editor prefEdit = prefs.edit();
+        for(int i = 0; i < formsList.size(); i++)
+        {
+
+            prefEdit.putString("PF " + i + " raName", formsList.get(i).getRaName());
+            prefEdit.putString("PF " + i + " hallName", formsList.get(i).getHallName());
+            prefEdit.putInt("PF " + i + " floorNum", formsList.get(i).getHallFloor());
+            prefEdit.putString("PF " + i + " eventTitle", formsList.get(i).getEventTitle());
+            prefEdit.putString("PF " + i + " eventReason", formsList.get(i).getEventReason());
+            prefEdit.putString("PF " + i + " eventDescription", formsList.get(i).getEventDescription());
+            prefEdit.putString("PF " + i + " eventPublicity", formsList.get(i).getEventPublicity());
+            prefEdit.putString("PF " + i + " eventDate", formsList.get(i).getEventDate());
+            prefEdit.putFloat("PF " + i + " cost",    (float) formsList.get(i).getCost()); //find better solution
+            prefEdit.putInt("PF " + i + " attendees", formsList.get(i).getAttendees());
+            prefEdit.putString("PF " + i + " goals", formsList.get(i).getGoals());
+            prefEdit.putInt("PF " + i + " positionForDelete", formsList.get(i).getPositionForDelete());
+            prefEdit.putBoolean("PF " + i + " isEvent", formsList.get(i).getIsEvent());
+            //prefEdit.commit();
+            prefEdit.apply();
+        }
+        for(int i = 0; i < formsList.size(); i++)
+        {
+            Log.d("FindMePlz",prefs.getString("PF " + i + " raName",null));
+            Log.d("FindMePlz","PF " + i + " raName");
+        }
+    }
+
 }
 
 class ProgrammingAdapter extends ArrayAdapter<ProgrammingForm> {
@@ -167,7 +204,7 @@ class ProgrammingAdapter extends ArrayAdapter<ProgrammingForm> {
             type.setText("Passive");
         }
 
-        date.setText(curForm.getCreateDate());
+        date.setText(curForm.getEventDate());
         title.setText(curForm.getEventTitle());
 
         return view;

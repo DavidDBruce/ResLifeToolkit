@@ -35,7 +35,6 @@ public class DocumentationActivity extends AppCompatActivity {
         save();
         outputIntent.putExtra("returnDoc",inputDoc);
         setResult(RESULT_OK,outputIntent);
-        finish();
     }
 
     public void cancelDoc(View v)

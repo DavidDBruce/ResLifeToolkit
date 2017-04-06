@@ -2,7 +2,9 @@ package com.example.a33528.reslifetoolkit;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -168,18 +170,6 @@ public class ProgrammingFormActivity extends AppCompatActivity {
         finish();
     }
 
-    public void formCancel(View v)
-    {
-        finish();
-    }
-
-    public void formDelete(View v)
-    {
-        output.putExtra("returnForm", inputForm);
-        setResult(RESULT_CANCELED, output);
-        finish();
-    }
-
     public void formSend(View v)
     {
         save();
@@ -201,6 +191,18 @@ public class ProgrammingFormActivity extends AppCompatActivity {
         finish();
     }
 
+    public void formCancel(View v)
+    {
+        finish();
+    }
+
+    public void formDelete(View v)
+    {
+        output.putExtra("returnForm", inputForm);
+        setResult(RESULT_CANCELED, output);
+        finish();
+    }
+
     public void save()
     {
         Scanner s = new Scanner(attendees.getText().toString());
@@ -218,8 +220,6 @@ public class ProgrammingFormActivity extends AppCompatActivity {
         inputForm.setHallName(hallSpinner.getSelectedItem().toString());
         inputForm.setRaName(raName.getText().toString());
         inputForm.setEventDate(eventDate.getText().toString());
-        SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
-        inputForm.setModDate(formatter.format(Calendar.getInstance().getTime()));
     }
 
     public String buildForm()
@@ -258,5 +258,4 @@ public class ProgrammingFormActivity extends AppCompatActivity {
         }
         return completedForm;
     }
-
 }

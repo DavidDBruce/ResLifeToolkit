@@ -23,15 +23,11 @@ public class ProgrammingForm implements Serializable{
     private int attendees;
     private String goals = "";
     private boolean isEvent;
-    private String createDate = "";
-    private String modDate = "";
     private int positionForDelete;
 
     public ProgrammingForm()
     {
-        SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
-        createDate = formatter.format(Calendar.getInstance().getTime());
-        modDate = createDate;
+
     }
 
     public ProgrammingForm(String raName, String hallName, int hallFloor, String eventTitle, String eventReason, String eventDescription, String eventPublicity, double cost, int attendees, String goals, boolean isEvent )
@@ -47,11 +43,6 @@ public class ProgrammingForm implements Serializable{
         this.attendees = attendees;
         this.goals = goals;
         this.isEvent = isEvent;
-
-        //Initializing dates
-        SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
-        createDate = formatter.format(Calendar.getInstance().getTime());
-        modDate = createDate;
     }
 
     //Getters and setters for necessary items.
@@ -137,12 +128,6 @@ public class ProgrammingForm implements Serializable{
     public boolean getIsEvent() {return isEvent;}
 
     public void setIsEvent(boolean event) {isEvent = event;}
-
-    public String getCreateDate() {return createDate;}
-
-    public String getModDate() {return modDate;}
-
-    public void setModDate(String modDate) {this.modDate = modDate;}
 
     public void setPositionForDelete(int position){this.positionForDelete = position;}
 

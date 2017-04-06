@@ -96,4 +96,34 @@
         android:layout_height="wrap_content"
         android:onClick="dayRound"
         android:text="Day Rounds" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/dutyLogSaveBTN"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:backgroundTint="@android:color/holo_green_light"
+            android:text="Save" />
+
+        <Button
+            android:id="@+id/dutyLogSendBTN"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:backgroundTint="@android:color/holo_blue_light"
+            android:text="Send" />
+
+        <Button
+            android:id="@+id/dutyLogDeleteBTN"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:backgroundTint="@android:color/holo_red_light"
+            android:text="Delete" />
+    </LinearLayout>
 </LinearLayout>

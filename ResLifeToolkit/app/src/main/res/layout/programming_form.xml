@@ -213,6 +213,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:backgroundTint="@android:color/holo_green_light"
             android:onClick="formSave"
             android:text="Save" />
 
@@ -221,6 +222,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:backgroundTint="@android:color/holo_blue_light"
             android:onClick="formSend"
             android:text="Send" />
 
@@ -229,6 +231,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:backgroundTint="@android:color/holo_orange_light"
             android:onClick="formCancel"
             android:text="Cancel" />
 
@@ -237,6 +240,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:backgroundTint="@android:color/holo_red_light"
             android:onClick="formDelete"
             android:text="Delete" />
     </LinearLayout>

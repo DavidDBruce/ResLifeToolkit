@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -30,10 +31,17 @@ public class DutyLogListActivity extends AppCompatActivity {
     private DutyLog testLog2;
     private DutyLog testLog3;
 
+    File dutyLogJSON;
+    Intent inputIntent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.general_list);
+
+        inputIntent = getIntent();
+        dutyLogJSON = (File) inputIntent.getSerializableExtra("dutyLogFile");
+
 
         docList.add(new Documentation("Alcohol on second floor."));
         docList.add(new Documentation("Noise violation on first."));
