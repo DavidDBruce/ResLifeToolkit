@@ -50,7 +50,6 @@ public class ProgrammingListActivity extends AppCompatActivity {
 
 //        initializePrefs();
         initializeForms();
-
         buildLV();
     }
 
