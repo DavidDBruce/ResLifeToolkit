@@ -153,7 +153,7 @@ public class ProgrammingForm implements Serializable{
 
     public String toString()
     {
-        return raName + " " + eventTitle;
+        return raName + " " + eventTitle + " " + id;
     }
 
 }

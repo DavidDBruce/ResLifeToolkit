@@ -49,16 +49,17 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
                 "id INTEGER PRIMARY KEY AUTOINCREMENT, " + "raname TEXT, "+ "hallname TEXT, " + "floornum TEXT, " + "eventtitle TEXT, " + "eventreason TEXT, " + "eventdescription TEXT, " + "eventpublicity TEXT, " + "eventdate TEXT, " + "cost TEXT, " + "attendees TEXT, " + "goals TEXT, "+ "positionfordelete INTEGER, " + "isevent INTEGER" + ")";
         db.execSQL(CREATE_PF_TABLE);
     }
+
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS programmingform");
         onCreate(db);
     }
+
     public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         onUpgrade(db, oldVersion, newVersion);
     }
 
-    public void addProgrammingForm(ProgrammingForm pf)
-    {
+    public void addProgrammingForm(ProgrammingForm pf) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues curEntry = new ContentValues();
 
@@ -84,6 +85,24 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         Log.d("addForm", "Form added " + pf.getRaName());
 
         db.close();
+    }
+
+    public void deleteProgrammingForm(ProgrammingForm pf) {
+
+        // 1. get reference to writable DB
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        // 2. delete
+        db.delete(TABLE_PF, //table name
+                KEY_ID+" = ?",  // selections
+                new String[] { String.valueOf(pf.getId()) }); //selections args
+
+        // 3. close
+        db.close();
+
+        //log
+        Log.d("deleteBook", pf.toString());
+
     }
 
     public ProgrammingForm getProgrammingForm(int id){
@@ -173,9 +192,53 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 
         Log.d("getAllBooks()", pfs.toString());
 
-        // return books
         return pfs;
     }
+
+    public void clearProgrammingForms() {
+        SQLiteDatabase db = getWritableDatabase();
+        db.execSQL("DROP TABLE IF EXISTS programmingform");
+        onCreate(db);
+    }
+
+    public int updateProgrammingForm(ProgrammingForm pf) {
+
+        // 1. get reference to writable DB
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        // 2. create ContentValues to add key "column"/value
+        ContentValues curEntry = new ContentValues();
+
+        curEntry.put("raname", pf.getRaName());
+        curEntry.put("hallname", pf.getHallName());
+        curEntry.put("floornum", pf.getHallFloor());
+        curEntry.put("eventtitle", pf.getEventTitle());
+        curEntry.put("eventreason", pf.getEventReason());
+        curEntry.put("eventdescription", pf.getEventDescription());
+        curEntry.put("eventpublicity", pf.getEventPublicity());
+        curEntry.put("eventdate", pf.getEventDate());
+        curEntry.put("cost", pf.getCost());
+        curEntry.put("attendees", pf.getAttendees());
+        curEntry.put("goals", pf.getGoals());
+        curEntry.put("positionfordelete", pf.getPositionForDelete());
+        if(pf.getIsEvent()){
+            curEntry.put("isevent", 1);}
+        else{
+            curEntry.put("isevent", 0);}
+
+        // 3. updating row
+        int i = db.update(TABLE_PF, //table
+                curEntry, // column/value
+                KEY_ID+" = ?", // selections
+                new String[] { String.valueOf(pf.getId()) }); //selection args
+
+        // 4. close
+        db.close();
+
+        return i;
+
+    }
+
 
 
 }
