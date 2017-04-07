@@ -2,12 +2,9 @@ package com.example.a33528.reslifetoolkit;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
@@ -17,7 +14,6 @@ import android.widget.Switch;
 import android.widget.TimePicker;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.EventListener;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -73,6 +69,7 @@ public class ProgrammingFormActivity extends AppCompatActivity {
         cost.setText(inputForm.getCost());
         goals.setText(inputForm.getGoals());
         eventDate.setText(inputForm.getEventDate());
+        eventTime.setText(inputForm.getEventTime());
         if(inputForm.getIsEvent())
         {
             formSwitch.setChecked(false);
@@ -139,9 +136,15 @@ public class ProgrammingFormActivity extends AppCompatActivity {
                 mTimePicker = new TimePickerDialog(ProgrammingFormActivity.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                        eventTime.setText( selectedHour + ":" + selectedMinute);
+                        if(selectedHour >= 12)
+                        {
+                            eventTime.setText( selectedHour + ":" + selectedMinute + " PM");
+                        }
+                        else {
+                            eventTime.setText(selectedHour + ":" + selectedMinute + " AM");
+                        }
                     }
-                }, hour, minute, true);
+                }, hour, minute, false);
                 mTimePicker.setTitle("Select Time");
                 mTimePicker.show();
 
@@ -217,6 +220,7 @@ public class ProgrammingFormActivity extends AppCompatActivity {
         inputForm.setHallName(hallSpinner.getSelectedItem().toString());
         inputForm.setRaName(raName.getText().toString());
         inputForm.setEventDate(eventDate.getText().toString());
+        inputForm.setEventTime(eventTime.getText().toString());
     }
 
     public String buildForm()

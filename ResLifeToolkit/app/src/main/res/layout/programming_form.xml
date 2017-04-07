@@ -1,248 +1,253 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
 
     <LinearLayout
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <EditText
-            android:id="@+id/raNameET"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:hint="Your Name"
-            android:inputType="textPersonName" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <Spinner
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/hallSPN"
-            android:layout_weight="1" />
-
-        <EditText
-            android:id="@+id/floorET"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:hint="Floor"
-            android:inputType="number" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="match_parent">
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical|center_horizontal"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/eventTV"
+            <EditText
+                android:id="@+id/raNameET"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Event"
-                android:textAlignment="textEnd" />
-
-            <Switch
-                android:id="@+id/formSwitch"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="0" />
-
-            <TextView
-                android:id="@+id/passiveTV"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Passive"
-                android:textAlignment="textStart" />
+                android:ems="10"
+                android:hint="Your Name"
+                android:inputType="textPersonName" />
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-            <EditText
-                android:id="@+id/eventDateET"
+            <Spinner
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ems="10"
-                android:focusable="false"
-                android:hint="Date"
-                android:inputType="date" />
+                android:id="@+id/hallSPN"
+                android:layout_weight="1" />
 
             <EditText
-                android:id="@+id/eventTimeET"
+                android:id="@+id/floorET"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:focusable="false"
-                android:hint="Time"
-                android:inputType="time" />
+                android:hint="Floor"
+                android:inputType="number" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical|center_horizontal"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/eventTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Event"
+                    android:textAlignment="textEnd" />
+
+                <Switch
+                    android:id="@+id/formSwitch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0" />
+
+                <TextView
+                    android:id="@+id/passiveTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Passive"
+                    android:textAlignment="textStart" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/eventDateET"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:focusable="false"
+                    android:hint="Date"
+                    android:inputType="date" />
+
+                <EditText
+                    android:id="@+id/eventTimeET"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:focusable="false"
+                    android:hint="Time"
+                    android:inputType="time" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/eventTitleET"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Event Title"
+                android:inputType="textPersonName" />
+
+        </LinearLayout>
+
+        <TextView
+            android:text="Why are you hosting this event?"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/whyTV" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textMultiLine"
+            android:ems="10"
+            android:id="@+id/whyET" />
+
+        <TextView
+            android:text="Event Description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/descTV" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textMultiLine"
+            android:ems="10"
+            android:id="@+id/descET" />
+
+        <TextView
+            android:text="What publicity did you use?"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/pubTV" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textMultiLine"
+            android:ems="10"
+            android:id="@+id/pubET" />
+
+        <TextView
+            android:text="redBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/redBarTV"
+            android:textColor="@android:color/holo_red_dark"
+            android:background="@android:color/holo_red_dark" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/costET"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Cost"
+                android:inputType="numberDecimal" />
+
+            <EditText
+                android:id="@+id/attendeesET"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="# of Attendees"
+                android:inputType="number" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/goalsTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Did you meet your goals?" />
+
+        <EditText
+            android:id="@+id/goalsET"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textMultiLine" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/pfSaveBTN"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="@android:color/holo_green_light"
+                android:onClick="formSave"
+                android:text="Save" />
+
+            <Button
+                android:id="@+id/pfSendBTN"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="@android:color/holo_blue_light"
+                android:onClick="formSend"
+                android:text="Send" />
+
+            <Button
+                android:id="@+id/pfCancelBTN"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="@android:color/holo_orange_light"
+                android:onClick="formCancel"
+                android:text="Cancel" />
+
+            <Button
+                android:id="@+id/pfDeleteBTN"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="@android:color/holo_red_light"
+                android:onClick="formDelete"
+                android:text="Delete" />
         </LinearLayout>
 
     </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <EditText
-            android:id="@+id/eventTitleET"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:hint="Event Title"
-            android:inputType="textPersonName" />
-
-    </LinearLayout>
-
-    <TextView
-        android:text="Why are you hosting this event?"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/whyTV" />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textMultiLine"
-        android:ems="10"
-        android:id="@+id/whyET" />
-
-    <TextView
-        android:text="Event Description"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/descTV" />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textMultiLine"
-        android:ems="10"
-        android:id="@+id/descET" />
-
-    <TextView
-        android:text="What publicity did you use?"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/pubTV" />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textMultiLine"
-        android:ems="10"
-        android:id="@+id/pubET" />
-
-    <TextView
-        android:text="redBar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/redBarTV"
-        android:textColor="@android:color/holo_red_dark"
-        android:background="@android:color/holo_red_dark" />
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <EditText
-            android:id="@+id/costET"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:hint="Cost"
-            android:inputType="numberDecimal" />
-
-        <EditText
-            android:id="@+id/attendeesET"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:hint="# of Attendees"
-            android:inputType="number" />
-
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/goalsTV"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Did you meet your goals?" />
-
-    <EditText
-        android:id="@+id/goalsET"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textMultiLine" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/pfSaveBTN"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:backgroundTint="@android:color/holo_green_light"
-            android:onClick="formSave"
-            android:text="Save" />
-
-        <Button
-            android:id="@+id/pfSendBTN"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:backgroundTint="@android:color/holo_blue_light"
-            android:onClick="formSend"
-            android:text="Send" />
-
-        <Button
-            android:id="@+id/pfCancelBTN"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:backgroundTint="@android:color/holo_orange_light"
-            android:onClick="formCancel"
-            android:text="Cancel" />
-
-        <Button
-            android:id="@+id/pfDeleteBTN"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:backgroundTint="@android:color/holo_red_light"
-            android:onClick="formDelete"
-            android:text="Delete" />
-    </LinearLayout>
-
-</LinearLayout>
+</ScrollView>

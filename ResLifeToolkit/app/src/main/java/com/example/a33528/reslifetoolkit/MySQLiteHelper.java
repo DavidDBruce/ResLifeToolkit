@@ -35,8 +35,9 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     private static final String KEY_GOALS = "goals";
     private static final String KEY_POSITIONFORDELETE = "positionfordelete";
     private static final String KEY_ISEVENT = "isevent";
+    private static final String KEY_EVENTTIME = "eventtime";
 
-    private static final String[] PF_COLUMNS = {KEY_ID,KEY_RANAME,KEY_HALLNAME,KEY_FLOORNUM,KEY_EVENTTITLE,KEY_EVENTREASON,KEY_EVENTDESCRIPTION,KEY_EVENTPUBLICITY,KEY_EVENTDATE,KEY_COST,KEY_ATTENDEES,KEY_GOALS,KEY_POSITIONFORDELETE,KEY_ISEVENT};
+    private static final String[] PF_COLUMNS = {KEY_ID,KEY_RANAME,KEY_HALLNAME,KEY_FLOORNUM,KEY_EVENTTITLE,KEY_EVENTREASON,KEY_EVENTDESCRIPTION,KEY_EVENTPUBLICITY,KEY_EVENTDATE,KEY_COST,KEY_ATTENDEES,KEY_GOALS,KEY_POSITIONFORDELETE,KEY_ISEVENT,KEY_EVENTTIME};
 
     public static final int DATABASE_VERSION = 1;
     public static final String DATABASE_NAME = "ResLifeToolkitDB";
@@ -46,7 +47,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     }
     public void onCreate(SQLiteDatabase db) {
         String CREATE_PF_TABLE = "CREATE TABLE IF NOT EXISTS programmingform ( " +
-                "id INTEGER PRIMARY KEY AUTOINCREMENT, " + "raname TEXT, "+ "hallname TEXT, " + "floornum TEXT, " + "eventtitle TEXT, " + "eventreason TEXT, " + "eventdescription TEXT, " + "eventpublicity TEXT, " + "eventdate TEXT, " + "cost TEXT, " + "attendees TEXT, " + "goals TEXT, "+ "positionfordelete INTEGER, " + "isevent INTEGER" + ")";
+                "id INTEGER PRIMARY KEY AUTOINCREMENT, " + "raname TEXT, "+ "hallname TEXT, " + "floornum TEXT, " + "eventtitle TEXT, " + "eventreason TEXT, " + "eventdescription TEXT, " + "eventpublicity TEXT, " + "eventdate TEXT, " + "cost TEXT, " + "attendees TEXT, " + "goals TEXT, "+ "positionfordelete INTEGER, " + "isevent INTEGER," + "eventtime TEXT" + ")";
         db.execSQL(CREATE_PF_TABLE);
     }
 
@@ -79,6 +80,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
             curEntry.put("isevent", 1);}
         else{
             curEntry.put("isevent", 0);}
+        curEntry.put("eventtime",pf.getEventTime());
 
         db.insert(TABLE_PF,null,curEntry);
 
@@ -181,11 +183,11 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
                 pf.setAttendees(cursor.getString(10));
                 pf.setGoals(cursor.getString(11));
                 pf.setPositionForDelete(Integer.parseInt(cursor.getString(12)));
-
                 if(Integer.parseInt(cursor.getString(13) )== 1){
                     pf.setIsEvent(true);}
                 else{
                     pf.setIsEvent(false);}
+                pf.setEventTime(cursor.getString(14));
                 pfs.add(pf);
             } while (cursor.moveToNext());
         }
@@ -225,6 +227,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
             curEntry.put("isevent", 1);}
         else{
             curEntry.put("isevent", 0);}
+        curEntry.put("eventtime", pf.getEventTime());
 
         // 3. updating row
         int i = db.update(TABLE_PF, //table

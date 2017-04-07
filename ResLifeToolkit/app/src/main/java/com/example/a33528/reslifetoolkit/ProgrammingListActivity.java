@@ -110,7 +110,7 @@ public class ProgrammingListActivity extends AppCompatActivity {
         if(requestCode == 42 && resultCode == RESULT_OK && data != null) {
             ProgrammingForm returnForm = (ProgrammingForm) data.getSerializableExtra("returnForm");
             mDbHelper.updateProgrammingForm(returnForm);
-            Collections.reverse(formsList = mDbHelper.getAllProgrammingForms());
+            formsList = mDbHelper.getAllProgrammingForms();
             programmingListLA.clear();
             programmingListLA.addAll(formsList);
             programmingListLA.notifyDataSetChanged();
@@ -133,8 +133,6 @@ public class ProgrammingListActivity extends AppCompatActivity {
 }
 
 class ProgrammingAdapter extends ArrayAdapter<ProgrammingForm> {
-    //ArrayAdapter to set the correct information in a ListView for ProgrammingForms
-    Context c;
 
     ArrayList<ProgrammingForm> inputForms = new ArrayList<ProgrammingForm>();
 

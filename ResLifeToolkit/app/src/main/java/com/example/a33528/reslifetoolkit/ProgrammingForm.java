@@ -20,6 +20,7 @@ public class ProgrammingForm implements Serializable{
     private String eventDescription = "";
     private String eventPublicity = "";
     private String eventDate = "";
+    private String eventTime = "";
     private String cost = "";
     private String attendees = "";
     private String goals = "";
@@ -149,6 +150,14 @@ public class ProgrammingForm implements Serializable{
 
     public void setEventDate(String eventDate) {
         this.eventDate = eventDate;
+    }
+
+    public String getEventTime() {
+        return eventTime;
+    }
+
+    public void setEventTime(String eventTime) {
+        this.eventTime = eventTime;
     }
 
     public String toString()
