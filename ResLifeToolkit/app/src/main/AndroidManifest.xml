@@ -22,8 +22,8 @@
         <activity android:name=".DutyLogListActivity" />
         <activity android:name=".ProgrammingFormActivity" />
         <activity android:name=".DutyLogActivity" />
-        <activity android:name=".DocumentationActivity" />
-        <activity android:name=".DocumentationListActivity"></activity>
+        <activity android:name=".DocumentationListActivity" />
+        <activity android:name=".TextInputActivity"></activity>
     </application>
 
 </manifest>

@@ -18,19 +18,17 @@ public class DutyLog implements Serializable {
     private String roundDay = "";
     private String raOnDuty = "";
     private String createDate = "";
-    private String modDate = "";
-    private ArrayList<Documentation> documentations;
-    private ArrayList<Documentation> workOrders;
+    private String documentations;
+    private String workOrders;
     private int positionForDelete;
 
     public DutyLog()
     {
         SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
         createDate = formatter.format(Calendar.getInstance().getTime());
-        modDate = createDate;
     }
 
-    public DutyLog(String round8, String round10, String round12, String round2, String roundDay, String raOnDuty, ArrayList<Documentation> documentations, ArrayList<Documentation> workOrders)
+    public DutyLog(String round8, String round10, String round12, String round2, String roundDay, String raOnDuty, String documentations, String workOrders)
     {
         this.round8 = round8;
         this.round10 = round10;
@@ -43,7 +41,6 @@ public class DutyLog implements Serializable {
 
         SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
         createDate = formatter.format(Calendar.getInstance().getTime());
-        modDate = createDate;
     }
 
     public String getRound8() {
@@ -98,104 +95,20 @@ public class DutyLog implements Serializable {
         return createDate;
     }
 
-    public String getModDate() {
-        return modDate;
-    }
-
-    public void setModDate(String modDate) {
-        this.modDate = modDate;
-    }
-
-    public ArrayList<Documentation> getDocumentations() {
+    public String getDocumentations() {
         return documentations;
     }
 
-    public void setDocumentations(ArrayList<Documentation> documentations) {
+    public void setDocumentations(String documentations) {
         this.documentations = documentations;
     }
 
-    public ArrayList<Documentation> getWorkOrders() {
+    public String getWorkOrders() {
         return workOrders;
     }
 
-    public void setWorkOrders(ArrayList<Documentation> workOrders) {
+    public void setWorkOrders(String workOrders) {
         this.workOrders = workOrders;
-    }
-
-    public int getPositionForDelete() {
-        return positionForDelete;
-    }
-
-    public void setPositionForDelete(int positionForDelete) {
-        this.positionForDelete = positionForDelete;
-    }
-}
-
-class Documentation implements Serializable
-{
-
-    private String docMessage = "";
-    private String docCreateDate = "";
-    private String docModDate = "";
-    private String docCreateTime = "";
-    private String docModTime = "";
-    private int positionForDelete;
-
-    public Documentation(){
-        SimpleDateFormat timeFormatter = new SimpleDateFormat("hh:mm");
-        docCreateTime = timeFormatter.format(Calendar.getInstance().getTime());
-        docModTime = docCreateTime;
-
-        SimpleDateFormat dateFormatter = new SimpleDateFormat("MM/dd/yyyy");
-        docCreateDate = dateFormatter.format(Calendar.getInstance().getTime());
-        docModDate = docCreateDate;
-    }
-
-    public Documentation(String docMessage){
-
-        this.docMessage = docMessage;
-
-        SimpleDateFormat timeFormatter = new SimpleDateFormat("hh:mm");
-        docCreateTime = timeFormatter.format(Calendar.getInstance().getTime());
-        docModTime = docCreateTime;
-
-        SimpleDateFormat dateFormatter = new SimpleDateFormat("MM/dd/yyyy");
-        docCreateDate = dateFormatter.format(Calendar.getInstance().getTime());
-        docModDate = docCreateDate;
-    }
-
-    public String getDocMessage() {
-        return docMessage;
-    }
-
-    public void setDocMessage(String docMessage) {
-        this.docMessage = docMessage;
-    }
-
-    public String getDocCreateDate() {
-        return docCreateDate;
-    }
-
-    public String getDocModDate() {
-        return docModDate;
-    }
-
-    public void setDocModDate() {
-        SimpleDateFormat dateFormatter = new SimpleDateFormat("MM/dd/yyyy");
-        docModDate = dateFormatter.format(Calendar.getInstance().getTime());
-    }
-
-    public String getDocCreateTime() {
-        return docCreateTime;
-    }
-
-    public String getDocModTime() {
-        return docModTime;
-    }
-
-    public void setDocModTime() {
-        SimpleDateFormat timeFormatter = new SimpleDateFormat("hh:mm");
-        docModTime = timeFormatter.format(Calendar.getInstance().getTime());
     }
 
     public int getPositionForDelete() {

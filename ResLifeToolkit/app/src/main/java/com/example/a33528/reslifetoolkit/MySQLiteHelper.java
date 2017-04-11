@@ -37,7 +37,19 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     private static final String KEY_ISEVENT = "isevent";
     private static final String KEY_EVENTTIME = "eventtime";
 
+    //Duty Log Column Names
+    private static final String KEY_8ROUNDS = "8rounds";
+    private static final String KEY_10ROUNDS = "10rounds";
+    private static final String KEY_12ROUNDS = "12rounds";
+    private static final String KEY_2ROUNDS = "2rounds";
+    private static final String KEY_DAYROUNDS = "dayrounds";
+    private static final String KEY_DOCUMENTATIONS = "documentations";
+    private static final String KEY_WORKORDERS = "workorders";
+    private static final String KEY_LOGDATE = "logdate";
+
     private static final String[] PF_COLUMNS = {KEY_ID,KEY_RANAME,KEY_HALLNAME,KEY_FLOORNUM,KEY_EVENTTITLE,KEY_EVENTREASON,KEY_EVENTDESCRIPTION,KEY_EVENTPUBLICITY,KEY_EVENTDATE,KEY_COST,KEY_ATTENDEES,KEY_GOALS,KEY_POSITIONFORDELETE,KEY_ISEVENT,KEY_EVENTTIME};
+
+    private static final String[] DL_COLUMNS = {KEY_ID,KEY_RANAME,KEY_8ROUNDS,KEY_10ROUNDS,KEY_12ROUNDS,KEY_2ROUNDS,KEY_DAYROUNDS,KEY_DOCUMENTATIONS,KEY_WORKORDERS,KEY_LOGDATE};
 
     public static final int DATABASE_VERSION = 1;
     public static final String DATABASE_NAME = "ResLifeToolkitDB";
@@ -45,10 +57,14 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     public MySQLiteHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
+
     public void onCreate(SQLiteDatabase db) {
-        String CREATE_PF_TABLE = "CREATE TABLE IF NOT EXISTS programmingform ( " +
-                "id INTEGER PRIMARY KEY AUTOINCREMENT, " + "raname TEXT, "+ "hallname TEXT, " + "floornum TEXT, " + "eventtitle TEXT, " + "eventreason TEXT, " + "eventdescription TEXT, " + "eventpublicity TEXT, " + "eventdate TEXT, " + "cost TEXT, " + "attendees TEXT, " + "goals TEXT, "+ "positionfordelete INTEGER, " + "isevent INTEGER," + "eventtime TEXT" + ")";
+        String CREATE_PF_TABLE = "CREATE TABLE IF NOT EXISTS programmingform ( " + "id INTEGER PRIMARY KEY AUTOINCREMENT, " + "raname TEXT, "+ "hallname TEXT, " + "floornum TEXT, " + "eventtitle TEXT, " + "eventreason TEXT, " + "eventdescription TEXT, " + "eventpublicity TEXT, " + "eventdate TEXT, " + "cost TEXT, " + "attendees TEXT, " + "goals TEXT, "+ "positionfordelete INTEGER, " + "isevent INTEGER," + "eventtime TEXT" + ")";
         db.execSQL(CREATE_PF_TABLE);
+
+        String CREATE_DL_TABLE = "CREATE TABLE IF NOT EXISTS dutylogs ( " + "id INTEGER PRIMARY KEY AUTOINCREMENT, " + "raname TEXT, " + "8rounds TEXT, " + "10rounds TEXT, " + "12rounds TEXT, " + "2rounds TEXT, " + "dayrounds TEXT, " + "documentations TEXT, " + "woorkorders TEXT, " + "logdate TEXT)";
+
+        db.execSQL(CREATE_DL_TABLE);
     }
 
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
