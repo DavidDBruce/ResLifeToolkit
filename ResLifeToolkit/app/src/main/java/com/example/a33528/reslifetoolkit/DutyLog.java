@@ -10,7 +10,7 @@ import java.util.Calendar;
  */
 
 public class DutyLog implements Serializable {
-
+//
     private String round8 = "";
     private String round10 = "";
     private String round12 = "";
