@@ -30,7 +30,7 @@ public class DutyLogActivity extends AppCompatActivity {
         dutyLogTitle = (TextView) findViewById(R.id.dutyLogDateTV);
         raOnDuty = (EditText) findViewById(R.id.raOnDutyET);
 
-        dutyLogTitle.setText("Duty Log for " + inputLog.getCreateDate());
+        dutyLogTitle.setText("Duty Log for " + inputLog.getLogDate());
         raOnDuty.setText(inputLog.getRaOnDuty());
      }
 

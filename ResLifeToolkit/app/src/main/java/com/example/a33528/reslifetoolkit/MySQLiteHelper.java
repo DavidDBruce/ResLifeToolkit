@@ -19,6 +19,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 
     // Table Name
     private static final String TABLE_PF = "programmingform";
+    private static final String TABLE_DL = "dutylogs";
 
     //Programming Form Column Names
     private static final String KEY_ID = "id";
@@ -100,9 +101,6 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         curEntry.put("eventtime",pf.getEventTime());
 
         db.insert(TABLE_PF,null,curEntry);
-
-        Log.d("addForm", "Form added " + pf.getRaName());
-
         db.close();
     }
 
@@ -268,6 +266,16 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         curEntry.put("10round",dl.getRound10());
         curEntry.put("12round",dl.getRound12());
         curEntry.put("2round",dl.getRound2());
+        curEntry.put("dayround", dl.getRoundDay());
+        curEntry.put("raonduty", dl.getRaOnDuty());
+        curEntry.put("logdate", dl.getLogDate());
+        curEntry.put("documentations", dl.getDocumentations());
+        curEntry.put("workorders", dl.getWorkOrders());
+        curEntry.put("positionfordelete", dl.getPositionForDelete());
+
+        db.insert(TABLE_DL,null,curEntry);
+        db.close();
+
     }
 
 

@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
     }
     public void programmingForms(View view)
     {
-        Intent intent = new Intent(this,ProgrammingListActivity.class);
+        Intent intent = new Intent(this,ProgrammingFormListActivity.class);
         startActivity(intent);
     }
     public void dutyLogs(View view)

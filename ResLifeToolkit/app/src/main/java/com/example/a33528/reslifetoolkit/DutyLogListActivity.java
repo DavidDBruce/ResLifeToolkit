@@ -43,13 +43,13 @@ public class DutyLogListActivity extends AppCompatActivity {
         dutyLogJSON = (File) inputIntent.getSerializableExtra("dutyLogFile");
 
 
-        //docList.add(new Documentation("Alcohol on second floor."));
-        //docList.add(new Documentation("Noise violation on first."));
-        //docList.add(new Documentation("Fight on third."));
-
-        //woList.add(new Documentation("Sink flooded on third"));
-        //woList.add(new Documentation("Light out on first"));
-        //woList.add(new Documentation("Door stuck shut in room 115"));
+//        docList.add(new Documentation("Alcohol on second floor."));
+//        docList.add(new Documentation("Noise violation on first."));
+//        docList.add(new Documentation("Fight on third."));
+//
+//        woList.add(new Documentation("Sink flooded on third"));
+//        woList.add(new Documentation("Light out on first"));
+//        woList.add(new Documentation("Door stuck shut in room 115"));
 
 //        testLog1 = new DutyLog("Peeps","Quiet","Quiet","","","David Bruce", docList, woList);
 //        testLog2 = new DutyLog("Persons","Mixtape","Fire Alarm","Ducks","Nothing","Cheyanne Whorton", docList, woList);
@@ -85,7 +85,7 @@ public class DutyLogListActivity extends AppCompatActivity {
                 final int removePosition = position;
                 new AlertDialog.Builder(DutyLogListActivity.this)
                         .setTitle("Delete Duty Log")
-                        .setMessage("Are you sure you want to delete the duty log for " + logList.get(position).getCreateDate() + "?")
+                        .setMessage("Are you sure you want to delete the duty log for " + logList.get(position).getLogDate() + "?")
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener(){
                             public void onClick(DialogInterface dialog, int which)
                             {
@@ -156,11 +156,11 @@ class DutyLogAdapter extends ArrayAdapter<DutyLog> {
 
         DutyLog curLog = getItem(position);
 
-        Scanner s = new Scanner(curLog.getCreateDate());
+        Scanner s = new Scanner(curLog.getLogDate());
         s.useDelimiter("/");
         int monthInt = s.nextInt();
 
-        date.setText(curLog.getCreateDate());
+        date.setText(curLog.getLogDate());
         if(monthInt == 1){
             month.setText("January");
         }else if(monthInt == 2){

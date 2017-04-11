@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class ProgrammingListActivity extends AppCompatActivity {
+public class ProgrammingFormListActivity extends AppCompatActivity {
 
     ArrayList<ProgrammingForm> formsList;
     ProgrammingAdapter programmingListLA;
@@ -41,7 +41,8 @@ public class ProgrammingListActivity extends AppCompatActivity {
 
         formsList = mDbHelper.getAllProgrammingForms();
 
-        buildLV();
+        if(formsList.size() > 0)
+        {buildLV();}
     }
 
     public void buildLV() {
@@ -65,7 +66,7 @@ public class ProgrammingListActivity extends AppCompatActivity {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 final int removePosition = position;
-                new AlertDialog.Builder(ProgrammingListActivity.this)
+                new AlertDialog.Builder(ProgrammingFormListActivity.this)
                         .setTitle("Delete Form")
                         .setMessage("Are you sure you want to delete " + formsList.get(position).getEventTitle() + "?")
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener(){

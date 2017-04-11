@@ -17,15 +17,14 @@ public class DutyLog implements Serializable {
     private String round2 = "";
     private String roundDay = "";
     private String raOnDuty = "";
-    private String createDate = "";
+    private String logDate = "";
     private String documentations;
     private String workOrders;
     private int positionForDelete;
 
     public DutyLog()
     {
-        SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
-        createDate = formatter.format(Calendar.getInstance().getTime());
+
     }
 
     public DutyLog(String round8, String round10, String round12, String round2, String roundDay, String raOnDuty, String documentations, String workOrders)
@@ -38,9 +37,6 @@ public class DutyLog implements Serializable {
         this.raOnDuty = raOnDuty;
         this.documentations = documentations;
         this.workOrders = workOrders;
-
-        SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
-        createDate = formatter.format(Calendar.getInstance().getTime());
     }
 
     public String getRound8() {
@@ -91,9 +87,11 @@ public class DutyLog implements Serializable {
         this.raOnDuty = raOnDuty;
     }
 
-    public String getCreateDate() {
-        return createDate;
+    public String getLogDate() {
+        return logDate;
     }
+
+
 
     public String getDocumentations() {
         return documentations;
