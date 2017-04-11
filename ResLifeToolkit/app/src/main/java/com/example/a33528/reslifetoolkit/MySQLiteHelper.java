@@ -69,6 +69,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS programmingform");
+        db.execSQL("DROP TABLE IF EXISTS dutylogs");
         onCreate(db);
     }
 
@@ -256,6 +257,17 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 
         return i;
 
+    }
+
+    public void addDutyLog(DutyLog dl)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues curEntry = new ContentValues();
+
+        curEntry.put("8round",dl.getRound8());
+        curEntry.put("10round",dl.getRound10());
+        curEntry.put("12round",dl.getRound12());
+        curEntry.put("2round",dl.getRound2());
     }
 
 

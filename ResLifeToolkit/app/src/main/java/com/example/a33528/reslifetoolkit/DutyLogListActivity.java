@@ -25,8 +25,8 @@ public class DutyLogListActivity extends AppCompatActivity {
 
     private DutyLogAdapter dutyLogLA;
     private ArrayList<DutyLog> logList = new ArrayList<DutyLog>();
-    private ArrayList<Documentation> docList = new ArrayList<Documentation>();
-    private ArrayList<Documentation> woList = new ArrayList<Documentation>();
+    //private ArrayList<Documentation> docList = new ArrayList<Documentation>();
+    //private ArrayList<Documentation> woList = new ArrayList<Documentation>();
     private DutyLog testLog1;
     private DutyLog testLog2;
     private DutyLog testLog3;
@@ -43,21 +43,21 @@ public class DutyLogListActivity extends AppCompatActivity {
         dutyLogJSON = (File) inputIntent.getSerializableExtra("dutyLogFile");
 
 
-        docList.add(new Documentation("Alcohol on second floor."));
-        docList.add(new Documentation("Noise violation on first."));
-        docList.add(new Documentation("Fight on third."));
+        //docList.add(new Documentation("Alcohol on second floor."));
+        //docList.add(new Documentation("Noise violation on first."));
+        //docList.add(new Documentation("Fight on third."));
 
-        woList.add(new Documentation("Sink flooded on third"));
-        woList.add(new Documentation("Light out on first"));
-        woList.add(new Documentation("Door stuck shut in room 115"));
+        //woList.add(new Documentation("Sink flooded on third"));
+        //woList.add(new Documentation("Light out on first"));
+        //woList.add(new Documentation("Door stuck shut in room 115"));
 
-        testLog1 = new DutyLog("Peeps","Quiet","Quiet","","","David Bruce", docList, woList);
-        testLog2 = new DutyLog("Persons","Mixtape","Fire Alarm","Ducks","Nothing","Cheyanne Whorton", docList, woList);
-        testLog3 = new DutyLog("People","Stuff","Priyanka's Room","","","Mersadie Moore", docList, woList);
-
-        logList.add(testLog1);
-        logList.add(testLog2);
-        logList.add(testLog3);
+//        testLog1 = new DutyLog("Peeps","Quiet","Quiet","","","David Bruce", docList, woList);
+//        testLog2 = new DutyLog("Persons","Mixtape","Fire Alarm","Ducks","Nothing","Cheyanne Whorton", docList, woList);
+//        testLog3 = new DutyLog("People","Stuff","Priyanka's Room","","","Mersadie Moore", docList, woList);
+//
+//        logList.add(testLog1);
+//        logList.add(testLog2);
+//        logList.add(testLog3);
 
         buildLV();
     }
