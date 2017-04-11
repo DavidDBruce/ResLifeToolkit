@@ -41,8 +41,7 @@ public class ProgrammingFormListActivity extends AppCompatActivity {
 
         formsList = mDbHelper.getAllProgrammingForms();
 
-        if(formsList.size() > 0)
-        {buildLV();}
+        buildLV();
     }
 
     public void buildLV() {
@@ -154,17 +153,20 @@ class ProgrammingAdapter extends ArrayAdapter<ProgrammingForm> {
 
         ProgrammingForm curForm = getItem(position);
 
-        if(curForm.getIsEvent())
+        if(curForm != null)
         {
-            type.setText("Event");
-        }
-        else
-        {
-            type.setText("Passive");
-        }
+            if(curForm.getIsEvent())
+            {
+                type.setText("Event");
+            }
+            else
+            {
+                type.setText("Passive");
+            }
 
-        date.setText(curForm.getEventDate());
-        title.setText(curForm.getEventTitle());
+            date.setText(curForm.getEventDate());
+            title.setText(curForm.getEventTitle());
+        }
 
         return view;
     }

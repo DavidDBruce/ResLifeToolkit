@@ -21,6 +21,7 @@ public class DutyLog implements Serializable {
     private String documentations;
     private String workOrders;
     private int positionForDelete;
+    private int id;
 
     public DutyLog()
     {
@@ -91,7 +92,9 @@ public class DutyLog implements Serializable {
         return logDate;
     }
 
-
+    public void setLogDate(String logDate) {
+        this.logDate = logDate;
+    }
 
     public String getDocumentations() {
         return documentations;
@@ -115,5 +118,13 @@ public class DutyLog implements Serializable {
 
     public void setPositionForDelete(int positionForDelete) {
         this.positionForDelete = positionForDelete;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

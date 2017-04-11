@@ -18,11 +18,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ProgrammingListActivity" />
+        <activity android:name=".ProgrammingFormListActivity" />
         <activity android:name=".DutyLogListActivity" />
         <activity android:name=".ProgrammingFormActivity" />
         <activity android:name=".DutyLogActivity" />
-        <activity android:name=".DocumentationListActivity" />
         <activity android:name=".TextInputActivity"></activity>
     </application>
 

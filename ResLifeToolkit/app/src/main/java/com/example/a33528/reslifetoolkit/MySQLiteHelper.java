@@ -257,8 +257,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 
     }
 
-    public void addDutyLog(DutyLog dl)
-    {
+    public void addDutyLog(DutyLog dl) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues curEntry = new ContentValues();
 
@@ -278,6 +277,85 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 
     }
 
+    public void deleteDutyLog(DutyLog dl) {
 
+        // 1. get reference to writable DB
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        // 2. delete
+        db.delete(TABLE_DL, //table name
+                KEY_ID+" = ?",  // selections
+                new String[] { String.valueOf(dl.getId()) }); //selections args
+
+        // 3. close
+        db.close();
+
+    }
+
+    public ArrayList<DutyLog> getAllDutyLogs() {
+        ArrayList<DutyLog> dls = new ArrayList<DutyLog>();
+
+        // 1. build the query
+        String query = "SELECT  * FROM " + TABLE_DL;
+
+        // 2. get reference to writable DB
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+
+        // 3. go over each row, build book and add it to list
+        DutyLog dl;
+        if (cursor.moveToFirst()) {
+            do {
+                dl = new DutyLog();
+                dl.setId(Integer.parseInt(cursor.getString(0)));
+                dl.setRound8(cursor.getString(1));
+                dl.setRound10(cursor.getString(2));
+                dl.setRound12(cursor.getString(3));
+                dl.setRound2(cursor.getString(4));
+                dl.setRoundDay(cursor.getString(5));
+                dl.setRaOnDuty((cursor.getString(6)));
+                dl.setLogDate(cursor.getString(7));
+                dl.setDocumentations(cursor.getString(8));
+                dl.setWorkOrders(cursor.getString(9));
+                dl.setPositionForDelete(Integer.parseInt(cursor.getString(10)));
+
+                dls.add(dl);
+            } while (cursor.moveToNext());
+        }
+
+        return dls;
+    }
+
+    public int updateDutyLog(DutyLog dl) {
+
+        // 1. get reference to writable DB
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        // 2. create ContentValues to add key "column"/value
+        ContentValues curEntry = new ContentValues();
+
+        curEntry.put("8round",dl.getRound8());
+        curEntry.put("10round",dl.getRound10());
+        curEntry.put("12round",dl.getRound12());
+        curEntry.put("2round",dl.getRound2());
+        curEntry.put("dayround", dl.getRoundDay());
+        curEntry.put("raonduty", dl.getRaOnDuty());
+        curEntry.put("logdate", dl.getLogDate());
+        curEntry.put("documentations", dl.getDocumentations());
+        curEntry.put("workorders", dl.getWorkOrders());
+        curEntry.put("positionfordelete", dl.getPositionForDelete());
+
+        // 3. updating row
+        int i = db.update(TABLE_PF, //table
+                curEntry, // column/value
+                KEY_ID+" = ?", // selections
+                new String[] { String.valueOf(dl.getId()) }); //selection args
+
+        // 4. close
+        db.close();
+
+        return i;
+
+    }
 
 }
