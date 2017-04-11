@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_screen);
 
-//        mDbHelper = new MySQLiteHelper(getApplicationContext());
+        mDbHelper = new MySQLiteHelper(getApplicationContext());
 //        mDbHelper.clearProgrammingForms();
 //
 //        testForm = new ProgrammingForm("David Bruce", "South Complex", "2", "Smash Night", "Fun", "Playing Smash Bros", "Flyers and Emails", "0.0", "12", "yes", true);

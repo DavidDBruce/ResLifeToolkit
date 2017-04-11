@@ -18,8 +18,8 @@ public class DutyLog implements Serializable {
     private String roundDay = "";
     private String raOnDuty = "";
     private String logDate = "";
-    private String documentations;
-    private String workOrders;
+    private String documentations = "";
+    private String workOrders = " ";
     private int positionForDelete;
     private int id;
 

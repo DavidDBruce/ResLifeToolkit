@@ -39,10 +39,10 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     private static final String KEY_EVENTTIME = "eventtime";
 
     //Duty Log Column Names
-    private static final String KEY_8ROUNDS = "8rounds";
-    private static final String KEY_10ROUNDS = "10rounds";
-    private static final String KEY_12ROUNDS = "12rounds";
-    private static final String KEY_2ROUNDS = "2rounds";
+    private static final String KEY_8ROUNDS = "eigthrounds";
+    private static final String KEY_10ROUNDS = "tenrounds";
+    private static final String KEY_12ROUNDS = "twelverounds";
+    private static final String KEY_2ROUNDS = "tworounds";
     private static final String KEY_DAYROUNDS = "dayrounds";
     private static final String KEY_DOCUMENTATIONS = "documentations";
     private static final String KEY_WORKORDERS = "workorders";
@@ -50,7 +50,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 
     private static final String[] PF_COLUMNS = {KEY_ID,KEY_RANAME,KEY_HALLNAME,KEY_FLOORNUM,KEY_EVENTTITLE,KEY_EVENTREASON,KEY_EVENTDESCRIPTION,KEY_EVENTPUBLICITY,KEY_EVENTDATE,KEY_COST,KEY_ATTENDEES,KEY_GOALS,KEY_POSITIONFORDELETE,KEY_ISEVENT,KEY_EVENTTIME};
 
-    private static final String[] DL_COLUMNS = {KEY_ID,KEY_RANAME,KEY_8ROUNDS,KEY_10ROUNDS,KEY_12ROUNDS,KEY_2ROUNDS,KEY_DAYROUNDS,KEY_DOCUMENTATIONS,KEY_WORKORDERS,KEY_LOGDATE};
+    private static final String[] DL_COLUMNS = {KEY_ID,KEY_RANAME,KEY_8ROUNDS,KEY_10ROUNDS,KEY_12ROUNDS,KEY_2ROUNDS,KEY_DAYROUNDS,KEY_DOCUMENTATIONS,KEY_WORKORDERS,KEY_LOGDATE,KEY_POSITIONFORDELETE};
 
     public static final int DATABASE_VERSION = 1;
     public static final String DATABASE_NAME = "ResLifeToolkitDB";
@@ -63,7 +63,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         String CREATE_PF_TABLE = "CREATE TABLE IF NOT EXISTS programmingform ( " + "id INTEGER PRIMARY KEY AUTOINCREMENT, " + "raname TEXT, "+ "hallname TEXT, " + "floornum TEXT, " + "eventtitle TEXT, " + "eventreason TEXT, " + "eventdescription TEXT, " + "eventpublicity TEXT, " + "eventdate TEXT, " + "cost TEXT, " + "attendees TEXT, " + "goals TEXT, "+ "positionfordelete INTEGER, " + "isevent INTEGER," + "eventtime TEXT" + ")";
         db.execSQL(CREATE_PF_TABLE);
 
-        String CREATE_DL_TABLE = "CREATE TABLE IF NOT EXISTS dutylogs ( " + "id INTEGER PRIMARY KEY AUTOINCREMENT, " + "raname TEXT, " + "8rounds TEXT, " + "10rounds TEXT, " + "12rounds TEXT, " + "2rounds TEXT, " + "dayrounds TEXT, " + "documentations TEXT, " + "woorkorders TEXT, " + "logdate TEXT)";
+        String CREATE_DL_TABLE = "CREATE TABLE IF NOT EXISTS dutylogs ( " + "id INTEGER PRIMARY KEY AUTOINCREMENT, " + "raname TEXT, " + "eightrounds TEXT, " + "tenrounds TEXT, " + "twelverounds TEXT, " + "tworounds TEXT, " + "dayrounds TEXT, " + "documentations TEXT, " + "woorkorders TEXT, " + "logdate TEXT)";
 
         db.execSQL(CREATE_DL_TABLE);
     }
@@ -207,8 +207,6 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
             } while (cursor.moveToNext());
         }
 
-        Log.d("getAllBooks()", pfs.toString());
-
         return pfs;
     }
 
@@ -261,15 +259,16 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues curEntry = new ContentValues();
 
-        curEntry.put("8round",dl.getRound8());
-        curEntry.put("10round",dl.getRound10());
-        curEntry.put("12round",dl.getRound12());
-        curEntry.put("2round",dl.getRound2());
-        curEntry.put("dayround", dl.getRoundDay());
+
         curEntry.put("raonduty", dl.getRaOnDuty());
-        curEntry.put("logdate", dl.getLogDate());
+        curEntry.put("eightround",dl.getRound8());
+        curEntry.put("tenround",dl.getRound10());
+        curEntry.put("twelveround",dl.getRound12());
+        curEntry.put("tworound",dl.getRound2());
+        curEntry.put("dayround", dl.getRoundDay());
         curEntry.put("documentations", dl.getDocumentations());
         curEntry.put("workorders", dl.getWorkOrders());
+        curEntry.put("logdate", dl.getLogDate());
         curEntry.put("positionfordelete", dl.getPositionForDelete());
 
         db.insert(TABLE_DL,null,curEntry);
@@ -334,10 +333,10 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         // 2. create ContentValues to add key "column"/value
         ContentValues curEntry = new ContentValues();
 
-        curEntry.put("8round",dl.getRound8());
-        curEntry.put("10round",dl.getRound10());
-        curEntry.put("12round",dl.getRound12());
-        curEntry.put("2round",dl.getRound2());
+        curEntry.put("eightround",dl.getRound8());
+        curEntry.put("tenround",dl.getRound10());
+        curEntry.put("twelveround",dl.getRound12());
+        curEntry.put("tworound",dl.getRound2());
         curEntry.put("dayround", dl.getRoundDay());
         curEntry.put("raonduty", dl.getRaOnDuty());
         curEntry.put("logdate", dl.getLogDate());

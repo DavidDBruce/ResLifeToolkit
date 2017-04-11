@@ -25,23 +25,14 @@ public class DutyLogListActivity extends AppCompatActivity {
 
     private DutyLogAdapter dutyLogLA;
     private ArrayList<DutyLog> logList = new ArrayList<DutyLog>();
-    //private ArrayList<Documentation> docList = new ArrayList<Documentation>();
-    //private ArrayList<Documentation> woList = new ArrayList<Documentation>();
     private DutyLog testLog1;
     private DutyLog testLog2;
     private DutyLog testLog3;
-
-    File dutyLogJSON;
-    Intent inputIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.general_list);
-
-        inputIntent = getIntent();
-        dutyLogJSON = (File) inputIntent.getSerializableExtra("dutyLogFile");
-
 
 //        docList.add(new Documentation("Alcohol on second floor."));
 //        docList.add(new Documentation("Noise violation on first."));
