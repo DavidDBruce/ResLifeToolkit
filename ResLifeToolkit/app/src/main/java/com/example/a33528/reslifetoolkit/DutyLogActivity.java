@@ -1,7 +1,9 @@
 package com.example.a33528.reslifetoolkit;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -22,9 +24,12 @@ import java.util.Locale;
 public class DutyLogActivity extends AppCompatActivity {
 
     private Intent inputIntent;
+    private Intent outputIntent;
     private DutyLog inputLog;
     private TextView dutyLogTitle;
     private EditText raOnDuty;
+    private String logDateOnUpdate;
+    MySQLiteHelper mDbHelper;
 
     private DatePickerDialog.OnDateSetListener date;
     private Calendar myCalendar = Calendar.getInstance();
@@ -38,15 +43,20 @@ public class DutyLogActivity extends AppCompatActivity {
         inputLog = (DutyLog) inputIntent.getSerializableExtra("logSelected");
         dutyLogTitle = (TextView) findViewById(R.id.dutyLogDateTV);
         raOnDuty = (EditText) findViewById(R.id.raOnDutyET);
+        mDbHelper = new MySQLiteHelper(getApplicationContext());
 
-        dutyLogTitle.setText("Duty Log for " + inputLog.getLogDate());
+        if(inputLog.getLogDate().equals("")) {
+            dutyLogTitle.setText("Tap here to set date.");
+        }
+        else{
+            dutyLogTitle.setText("Duty Log for " + inputLog.getLogDate());
+        }
 
         date = new DatePickerDialog.OnDateSetListener() {
 
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear,
                                   int dayOfMonth) {
-                // TODO Auto-generated method stub
                 myCalendar.set(Calendar.YEAR, year);
                 myCalendar.set(Calendar.MONTH, monthOfYear);
                 myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
@@ -59,7 +69,6 @@ public class DutyLogActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                // TODO Auto-generated method stub
                 new DatePickerDialog(DutyLogActivity.this, date, myCalendar
                         .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
                         myCalendar.get(Calendar.DAY_OF_MONTH)).show();
@@ -73,7 +82,9 @@ public class DutyLogActivity extends AppCompatActivity {
          String myFormat = "MM/dd/yy";
          SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
-         dutyLogTitle.setText("Duty Log for" + sdf.format(myCalendar.getTime()));
+         logDateOnUpdate = sdf.format(myCalendar.getTime());
+         dutyLogTitle.setText("Duty Log for" + logDateOnUpdate);
+
      }
 
     public void eightRound(View v)
@@ -125,30 +136,82 @@ public class DutyLogActivity extends AppCompatActivity {
         startActivityForResult(intent, 56);
     }
 
-//    @Override
-//    public void onActivityResult(int requestCode, int resultCode, Intent data)
-//    {
-//        if(requestCode == 42 && resultCode == RESULT_OK && data != null) {
-//            DutyLog returnLog = (DutyLog) data.getSerializableExtra("returnLog");
-//            mDbHelper.updateDutyLog(returnLog);
-//            logList = mDbHelper.getAllDutyLogs();
-//            dutyLogLA.clear();
-//            dutyLogLA.addAll(logList);
-//            dutyLogLA.notifyDataSetChanged();
-//        }
-//        else if(requestCode == 42 && resultCode == RESULT_CANCELED && data != null) {
-//            DutyLog returnLog = (DutyLog) data.getSerializableExtra("returnLog");
-//            mDbHelper.deleteDutyLog(returnLog);
-//            logList = mDbHelper.getAllDutyLogs();
-//            dutyLogLA.clear();
-//            dutyLogLA.addAll(logList);
-//            dutyLogLA.notifyDataSetChanged();
-//        }
-//        else {
-//            if(logList.get(0).getDocumentations().equals("") && logList.get(0).getLogDate().equals("")) {
-//                mDbHelper.deleteDutyLog(logList.get(0));
-//            }
-//            dutyLogLA.notifyDataSetChanged();
-//        }
-//    }
+    public void saveFullLog(View v){
+        inputLog.setRaOnDuty(raOnDuty.getText().toString());
+        if(logDateOnUpdate.equals("")){
+
+        }
+        else{
+            inputLog.setLogDate(logDateOnUpdate);
+        }
+
+        //mDbHelper.updateDutyLog(inputLog);
+        outputIntent.putExtra("returnLog",inputLog);
+        setResult(RESULT_OK,outputIntent);
+        finish();
+
+    }
+
+    public void cancelFullLog(View v){
+
+    }
+
+    public void deleteFullLog(View v){
+
+        new AlertDialog.Builder(DutyLogActivity.this)
+                .setTitle("Delete Duty Log")
+                .setMessage("Are you sure you want to delete this duty log?")
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener(){
+                    public void onClick(DialogInterface dialog, int which)
+                    {
+                        outputIntent.putExtra("returnLog",inputLog);
+                        setResult(RESULT_CANCELED,outputIntent);
+                        finish();
+                    }
+                })
+                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener(){
+                    public void onClick(DialogInterface dialog, int which)
+                    {
+
+                    }
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        if(requestCode == 50 && resultCode == RESULT_OK && data != null) {
+            inputLog.setRound8(data.getStringExtra("returnText"));
+            mDbHelper.updateDutyLog(inputLog);
+        }
+        else if(requestCode == 51 && resultCode == RESULT_OK && data != null) {
+            inputLog.setRound10(data.getStringExtra("returnText"));
+            mDbHelper.updateDutyLog(inputLog);
+        }
+        else if(requestCode == 52 && resultCode == RESULT_OK && data != null) {
+            inputLog.setRound12(data.getStringExtra("returnText"));
+            mDbHelper.updateDutyLog(inputLog);
+        }
+        else if(requestCode == 53 && resultCode == RESULT_OK && data != null) {
+            inputLog.setRound2(data.getStringExtra("returnText"));
+            mDbHelper.updateDutyLog(inputLog);
+        }
+        else if(requestCode == 54 && resultCode == RESULT_OK && data != null) {
+            inputLog.setRoundDay(data.getStringExtra("returnText"));
+            mDbHelper.updateDutyLog(inputLog);
+        }
+        else if(requestCode == 55 && resultCode == RESULT_OK && data != null) {
+            inputLog.setDocumentations(data.getStringExtra("returnText"));
+            mDbHelper.updateDutyLog(inputLog);
+        }
+        else if(requestCode == 56 && resultCode == RESULT_OK && data != null) {
+            inputLog.setWorkOrders(data.getStringExtra("returnText"));
+            mDbHelper.updateDutyLog(inputLog);
+        }
+        else {
+
+        }
+    }
 }

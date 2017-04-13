@@ -30,7 +30,7 @@ public class DutyLogListActivity extends AppCompatActivity {
     private DutyLog testLog1;
     private DutyLog testLog2;
     private DutyLog testLog3;
-    private FloatingActionButton addFormsButton;
+    //private FloatingActionButton addFormsButton;
     private MySQLiteHelper mDbHelper;
 
     @Override
@@ -40,15 +40,17 @@ public class DutyLogListActivity extends AppCompatActivity {
 
         mDbHelper = new MySQLiteHelper(getApplicationContext());
 
-        addFormsButton = (FloatingActionButton) findViewById(R.id.addFormFAB);
+        //addFormsButton = (FloatingActionButton) findViewById(R.id.addFormFAB);
 
         testLog1 = new DutyLog("Peeps","Quiet","Quiet","","","David Bruce", "", "","4/12/15");
         testLog2 = new DutyLog("Persons","Mixtape","Fire Alarm","Ducks","Nothing","Cheyanne Whorton", "", "","3/12/15");
         testLog3 = new DutyLog("People","Stuff","Priyanka's Room","","","Mersadie Moore", "", "","2/12/15");
 
-        logList.add(testLog1);
-        logList.add(testLog2);
-        logList.add(testLog3);
+        mDbHelper.addDutyLog(testLog1);
+        mDbHelper.addDutyLog(testLog2);
+        mDbHelper.addDutyLog(testLog3);
+
+        logList = mDbHelper.getAllDutyLogs();
 
         buildLV();
     }
@@ -80,6 +82,7 @@ public class DutyLogListActivity extends AppCompatActivity {
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener(){
                             public void onClick(DialogInterface dialog, int which)
                             {
+                                mDbHelper.deleteDutyLog(logList.get(removePosition));
                                 logList.remove(removePosition);
                                 dutyLogLA.notifyDataSetChanged();
                             }
@@ -113,7 +116,7 @@ public class DutyLogListActivity extends AppCompatActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data)
     {
-        if(requestCode == 42 && resultCode == RESULT_OK && data != null) {
+        if(requestCode == 43 && resultCode == RESULT_OK && data != null) {
             DutyLog returnLog = (DutyLog) data.getSerializableExtra("returnLog");
             mDbHelper.updateDutyLog(returnLog);
             logList = mDbHelper.getAllDutyLogs();
@@ -121,7 +124,7 @@ public class DutyLogListActivity extends AppCompatActivity {
             dutyLogLA.addAll(logList);
             dutyLogLA.notifyDataSetChanged();
         }
-        else if(requestCode == 42 && resultCode == RESULT_CANCELED && data != null) {
+        else if(requestCode == 43 && resultCode == RESULT_CANCELED && data != null) {
             DutyLog returnLog = (DutyLog) data.getSerializableExtra("returnLog");
             mDbHelper.deleteDutyLog(returnLog);
             logList = mDbHelper.getAllDutyLogs();
@@ -130,7 +133,7 @@ public class DutyLogListActivity extends AppCompatActivity {
             dutyLogLA.notifyDataSetChanged();
         }
         else {
-            if(logList.get(0).getDocumentations().equals("") && logList.get(0).getLogDate().equals("")) {
+            if(logList.get(0).getRaOnDuty().equals("") && logList.get(0).getLogDate().equals("")) {
                 mDbHelper.deleteDutyLog(logList.get(0));
             }
             dutyLogLA.notifyDataSetChanged();

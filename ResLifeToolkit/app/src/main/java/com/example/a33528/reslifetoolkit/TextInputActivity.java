@@ -24,14 +24,14 @@ public class TextInputActivity extends AppCompatActivity {
         formBodyET = (EditText) findViewById(R.id.formBodyET);
     }
 
-    public void saveLog(View v)
+    public void saveLogEntry(View v)
     {
-        outputIntent.putExtra("returnLog", formBodyET.getText().toString());
+        outputIntent.putExtra("returnText", formBodyET.getText().toString());
         setResult(RESULT_OK, outputIntent);
         finish();
     }
 
-    public void cancelLog(View v)
+    public void cancelLogEntry(View v)
     {
         setResult(RESULT_CANCELED, null);
         finish();

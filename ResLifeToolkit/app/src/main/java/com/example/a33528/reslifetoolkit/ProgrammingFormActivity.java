@@ -1,7 +1,9 @@
 package com.example.a33528.reslifetoolkit;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -202,10 +204,25 @@ public class ProgrammingFormActivity extends AppCompatActivity {
     }
 
     public void formDelete(View v)
-    {
-        output.putExtra("returnForm", inputForm);
-        setResult(RESULT_CANCELED, output);
-        finish();
+    {new AlertDialog.Builder(ProgrammingFormActivity.this)
+            .setTitle("Delete Duty Log")
+            .setMessage("Are you sure you want to delete this programmingn form?")
+            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener(){
+                public void onClick(DialogInterface dialog, int which)
+                {
+                    output.putExtra("returnForm", inputForm);
+                    setResult(RESULT_CANCELED, output);
+                    finish();
+                }
+            })
+            .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener(){
+                public void onClick(DialogInterface dialog, int which)
+                {
+
+                }
+            })
+            .setIcon(android.R.drawable.ic_dialog_alert)
+            .show();
     }
 
     public void save()

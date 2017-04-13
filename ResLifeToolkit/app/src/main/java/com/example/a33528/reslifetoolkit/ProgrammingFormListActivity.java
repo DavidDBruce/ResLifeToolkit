@@ -25,7 +25,7 @@ public class ProgrammingFormListActivity extends AppCompatActivity {
 
     private ArrayList<ProgrammingForm> formsList;
     private ProgrammingAdapter programmingListLA;
-    private FloatingActionButton addFormsButton;
+    //private FloatingActionButton addFormsButton;
     private MySQLiteHelper mDbHelper;
 
     @Override
@@ -37,7 +37,7 @@ public class ProgrammingFormListActivity extends AppCompatActivity {
 
         formsList = new ArrayList<ProgrammingForm>();
 
-        addFormsButton = (FloatingActionButton) findViewById(R.id.addFormFAB);
+        //addFormsButton = (FloatingActionButton) findViewById(R.id.addFormFAB);
 
         formsList = mDbHelper.getAllProgrammingForms();
 
