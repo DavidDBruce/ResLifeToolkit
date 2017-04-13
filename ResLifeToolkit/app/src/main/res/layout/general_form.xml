@@ -39,6 +39,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:backgroundTint="@android:color/holo_green_light"
+                android:onClick="saveLog"
                 android:text="Save" />
 
             <Button
@@ -47,15 +48,9 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:backgroundTint="@android:color/holo_orange_light"
+                android:onClick="cancelLog"
                 android:text="Cancel" />
 
-            <Button
-                android:id="@+id/genFormDelete"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:backgroundTint="@android:color/holo_red_light"
-                android:text="Delete" />
         </LinearLayout>
 
     </LinearLayout>

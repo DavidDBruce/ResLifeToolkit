@@ -5,6 +5,7 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -29,15 +30,21 @@ public class DutyLogListActivity extends AppCompatActivity {
     private DutyLog testLog1;
     private DutyLog testLog2;
     private DutyLog testLog3;
+    private FloatingActionButton addFormsButton;
+    private MySQLiteHelper mDbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.general_list);
 
-        testLog1 = new DutyLog("Peeps","Quiet","Quiet","","","David Bruce", "", "","13/12/15");
-        testLog2 = new DutyLog("Persons","Mixtape","Fire Alarm","Ducks","Nothing","Cheyanne Whorton", "", "","4/12/15");
-        testLog3 = new DutyLog("People","Stuff","Priyanka's Room","","","Mersadie Moore", "", "","");
+        mDbHelper = new MySQLiteHelper(getApplicationContext());
+
+        addFormsButton = (FloatingActionButton) findViewById(R.id.addFormFAB);
+
+        testLog1 = new DutyLog("Peeps","Quiet","Quiet","","","David Bruce", "", "","4/12/15");
+        testLog2 = new DutyLog("Persons","Mixtape","Fire Alarm","Ducks","Nothing","Cheyanne Whorton", "", "","3/12/15");
+        testLog3 = new DutyLog("People","Stuff","Priyanka's Room","","","Mersadie Moore", "", "","2/12/15");
 
         logList.add(testLog1);
         logList.add(testLog2);
@@ -94,31 +101,40 @@ public class DutyLogListActivity extends AppCompatActivity {
     {
         DutyLog item = new DutyLog();
         item.setPositionForDelete(0);
-        Collections.reverse(logList);
-        logList.add(item);
-        Collections.reverse(logList);
+        mDbHelper.addDutyLog(item);
+        logList = mDbHelper.getAllDutyLogs();
+        dutyLogLA.clear();
+        dutyLogLA.addAll(logList);
         Intent intent = new Intent(getApplicationContext(), DutyLogActivity.class);
-        intent.putExtra("logSelected", item);
+        intent.putExtra("formSelected", logList.get(logList.size()-1));
         startActivityForResult(intent, 43);
-
     }
 
-    public void addDoc(View v)
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data)
     {
-        DutyLog item = new DutyLog();
-        item.setPositionForDelete(0);
-        Collections.reverse(logList);
-        logList.add(item);
-        Collections.reverse(logList);
-        Intent intent = new Intent(getApplicationContext(), DutyLogActivity.class);
-        intent.putExtra("logSelected", item);
-        startActivityForResult(intent, 43);
-
-    }
-
-    public void logTime(View v)
-    {
-
+        if(requestCode == 42 && resultCode == RESULT_OK && data != null) {
+            DutyLog returnLog = (DutyLog) data.getSerializableExtra("returnLog");
+            mDbHelper.updateDutyLog(returnLog);
+            logList = mDbHelper.getAllDutyLogs();
+            dutyLogLA.clear();
+            dutyLogLA.addAll(logList);
+            dutyLogLA.notifyDataSetChanged();
+        }
+        else if(requestCode == 42 && resultCode == RESULT_CANCELED && data != null) {
+            DutyLog returnLog = (DutyLog) data.getSerializableExtra("returnLog");
+            mDbHelper.deleteDutyLog(returnLog);
+            logList = mDbHelper.getAllDutyLogs();
+            dutyLogLA.clear();
+            dutyLogLA.addAll(logList);
+            dutyLogLA.notifyDataSetChanged();
+        }
+        else {
+            if(logList.get(0).getDocumentations().equals("") && logList.get(0).getLogDate().equals("")) {
+                mDbHelper.deleteDutyLog(logList.get(0));
+            }
+            dutyLogLA.notifyDataSetChanged();
+        }
     }
 }
 
@@ -126,7 +142,7 @@ public class DutyLogListActivity extends AppCompatActivity {
 class DutyLogAdapter extends ArrayAdapter<DutyLog> {
     //ArrayAdapter to set the correct information in a ListView for DutyLogs
 
-    ArrayList<DutyLog> inputForms = new ArrayList<DutyLog>();
+    //ArrayList<DutyLog> inputForms = new ArrayList<DutyLog>();
 
     public DutyLogAdapter(Context context, int resource, int textViewResourceId, List<DutyLog> objects) {
         super(context, resource, textViewResourceId, objects);

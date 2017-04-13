@@ -23,10 +23,10 @@ import java.util.List;
 
 public class ProgrammingFormListActivity extends AppCompatActivity {
 
-    ArrayList<ProgrammingForm> formsList;
-    ProgrammingAdapter programmingListLA;
-    FloatingActionButton addFormsButton;
-    MySQLiteHelper mDbHelper;
+    private ArrayList<ProgrammingForm> formsList;
+    private ProgrammingAdapter programmingListLA;
+    private FloatingActionButton addFormsButton;
+    private MySQLiteHelper mDbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

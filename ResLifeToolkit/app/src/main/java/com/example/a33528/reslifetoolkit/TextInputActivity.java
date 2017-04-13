@@ -3,12 +3,16 @@ package com.example.a33528.reslifetoolkit;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 public class TextInputActivity extends AppCompatActivity {
 
     Intent inputIntent;
+    Intent outputIntent;
     TextView formTitle;
+    EditText formBodyET;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,5 +21,21 @@ public class TextInputActivity extends AppCompatActivity {
         inputIntent = getIntent();
         formTitle = (TextView) findViewById(R.id.formTitleTV);
         formTitle.setText(inputIntent.getStringExtra("inputTitle"));
+        formBodyET = (EditText) findViewById(R.id.formBodyET);
     }
+
+    public void saveLog(View v)
+    {
+        outputIntent.putExtra("returnLog", formBodyET.getText().toString());
+        setResult(RESULT_OK, outputIntent);
+        finish();
+    }
+
+    public void cancelLog(View v)
+    {
+        setResult(RESULT_CANCELED, null);
+        finish();
+    }
+
+
 }

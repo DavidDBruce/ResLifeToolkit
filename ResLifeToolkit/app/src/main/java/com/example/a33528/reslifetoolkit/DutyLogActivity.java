@@ -125,9 +125,30 @@ public class DutyLogActivity extends AppCompatActivity {
         startActivityForResult(intent, 56);
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data)
-    {
-
-    }
+//    @Override
+//    public void onActivityResult(int requestCode, int resultCode, Intent data)
+//    {
+//        if(requestCode == 42 && resultCode == RESULT_OK && data != null) {
+//            DutyLog returnLog = (DutyLog) data.getSerializableExtra("returnLog");
+//            mDbHelper.updateDutyLog(returnLog);
+//            logList = mDbHelper.getAllDutyLogs();
+//            dutyLogLA.clear();
+//            dutyLogLA.addAll(logList);
+//            dutyLogLA.notifyDataSetChanged();
+//        }
+//        else if(requestCode == 42 && resultCode == RESULT_CANCELED && data != null) {
+//            DutyLog returnLog = (DutyLog) data.getSerializableExtra("returnLog");
+//            mDbHelper.deleteDutyLog(returnLog);
+//            logList = mDbHelper.getAllDutyLogs();
+//            dutyLogLA.clear();
+//            dutyLogLA.addAll(logList);
+//            dutyLogLA.notifyDataSetChanged();
+//        }
+//        else {
+//            if(logList.get(0).getDocumentations().equals("") && logList.get(0).getLogDate().equals("")) {
+//                mDbHelper.deleteDutyLog(logList.get(0));
+//            }
+//            dutyLogLA.notifyDataSetChanged();
+//        }
+//    }
 }
