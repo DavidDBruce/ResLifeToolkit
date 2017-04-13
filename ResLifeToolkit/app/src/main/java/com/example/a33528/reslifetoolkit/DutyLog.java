@@ -28,7 +28,7 @@ public class DutyLog implements Serializable {
 
     }
 
-    public DutyLog(String round8, String round10, String round12, String round2, String roundDay, String raOnDuty, String documentations, String workOrders)
+    public DutyLog(String round8, String round10, String round12, String round2, String roundDay, String raOnDuty, String documentations, String workOrders, String logDate)
     {
         this.round8 = round8;
         this.round10 = round10;
@@ -38,6 +38,7 @@ public class DutyLog implements Serializable {
         this.raOnDuty = raOnDuty;
         this.documentations = documentations;
         this.workOrders = workOrders;
+        this.logDate = logDate;
     }
 
     public String getRound8() {

@@ -1,6 +1,7 @@
 package com.example.a33528.reslifetoolkit;
 
 import android.app.AlertDialog;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -34,21 +35,13 @@ public class DutyLogListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.general_list);
 
-//        docList.add(new Documentation("Alcohol on second floor."));
-//        docList.add(new Documentation("Noise violation on first."));
-//        docList.add(new Documentation("Fight on third."));
-//
-//        woList.add(new Documentation("Sink flooded on third"));
-//        woList.add(new Documentation("Light out on first"));
-//        woList.add(new Documentation("Door stuck shut in room 115"));
+        testLog1 = new DutyLog("Peeps","Quiet","Quiet","","","David Bruce", "", "","13/12/15");
+        testLog2 = new DutyLog("Persons","Mixtape","Fire Alarm","Ducks","Nothing","Cheyanne Whorton", "", "","4/12/15");
+        testLog3 = new DutyLog("People","Stuff","Priyanka's Room","","","Mersadie Moore", "", "","");
 
-//        testLog1 = new DutyLog("Peeps","Quiet","Quiet","","","David Bruce", docList, woList);
-//        testLog2 = new DutyLog("Persons","Mixtape","Fire Alarm","Ducks","Nothing","Cheyanne Whorton", docList, woList);
-//        testLog3 = new DutyLog("People","Stuff","Priyanka's Room","","","Mersadie Moore", docList, woList);
-//
-//        logList.add(testLog1);
-//        logList.add(testLog2);
-//        logList.add(testLog3);
+        logList.add(testLog1);
+        logList.add(testLog2);
+        logList.add(testLog3);
 
         buildLV();
     }
@@ -122,6 +115,11 @@ public class DutyLogListActivity extends AppCompatActivity {
         startActivityForResult(intent, 43);
 
     }
+
+    public void logTime(View v)
+    {
+
+    }
 }
 
 
@@ -149,35 +147,41 @@ class DutyLogAdapter extends ArrayAdapter<DutyLog> {
 
         Scanner s = new Scanner(curLog.getLogDate());
         s.useDelimiter("/");
-        int monthInt = s.nextInt();
-
-        date.setText(curLog.getLogDate());
-        if(monthInt == 1){
-            month.setText("January");
-        }else if(monthInt == 2){
-            month.setText("February");
-        }else if(monthInt == 3){
-            month.setText("March");
-        }else if(monthInt == 4){
-            month.setText("April");
-        }else if(monthInt == 5){
-            month.setText("May");
-        }else if(monthInt == 6){
-            month.setText("June");
-        }else if(monthInt == 7){
-            month.setText("July");
-        }else if(monthInt == 8){
-            month.setText("August");
-        }else if(monthInt == 9){
-            month.setText("September");
-        }else if(monthInt == 10){
-            month.setText("October");
-        }else if(monthInt == 11){
-            month.setText("November");
-        }else if(monthInt == 12){
-            month.setText("December");
-        }else{
-            month.setText("Error");
+        int monthInt;
+        try {
+            monthInt = s.nextInt();
+            date.setText(curLog.getLogDate());
+            if (monthInt == 1) {
+                month.setText("January");
+            } else if (monthInt == 2) {
+                month.setText("February");
+            } else if (monthInt == 3) {
+                month.setText("March");
+            } else if (monthInt == 4) {
+                month.setText("April");
+            } else if (monthInt == 5) {
+                month.setText("May");
+            } else if (monthInt == 6) {
+                month.setText("June");
+            } else if (monthInt == 7) {
+                month.setText("July");
+            } else if (monthInt == 8) {
+                month.setText("August");
+            } else if (monthInt == 9) {
+                month.setText("September");
+            } else if (monthInt == 10) {
+                month.setText("October");
+            } else if (monthInt == 11) {
+                month.setText("November");
+            } else if (monthInt == 12) {
+                month.setText("December");
+            } else {
+                month.setText("Error");
+            }
+        }
+        catch(Exception e) {
+            month.setText("No Date");
+            date.setText("No Date");
         }
 
         return view;

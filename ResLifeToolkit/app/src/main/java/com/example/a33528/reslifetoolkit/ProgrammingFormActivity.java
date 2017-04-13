@@ -136,12 +136,14 @@ public class ProgrammingFormActivity extends AppCompatActivity {
                 mTimePicker = new TimePickerDialog(ProgrammingFormActivity.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                        if(selectedHour >= 12)
-                        {
-                            eventTime.setText( selectedHour + ":" + selectedMinute + " PM");
-                        }
-                        else {
-                            eventTime.setText(selectedHour + ":" + selectedMinute + " AM");
+                        if(selectedHour == 0) {
+                            eventTime.setText( 12 + ":" + String.format("%02d",selectedMinute) + " AM");
+                        }else if(selectedHour < 12) {
+                            eventTime.setText(selectedHour + ":" + String.format("%02d",selectedMinute) + " AM");
+                        }else if(selectedHour == 12){
+                            eventTime.setText( 12 + ":" + String.format("%02d",selectedMinute) + " PM");
+                        }else{
+                            eventTime.setText( selectedHour - 12 + ":" + String.format("%02d",selectedMinute) + " PM");
                         }
                     }
                 }, hour, minute, false);
@@ -252,8 +254,7 @@ public class ProgrammingFormActivity extends AppCompatActivity {
             completedForm += "-- " + publicity.getText().toString() + '\n' + '\n';
             completedForm += "---- Post Event Info ----" + '\n' + '\n';
             completedForm += "How much did this event cost";
-            Scanner s = new Scanner(cost.getText().toString());
-            completedForm += "-- $" + String.format("%.2f",s.nextDouble()) + '\n' + '\n';
+            completedForm += "-- $" + cost.getText().toString() + '\n' + '\n';
             completedForm += "How many resident came to this event?";
             completedForm += "-- " + attendees.getText().toString() + '\n' + '\n';
         }

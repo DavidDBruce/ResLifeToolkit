@@ -10,10 +10,10 @@
         android:weightSum="1">
 
         <TextView
-            android:id="@+id/formTimeTV"
+            android:id="@+id/formTitleTV"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Form Time"
+            android:text="Tap to enter time."
             android:textAlignment="center"
             android:textColor="#000000"
             android:textSize="24sp" />
