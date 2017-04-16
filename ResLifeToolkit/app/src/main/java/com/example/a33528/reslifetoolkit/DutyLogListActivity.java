@@ -1,11 +1,9 @@
 package com.example.a33528.reslifetoolkit;
 
 import android.app.AlertDialog;
-import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -15,22 +13,14 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
-import java.io.File;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
 public class DutyLogListActivity extends AppCompatActivity {
 
     private DutyLogAdapter dutyLogLA;
-    private ArrayList<DutyLog> logList = new ArrayList<DutyLog>();
-    private DutyLog testLog1;
-    private DutyLog testLog2;
-    private DutyLog testLog3;
-    //private FloatingActionButton addFormsButton;
+    private ArrayList<DutyLog> logList;
     private MySQLiteHelper mDbHelper;
 
     @Override
@@ -38,17 +28,9 @@ public class DutyLogListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.general_list);
 
+        logList = new ArrayList<>();
+
         mDbHelper = new MySQLiteHelper(getApplicationContext());
-
-        //addFormsButton = (FloatingActionButton) findViewById(R.id.addFormFAB);
-
-        testLog1 = new DutyLog("Peeps","Quiet","Quiet","","","David Bruce", "", "","4/12/15");
-        testLog2 = new DutyLog("Persons","Mixtape","Fire Alarm","Ducks","Nothing","Cheyanne Whorton", "", "","3/12/15");
-        testLog3 = new DutyLog("People","Stuff","Priyanka's Room","","","Mersadie Moore", "", "","2/12/15");
-
-        mDbHelper.addDutyLog(testLog1);
-        mDbHelper.addDutyLog(testLog2);
-        mDbHelper.addDutyLog(testLog3);
 
         logList = mDbHelper.getAllDutyLogs();
 
@@ -83,8 +65,10 @@ public class DutyLogListActivity extends AppCompatActivity {
                             public void onClick(DialogInterface dialog, int which)
                             {
                                 mDbHelper.deleteDutyLog(logList.get(removePosition));
-                                logList.remove(removePosition);
-                                dutyLogLA.notifyDataSetChanged();
+                                logList.clear();
+                                logList = mDbHelper.getAllDutyLogs();
+                                dutyLogLA.clear();
+                                dutyLogLA.addAll(logList);
                             }
                         })
                         .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener(){
@@ -109,7 +93,7 @@ public class DutyLogListActivity extends AppCompatActivity {
         dutyLogLA.clear();
         dutyLogLA.addAll(logList);
         Intent intent = new Intent(getApplicationContext(), DutyLogActivity.class);
-        intent.putExtra("formSelected", logList.get(logList.size()-1));
+        intent.putExtra("logSelected", logList.get(logList.size()-1));
         startActivityForResult(intent, 43);
     }
 

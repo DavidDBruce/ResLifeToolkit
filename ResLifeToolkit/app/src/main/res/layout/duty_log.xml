@@ -108,6 +108,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:backgroundTint="@android:color/holo_green_light"
+            android:onClick="saveFullLog"
             android:text="Save" />
 
         <Button
@@ -116,6 +117,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:backgroundTint="@android:color/holo_blue_light"
+            android:onClick="sendFullLog"
             android:text="Send" />
 
         <Button
@@ -124,6 +126,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:backgroundTint="@android:color/holo_red_light"
+            android:onClick="deleteFullLog"
             android:text="Delete" />
     </LinearLayout>
 </LinearLayout>

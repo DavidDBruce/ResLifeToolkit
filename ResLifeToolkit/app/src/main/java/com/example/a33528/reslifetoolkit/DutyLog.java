@@ -128,4 +128,32 @@ public class DutyLog implements Serializable {
     public void setId(int id) {
         this.id = id;
     }
+
+    public String getEmailBody()
+    {
+        String s = raOnDuty + " -- Duty Log  -- " + logDate + '\n' + '\n';
+        s += " -- 8:00 Rounds" + '\n';
+        s += round8 + '\n' + '\n';
+        s += " -- 10:00 Rounds" + '\n';
+        s += round10 + '\n' + '\n';
+        s += " -- 12:00 Rounds" + '\n';
+        s += round12 + '\n' + '\n';
+        s += " -- 2:00 Rounds" + '\n';
+        s += round2 + '\n' + '\n';
+        s += " -- Daytime Rounds" + '\n';
+        s += roundDay + '\n' + '\n';
+        s += " -- Documentations" + '\n';
+        s += documentations + '\n' + '\n';
+        s += " -- Work Orders" + '\n';
+        s += workOrders;
+
+
+        return s;
+    }
+
+    public String getEmailSubject()
+    {
+        return raOnDuty + " -- Duty Log  -- " + logDate;
+    }
+
 }

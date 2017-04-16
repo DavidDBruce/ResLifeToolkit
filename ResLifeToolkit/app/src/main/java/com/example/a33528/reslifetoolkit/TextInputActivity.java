@@ -10,7 +10,7 @@ import android.widget.TextView;
 public class TextInputActivity extends AppCompatActivity {
 
     Intent inputIntent;
-    Intent outputIntent;
+    Intent outputIntent = new Intent();
     TextView formTitle;
     EditText formBodyET;
 
@@ -22,6 +22,7 @@ public class TextInputActivity extends AppCompatActivity {
         formTitle = (TextView) findViewById(R.id.formTitleTV);
         formTitle.setText(inputIntent.getStringExtra("inputTitle"));
         formBodyET = (EditText) findViewById(R.id.formBodyET);
+        formBodyET.setText(inputIntent.getStringExtra("inputText"));
     }
 
     public void saveLogEntry(View v)

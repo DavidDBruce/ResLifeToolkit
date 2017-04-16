@@ -4,28 +4,22 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 public class ProgrammingFormListActivity extends AppCompatActivity {
 
     private ArrayList<ProgrammingForm> formsList;
     private ProgrammingAdapter programmingListLA;
-    //private FloatingActionButton addFormsButton;
     private MySQLiteHelper mDbHelper;
 
     @Override
@@ -35,9 +29,7 @@ public class ProgrammingFormListActivity extends AppCompatActivity {
 
         mDbHelper = new MySQLiteHelper(getApplicationContext());
 
-        formsList = new ArrayList<ProgrammingForm>();
-
-        //addFormsButton = (FloatingActionButton) findViewById(R.id.addFormFAB);
+        formsList = new ArrayList<>();
 
         formsList = mDbHelper.getAllProgrammingForms();
 

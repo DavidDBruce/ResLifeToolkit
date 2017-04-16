@@ -17,12 +17,10 @@ import android.widget.TimePicker;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
-import java.util.Scanner;
 
 public class ProgrammingFormActivity extends AppCompatActivity {
 
-    private Intent intent;
-    private Intent output = new Intent();
+    private Intent outputIntent = new Intent();
     private ProgrammingForm inputForm;
     private EditText formTitle;
     private EditText raName;
@@ -41,12 +39,12 @@ public class ProgrammingFormActivity extends AppCompatActivity {
 
     private Calendar myCalendar = Calendar.getInstance();
     private DatePickerDialog.OnDateSetListener date;
-    private TimePickerDialog.OnTimeSetListener time;
+    //private TimePickerDialog.OnTimeSetListener time;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.programming_form);
-        intent = getIntent();
+        Intent intent = getIntent();
         inputForm = (ProgrammingForm)intent.getSerializableExtra("formSelected");
         formTitle = (EditText) findViewById(R.id.eventTitleET);
         raName = (EditText) findViewById(R.id.raNameET);
@@ -105,7 +103,6 @@ public class ProgrammingFormActivity extends AppCompatActivity {
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear,
                                   int dayOfMonth) {
-                // TODO Auto-generated method stub
                 myCalendar.set(Calendar.YEAR, year);
                 myCalendar.set(Calendar.MONTH, monthOfYear);
                 myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
@@ -118,7 +115,6 @@ public class ProgrammingFormActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                // TODO Auto-generated method stub
                 new DatePickerDialog(ProgrammingFormActivity.this, date, myCalendar
                         .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
                         myCalendar.get(Calendar.DAY_OF_MONTH)).show();
@@ -130,7 +126,6 @@ public class ProgrammingFormActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                // TODO Auto-generated method stub
                 Calendar mcurrentTime = Calendar.getInstance();
                 int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
                 int minute = mcurrentTime.get(Calendar.MINUTE);
@@ -139,25 +134,20 @@ public class ProgrammingFormActivity extends AppCompatActivity {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
                         if(selectedHour == 0) {
-                            eventTime.setText( 12 + ":" + String.format("%02d",selectedMinute) + " AM");
+                            eventTime.setText( 12 + ":" + String.format(Locale.US,"%02d",selectedMinute) + " AM");
                         }else if(selectedHour < 12) {
-                            eventTime.setText(selectedHour + ":" + String.format("%02d",selectedMinute) + " AM");
+                            eventTime.setText(selectedHour + ":" + String.format(Locale.US,"%02d",selectedMinute) + " AM");
                         }else if(selectedHour == 12){
-                            eventTime.setText( 12 + ":" + String.format("%02d",selectedMinute) + " PM");
+                            eventTime.setText( 12 + ":" + String.format(Locale.US,"%02d",selectedMinute) + " PM");
                         }else{
-                            eventTime.setText( selectedHour - 12 + ":" + String.format("%02d",selectedMinute) + " PM");
+                            eventTime.setText( selectedHour - 12 + ":" + String.format(Locale.US,"%02d",selectedMinute) + " PM");
                         }
                     }
                 }, hour, minute, false);
                 mTimePicker.setTitle("Select Time");
                 mTimePicker.show();
-
             }
         });
-
-
-
-
     }
 
     private void updateDateLabel() {
@@ -168,17 +158,15 @@ public class ProgrammingFormActivity extends AppCompatActivity {
         eventDate.setText(sdf.format(myCalendar.getTime()));
     }
 
-    public void formSave(View v)
-    {
+    public void formSave(View v) {
 
         save();
-        output.putExtra("returnForm", inputForm);
-        setResult(RESULT_OK, output);
+        outputIntent.putExtra("returnForm", inputForm);
+        setResult(RESULT_OK, outputIntent);
         finish();
     }
 
-    public void formSend(View v)
-    {
+    public void formSend(View v) {
         save();
         Intent i = new Intent(Intent.ACTION_SEND);
         i.setType("message/rfc822");
@@ -193,8 +181,8 @@ public class ProgrammingFormActivity extends AppCompatActivity {
         i.putExtra(Intent.EXTRA_TEXT,buildForm());
         startActivity(Intent.createChooser(i,"Send form..."));
 
-        output.putExtra("returnForm", inputForm);
-        setResult(RESULT_OK, output);
+        outputIntent.putExtra("returnForm", inputForm);
+        setResult(RESULT_OK, outputIntent);
         finish();
     }
 
@@ -203,15 +191,15 @@ public class ProgrammingFormActivity extends AppCompatActivity {
         finish();
     }
 
-    public void formDelete(View v)
-    {new AlertDialog.Builder(ProgrammingFormActivity.this)
+    public void formDelete(View v) {
+        new AlertDialog.Builder(ProgrammingFormActivity.this)
             .setTitle("Delete Duty Log")
-            .setMessage("Are you sure you want to delete this programmingn form?")
+            .setMessage("Are you sure you want to delete this programming form?")
             .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener(){
                 public void onClick(DialogInterface dialog, int which)
                 {
-                    output.putExtra("returnForm", inputForm);
-                    setResult(RESULT_CANCELED, output);
+                    outputIntent.putExtra("returnForm", inputForm);
+                    setResult(RESULT_CANCELED, outputIntent);
                     finish();
                 }
             })
@@ -225,8 +213,7 @@ public class ProgrammingFormActivity extends AppCompatActivity {
             .show();
     }
 
-    public void save()
-    {
+    public void save() {
         inputForm.setAttendees(attendees.getText().toString());
         inputForm.setCost(cost.getText().toString());
         inputForm.setIsEvent(!formSwitch.isChecked());
@@ -240,10 +227,10 @@ public class ProgrammingFormActivity extends AppCompatActivity {
         inputForm.setRaName(raName.getText().toString());
         inputForm.setEventDate(eventDate.getText().toString());
         inputForm.setEventTime(eventTime.getText().toString());
+        inputForm.setGoals(goals.getText().toString());
     }
 
-    public String buildForm()
-    {
+    public String buildForm() {
         String completedForm = "";
         if(!inputForm.getIsEvent()) {
             completedForm += raName.getText().toString() + " -- " + "Passive" + '\n' + '\n';
@@ -274,6 +261,8 @@ public class ProgrammingFormActivity extends AppCompatActivity {
             completedForm += "-- $" + cost.getText().toString() + '\n' + '\n';
             completedForm += "How many resident came to this event?";
             completedForm += "-- " + attendees.getText().toString() + '\n' + '\n';
+            completedForm += "Did you accomplish your goals?";
+            completedForm += "-- " + goals.getText().toString() + '\n' + '\n';
         }
         return completedForm;
     }

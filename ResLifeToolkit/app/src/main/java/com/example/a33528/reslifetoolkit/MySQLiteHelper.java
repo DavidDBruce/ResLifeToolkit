@@ -48,9 +48,9 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     private static final String KEY_WORKORDERS = "workorders";
     private static final String KEY_LOGDATE = "logdate";
 
-    private static final String[] PF_COLUMNS = {KEY_ID,KEY_RANAME,KEY_HALLNAME,KEY_FLOORNUM,KEY_EVENTTITLE,KEY_EVENTREASON,KEY_EVENTDESCRIPTION,KEY_EVENTPUBLICITY,KEY_EVENTDATE,KEY_COST,KEY_ATTENDEES,KEY_GOALS,KEY_POSITIONFORDELETE,KEY_ISEVENT,KEY_EVENTTIME};
+    //private static final String[] PF_COLUMNS = {KEY_ID,KEY_RANAME,KEY_HALLNAME,KEY_FLOORNUM,KEY_EVENTTITLE,KEY_EVENTREASON,KEY_EVENTDESCRIPTION,KEY_EVENTPUBLICITY,KEY_EVENTDATE,KEY_COST,KEY_ATTENDEES,KEY_GOALS,KEY_POSITIONFORDELETE,KEY_ISEVENT,KEY_EVENTTIME};
 
-    private static final String[] DL_COLUMNS = {KEY_ID,KEY_RANAME,KEY_8ROUNDS,KEY_10ROUNDS,KEY_12ROUNDS,KEY_2ROUNDS,KEY_DAYROUNDS,KEY_DOCUMENTATIONS,KEY_WORKORDERS,KEY_LOGDATE,KEY_POSITIONFORDELETE};
+   // private static final String[] DL_COLUMNS = {KEY_ID,KEY_RANAME,KEY_8ROUNDS,KEY_10ROUNDS,KEY_12ROUNDS,KEY_2ROUNDS,KEY_DAYROUNDS,KEY_DOCUMENTATIONS,KEY_WORKORDERS,KEY_LOGDATE,KEY_POSITIONFORDELETE};
 
     public static final int DATABASE_VERSION = 1;
     public static final String DATABASE_NAME = "ResLifeToolkitDB";
@@ -60,10 +60,38 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     }
 
     public void onCreate(SQLiteDatabase db) {
-        String CREATE_PF_TABLE = "CREATE TABLE IF NOT EXISTS programmingform ( " + "id INTEGER PRIMARY KEY AUTOINCREMENT, " + "raname TEXT, "+ "hallname TEXT, " + "floornum TEXT, " + "eventtitle TEXT, " + "eventreason TEXT, " + "eventdescription TEXT, " + "eventpublicity TEXT, " + "eventdate TEXT, " + "cost TEXT, " + "attendees TEXT, " + "goals TEXT, "+ "positionfordelete INTEGER, " + "isevent INTEGER," + "eventtime TEXT" + ")";
+
+        String CREATE_PF_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_PF + " ( "
+                + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + KEY_RANAME + " TEXT, "
+                + KEY_HALLNAME +" TEXT, "
+                + KEY_FLOORNUM +" TEXT, "
+                + KEY_EVENTTITLE +" TEXT, "
+                + KEY_EVENTREASON +" TEXT, "
+                + KEY_EVENTDESCRIPTION +" TEXT, "
+                + KEY_EVENTPUBLICITY +" TEXT, "
+                + KEY_EVENTDATE +" TEXT, "
+                + KEY_COST +" TEXT, "
+                + KEY_ATTENDEES + " TEXT, "
+                + KEY_GOALS + " TEXT, "
+                + KEY_POSITIONFORDELETE + " INTEGER, "
+                + KEY_ISEVENT + " INTEGER,"
+                + KEY_EVENTTIME + " TEXT" + ")";
         db.execSQL(CREATE_PF_TABLE);
 
-        String CREATE_DL_TABLE = "CREATE TABLE IF NOT EXISTS dutylogs ( " + "id INTEGER PRIMARY KEY AUTOINCREMENT, " + "raname TEXT, " + "eightrounds TEXT, " + "tenrounds TEXT, " + "twelverounds TEXT, " + "tworounds TEXT, " + "dayrounds TEXT, " + "documentations TEXT, " + "woorkorders TEXT, " + "logdate TEXT)";
+        String CREATE_DL_TABLE = "CREATE TABLE IF NOT EXISTS "
+                + TABLE_DL + " ( "
+                + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " //0
+                + KEY_RANAME + " TEXT, "                          //1
+                + KEY_8ROUNDS + " TEXT, "                         //2
+                + KEY_10ROUNDS + " TEXT, "                        //3
+                + KEY_12ROUNDS + " TEXT, "                        //4
+                + KEY_2ROUNDS + " TEXT, "                         //5
+                + KEY_DAYROUNDS + " TEXT, "                       //6
+                + KEY_DOCUMENTATIONS + " TEXT, "                  //7
+                + KEY_WORKORDERS + " TEXT, "                      //8
+                + KEY_POSITIONFORDELETE + " INTEGER, "            //9
+                + KEY_LOGDATE + " TEXT" + ")";                    //10
 
         db.execSQL(CREATE_DL_TABLE);
     }
@@ -122,54 +150,6 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 
     }
 
-    public ProgrammingForm getProgrammingForm(int id){
-
-        // 1. get reference to readable DB
-        SQLiteDatabase db = this.getReadableDatabase();
-
-        // 2. build query
-        Cursor cursor =
-                db.query(TABLE_PF, // a. table
-                        PF_COLUMNS, // b. column names
-                        " id = ?", // c. selections
-                        new String[] { String.valueOf(id) }, // d. selections args
-                        null, // e. group by
-                        null, // f. having
-                        null, // g. order by
-                        null); // h. limit
-
-        // 3. if we got results get the first one
-        if (cursor != null)
-            cursor.moveToFirst();
-
-        // 4. build book object
-        ProgrammingForm pf = new ProgrammingForm();
-        pf.setId(Integer.parseInt(cursor.getString(0)));
-        pf.setRaName(cursor.getString(1));
-        pf.setHallName(cursor.getString(2));
-        pf.setHallFloor(cursor.getString(3));
-        pf.setEventTitle(cursor.getString(4));
-        pf.setEventReason(cursor.getString(5));
-        pf.setEventDescription((cursor.getString(6)));
-        pf.setEventPublicity(cursor.getString(7));
-        pf.setEventDate(cursor.getString(8));
-        pf.setCost(cursor.getString(9));
-        pf.setAttendees(cursor.getString(10));
-        pf.setGoals(cursor.getString(11));
-        pf.setPositionForDelete(Integer.parseInt(cursor.getString(12)));
-
-        if(Integer.parseInt(cursor.getString(13) )== 1){
-            pf.setIsEvent(true);}
-        else{
-            pf.setIsEvent(false);}
-
-        //log
-        Log.d("getForm("+id+")", pf.toString());
-
-        // 5. return book
-        return pf;
-    }
-
     public ArrayList<ProgrammingForm> getAllProgrammingForms() {
         ArrayList<ProgrammingForm> pfs = new ArrayList<ProgrammingForm>();
 
@@ -213,6 +193,11 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     public void clearProgrammingForms() {
         SQLiteDatabase db = getWritableDatabase();
         db.execSQL("DROP TABLE IF EXISTS programmingform");
+        onCreate(db);
+    }
+    public void clearDutyLogs() {
+        SQLiteDatabase db = getWritableDatabase();
+        db.execSQL("DROP TABLE IF EXISTS dutylogs");
         onCreate(db);
     }
 
@@ -260,16 +245,16 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         ContentValues curEntry = new ContentValues();
 
 
-        curEntry.put("raonduty", dl.getRaOnDuty());
-        curEntry.put("eightround",dl.getRound8());
-        curEntry.put("tenround",dl.getRound10());
-        curEntry.put("twelveround",dl.getRound12());
-        curEntry.put("tworound",dl.getRound2());
-        curEntry.put("dayround", dl.getRoundDay());
-        curEntry.put("documentations", dl.getDocumentations());
-        curEntry.put("workorders", dl.getWorkOrders());
-        curEntry.put("logdate", dl.getLogDate());
-        curEntry.put("positionfordelete", dl.getPositionForDelete());
+        curEntry.put(KEY_RANAME, dl.getRaOnDuty());//1
+        curEntry.put(KEY_8ROUNDS,dl.getRound8());//2
+        curEntry.put(KEY_10ROUNDS,dl.getRound10());//3
+        curEntry.put(KEY_12ROUNDS,dl.getRound12());//4
+        curEntry.put(KEY_2ROUNDS,dl.getRound2());//5
+        curEntry.put(KEY_DAYROUNDS, dl.getRoundDay());//6
+        curEntry.put(KEY_DOCUMENTATIONS, dl.getDocumentations());//7
+        curEntry.put(KEY_WORKORDERS, dl.getWorkOrders());//8
+        curEntry.put(KEY_POSITIONFORDELETE, dl.getPositionForDelete());//9
+        curEntry.put(KEY_LOGDATE, dl.getLogDate());//10
 
         db.insert(TABLE_DL,null,curEntry);
         db.close();
@@ -307,17 +292,16 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
             do {
                 dl = new DutyLog();
                 dl.setId(Integer.parseInt(cursor.getString(0)));
-                dl.setRound8(cursor.getString(1));
-                dl.setRound10(cursor.getString(2));
-                dl.setRound12(cursor.getString(3));
-                dl.setRound2(cursor.getString(4));
-                dl.setRoundDay(cursor.getString(5));
-                dl.setRaOnDuty((cursor.getString(6)));
-                dl.setLogDate(cursor.getString(7));
-                dl.setDocumentations(cursor.getString(8));
-                dl.setWorkOrders(cursor.getString(9));
-                dl.setPositionForDelete(Integer.parseInt(cursor.getString(10)));
-
+                dl.setRaOnDuty((cursor.getString(1)));
+                dl.setRound8(cursor.getString(2));
+                dl.setRound10(cursor.getString(3));
+                dl.setRound12(cursor.getString(4));
+                dl.setRound2(cursor.getString(5));
+                dl.setRoundDay(cursor.getString(6));
+                dl.setDocumentations(cursor.getString(7));
+                dl.setWorkOrders(cursor.getString(8));
+                dl.setPositionForDelete(Integer.parseInt(cursor.getString(9)));
+                dl.setLogDate(cursor.getString(10));
                 dls.add(dl);
             } while (cursor.moveToNext());
         }
@@ -333,19 +317,19 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         // 2. create ContentValues to add key "column"/value
         ContentValues curEntry = new ContentValues();
 
-        curEntry.put("eightround",dl.getRound8());
-        curEntry.put("tenround",dl.getRound10());
-        curEntry.put("twelveround",dl.getRound12());
-        curEntry.put("tworound",dl.getRound2());
-        curEntry.put("dayround", dl.getRoundDay());
-        curEntry.put("raonduty", dl.getRaOnDuty());
-        curEntry.put("logdate", dl.getLogDate());
-        curEntry.put("documentations", dl.getDocumentations());
-        curEntry.put("workorders", dl.getWorkOrders());
-        curEntry.put("positionfordelete", dl.getPositionForDelete());
+        curEntry.put(KEY_RANAME, dl.getRaOnDuty());//1
+        curEntry.put(KEY_8ROUNDS,dl.getRound8());//2
+        curEntry.put(KEY_10ROUNDS,dl.getRound10());//3
+        curEntry.put(KEY_12ROUNDS,dl.getRound12());//4
+        curEntry.put(KEY_2ROUNDS,dl.getRound2());//5
+        curEntry.put(KEY_DAYROUNDS, dl.getRoundDay());//6
+        curEntry.put(KEY_DOCUMENTATIONS, dl.getDocumentations());//7
+        curEntry.put(KEY_WORKORDERS, dl.getWorkOrders());//8
+        curEntry.put(KEY_POSITIONFORDELETE, dl.getPositionForDelete());//9
+        curEntry.put(KEY_LOGDATE, dl.getLogDate());//10
 
         // 3. updating row
-        int i = db.update(TABLE_PF, //table
+        int i = db.update(TABLE_DL, //table
                 curEntry, // column/value
                 KEY_ID+" = ?", // selections
                 new String[] { String.valueOf(dl.getId()) }); //selection args
@@ -356,5 +340,53 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         return i;
 
     }
+
+    //    public ProgrammingForm getProgrammingForm(int id){
+//
+//        // 1. get reference to readable DB
+//        SQLiteDatabase db = this.getReadableDatabase();
+//
+//        // 2. build query
+//        Cursor cursor =
+//                db.query(TABLE_PF, // a. table
+//                        PF_COLUMNS, // b. column names
+//                        " id = ?", // c. selections
+//                        new String[] { String.valueOf(id) }, // d. selections args
+//                        null, // e. group by
+//                        null, // f. having
+//                        null, // g. order by
+//                        null); // h. limit
+//
+//        // 3. if we got results get the first one
+//        if (cursor != null)
+//            cursor.moveToFirst();
+//
+//        // 4. build book object
+//        ProgrammingForm pf = new ProgrammingForm();
+//        pf.setId(Integer.parseInt(cursor.getString(0)));
+//        pf.setRaName(cursor.getString(1));
+//        pf.setHallName(cursor.getString(2));
+//        pf.setHallFloor(cursor.getString(3));
+//        pf.setEventTitle(cursor.getString(4));
+//        pf.setEventReason(cursor.getString(5));
+//        pf.setEventDescription((cursor.getString(6)));
+//        pf.setEventPublicity(cursor.getString(7));
+//        pf.setEventDate(cursor.getString(8));
+//        pf.setCost(cursor.getString(9));
+//        pf.setAttendees(cursor.getString(10));
+//        pf.setGoals(cursor.getString(11));
+//        pf.setPositionForDelete(Integer.parseInt(cursor.getString(12)));
+//
+//        if(Integer.parseInt(cursor.getString(13) )== 1){
+//            pf.setIsEvent(true);}
+//        else{
+//            pf.setIsEvent(false);}
+//
+//        //log
+//        Log.d("getForm("+id+")", pf.toString());
+//
+//        // 5. return book
+//        return pf;
+//    }
 
 }

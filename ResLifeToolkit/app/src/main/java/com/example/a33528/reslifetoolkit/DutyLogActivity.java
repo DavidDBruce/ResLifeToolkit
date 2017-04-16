@@ -24,11 +24,11 @@ import java.util.Locale;
 public class DutyLogActivity extends AppCompatActivity {
 
     private Intent inputIntent;
-    private Intent outputIntent;
+    private Intent outputIntent = new Intent();
     private DutyLog inputLog;
     private TextView dutyLogTitle;
     private EditText raOnDuty;
-    private String logDateOnUpdate;
+    private String logDateOnUpdate = "";
     MySQLiteHelper mDbHelper;
 
     private DatePickerDialog.OnDateSetListener date;
@@ -40,6 +40,7 @@ public class DutyLogActivity extends AppCompatActivity {
         setContentView(R.layout.duty_log);
 
         inputIntent = getIntent();
+
         inputLog = (DutyLog) inputIntent.getSerializableExtra("logSelected");
         dutyLogTitle = (TextView) findViewById(R.id.dutyLogDateTV);
         raOnDuty = (EditText) findViewById(R.id.raOnDutyET);
@@ -77,62 +78,61 @@ public class DutyLogActivity extends AppCompatActivity {
         raOnDuty.setText(inputLog.getRaOnDuty());
      }
 
-     private void updateDateLabel()
-     {
+    private void updateDateLabel() {
          String myFormat = "MM/dd/yy";
          SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
          logDateOnUpdate = sdf.format(myCalendar.getTime());
-         dutyLogTitle.setText("Duty Log for" + logDateOnUpdate);
+         dutyLogTitle.setText("Duty Log for " + logDateOnUpdate);
 
      }
 
-    public void eightRound(View v)
-    {
+    public void eightRound(View v) {
         Intent intent = new Intent(getApplicationContext(), TextInputActivity.class);
         intent.putExtra("inputTitle","8 O'Clock Rounds");
+        intent.putExtra("inputText",inputLog.getRound8());
         startActivityForResult(intent, 50);
     }
 
-    public void tenRound(View v)
-    {
+    public void tenRound(View v) {
         Intent intent = new Intent(getApplicationContext(), TextInputActivity.class);
         intent.putExtra("inputTitle","10 O'Clock Rounds");
+        intent.putExtra("inputText",inputLog.getRound10());
         startActivityForResult(intent, 51);
     }
 
-    public void twelveRound(View v)
-    {
+    public void twelveRound(View v) {
         Intent intent = new Intent(getApplicationContext(), TextInputActivity.class);
         intent.putExtra("inputTitle","12 O'Clock Rounds");
+        intent.putExtra("inputText",inputLog.getRound12());
         startActivityForResult(intent, 52);
     }
 
-    public void twoRound(View v)
-    {
+    public void twoRound(View v) {
         Intent intent = new Intent(getApplicationContext(), TextInputActivity.class);
         intent.putExtra("inputTitle","2 O'Clock Rounds");
+        intent.putExtra("inputText",inputLog.getRound2());
         startActivityForResult(intent, 53);
     }
 
-    public void dayRound(View v)
-    {
+    public void dayRound(View v) {
         Intent intent = new Intent(getApplicationContext(), TextInputActivity.class);
         intent.putExtra("inputTitle","Daytime Rounds");
+        intent.putExtra("inputText",inputLog.getRoundDay());
         startActivityForResult(intent, 54);
     }
 
-    public void launchDoc(View v)
-    {
+    public void launchDoc(View v) {
         Intent intent = new Intent(getApplicationContext(), TextInputActivity.class);
         intent.putExtra("inputTitle","Documentations");
+        intent.putExtra("inputText",inputLog.getDocumentations());
         startActivityForResult(intent, 55);
     }
 
-    public void launchWO(View v)
-    {
+    public void launchWO(View v) {
         Intent intent = new Intent(getApplicationContext(), TextInputActivity.class);
         intent.putExtra("inputTitle","Work Orders");
+        intent.putExtra("inputText",inputLog.getWorkOrders());
         startActivityForResult(intent, 56);
     }
 
@@ -145,15 +145,20 @@ public class DutyLogActivity extends AppCompatActivity {
             inputLog.setLogDate(logDateOnUpdate);
         }
 
-        //mDbHelper.updateDutyLog(inputLog);
         outputIntent.putExtra("returnLog",inputLog);
         setResult(RESULT_OK,outputIntent);
         finish();
 
     }
 
-    public void cancelFullLog(View v){
-
+    public void sendFullLog(View v){
+        saveFullLog(v);
+        Intent i = new Intent(Intent.ACTION_SEND);
+        i.setType("message/rfc822");
+        i.putExtra(Intent.EXTRA_SUBJECT, inputLog.getEmailSubject());
+        i.putExtra(Intent.EXTRA_TEXT,inputLog.getEmailBody());
+        startActivity(Intent.createChooser(i,"Send form..."));
+        finish();
     }
 
     public void deleteFullLog(View v){
@@ -180,8 +185,7 @@ public class DutyLogActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data)
-    {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode == 50 && resultCode == RESULT_OK && data != null) {
             inputLog.setRound8(data.getStringExtra("returnText"));
             mDbHelper.updateDutyLog(inputLog);
