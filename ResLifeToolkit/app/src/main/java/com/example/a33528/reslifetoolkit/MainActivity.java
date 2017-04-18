@@ -16,10 +16,6 @@ import java.io.File;
 
 public class MainActivity extends AppCompatActivity {
 
-    ProgrammingForm testForm;
-    ProgrammingForm testForm2;
-    ProgrammingForm testForm3;
-
     MySQLiteHelper mDbHelper;
 
     @Override
@@ -28,24 +24,21 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.main_screen);
 
         mDbHelper = new MySQLiteHelper(getApplicationContext());
-//        mDbHelper.clearProgrammingForms();
-//
-//        testForm = new ProgrammingForm("David Bruce", "South Complex", "2", "Smash Night", "Fun", "Playing Smash Bros", "Flyers and Emails", "0.0", "12", "yes", true);
-//        testForm2 = new ProgrammingForm("Cheyanne Whorton", "South Complex", "2", "Sleep", "Floor needs to learn to sleep.", "Bulletin board with points built in.", "", "0.0", "0", "", false);
-//        testForm3 = new ProgrammingForm("Sadie Moore", "South Complex", "3", "Hot Seat", "Fun", "Playing Hot Seat after floor meeting.", "Flyers and Emails", "0.0", "12", "yes", true);
-//
-//        mDbHelper.addProgrammingForm(testForm);
-//        mDbHelper.addProgrammingForm(testForm2);
-//        mDbHelper.addProgrammingForm(testForm3);
     }
-    public void programmingForms(View view)
+    public void programmingForms(View v)
     {
         Intent intent = new Intent(this,ProgrammingFormListActivity.class);
         startActivity(intent);
     }
-    public void dutyLogs(View view)
+    public void dutyLogs(View v)
     {
         Intent intent = new Intent(this,DutyLogListActivity.class);
+        startActivity(intent);
+    }
+
+    public void handBook(View v)
+    {
+        Intent intent = getPackageManager().getLaunchIntentForPackage("com.instructure.candroid");
         startActivity(intent);
     }
 }

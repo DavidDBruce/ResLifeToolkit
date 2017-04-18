@@ -21,17 +21,11 @@
         android:onClick="dutyLogs" />
 
     <Button
-        android:text="Interaction Journals"
+        android:id="@+id/hbBTN"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/ijBTN"
-        android:layout_weight="1" />
-
-    <Button
-        android:text="Documents"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/docBTN"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        android:onClick="handBook"
+        android:text="Handbook" />
 
 </LinearLayout>
