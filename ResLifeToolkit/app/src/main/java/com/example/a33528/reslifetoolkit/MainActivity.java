@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import java.io.File;
 
@@ -38,8 +39,14 @@ public class MainActivity extends AppCompatActivity {
 
     public void handBook(View v)
     {
-        Intent intent = getPackageManager().getLaunchIntentForPackage("com.instructure.candroid");
-        startActivity(intent);
+        try {
+            Intent intent = getPackageManager().getLaunchIntentForPackage("com.instructure.candroid");
+            startActivity(intent);
+        }
+        catch(Exception e)
+        {
+            Toast.makeText(this,"You need to install the Canvas app.", Toast.LENGTH_SHORT).show();
+        }
     }
 }
 
