@@ -1,16 +1,9 @@
 package com.example.a33528.reslifetoolkit;
 
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-
-/**
- * Created by S522706 on 4/2/2017.
- */
 
 public class DutyLog implements Serializable {
-//
+
     private String round8 = "";
     private String round10 = "";
     private String round12 = "";

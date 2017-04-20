@@ -127,9 +127,6 @@ public class DutyLogListActivity extends AppCompatActivity {
 
 
 class DutyLogAdapter extends ArrayAdapter<DutyLog> {
-    //ArrayAdapter to set the correct information in a ListView for DutyLogs
-
-    //ArrayList<DutyLog> inputForms = new ArrayList<DutyLog>();
 
     public DutyLogAdapter(Context context, int resource, int textViewResourceId, List<DutyLog> objects) {
         super(context, resource, textViewResourceId, objects);
@@ -139,8 +136,6 @@ class DutyLogAdapter extends ArrayAdapter<DutyLog> {
     public View getView(int position, View convertView, ViewGroup parent) {
 
         View view = super.getView(position,convertView,parent);
-
-        //Retrieving TextViews from the list item XML, then setting them to their corresponding values.
 
         TextView date = (TextView) view.findViewById(R.id.dutyLogDateTV);
         TextView month = (TextView) view.findViewById(R.id.dutyLogMonthTV);

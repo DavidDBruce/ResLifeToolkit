@@ -5,15 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 import java.util.ArrayList;
-
-/**
- * Created by s522706 on 4/6/2017.
- */
-
-
 
 public class MySQLiteHelper extends SQLiteOpenHelper {
 
@@ -47,10 +40,6 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     private static final String KEY_DOCUMENTATIONS = "documentations";
     private static final String KEY_WORKORDERS = "workorders";
     private static final String KEY_LOGDATE = "logdate";
-
-    //private static final String[] PF_COLUMNS = {KEY_ID,KEY_RANAME,KEY_HALLNAME,KEY_FLOORNUM,KEY_EVENTTITLE,KEY_EVENTREASON,KEY_EVENTDESCRIPTION,KEY_EVENTPUBLICITY,KEY_EVENTDATE,KEY_COST,KEY_ATTENDEES,KEY_GOALS,KEY_POSITIONFORDELETE,KEY_ISEVENT,KEY_EVENTTIME};
-
-   // private static final String[] DL_COLUMNS = {KEY_ID,KEY_RANAME,KEY_8ROUNDS,KEY_10ROUNDS,KEY_12ROUNDS,KEY_2ROUNDS,KEY_DAYROUNDS,KEY_DOCUMENTATIONS,KEY_WORKORDERS,KEY_LOGDATE,KEY_POSITIONFORDELETE};
 
     public static final int DATABASE_VERSION = 1;
     public static final String DATABASE_NAME = "ResLifeToolkitDB";
@@ -134,33 +123,21 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 
     public void deleteProgrammingForm(ProgrammingForm pf) {
 
-        // 1. get reference to writable DB
         SQLiteDatabase db = this.getWritableDatabase();
 
-        // 2. delete
-        db.delete(TABLE_PF, //table name
-                KEY_ID+" = ?",  // selections
-                new String[] { String.valueOf(pf.getId()) }); //selections args
+        db.delete(TABLE_PF, KEY_ID+" = ?", new String[] { String.valueOf(pf.getId()) });
 
-        // 3. close
         db.close();
-
-        //log
-        Log.d("deleteBook", pf.toString());
-
     }
 
     public ArrayList<ProgrammingForm> getAllProgrammingForms() {
         ArrayList<ProgrammingForm> pfs = new ArrayList<ProgrammingForm>();
 
-        // 1. build the query
         String query = "SELECT  * FROM " + TABLE_PF;
 
-        // 2. get reference to writable DB
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
 
-        // 3. go over each row, build book and add it to list
         ProgrammingForm pf;
         if (cursor.moveToFirst()) {
             do {
@@ -195,6 +172,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS programmingform");
         onCreate(db);
     }
+
     public void clearDutyLogs() {
         SQLiteDatabase db = getWritableDatabase();
         db.execSQL("DROP TABLE IF EXISTS dutylogs");
@@ -203,10 +181,8 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 
     public int updateProgrammingForm(ProgrammingForm pf) {
 
-        // 1. get reference to writable DB
         SQLiteDatabase db = this.getWritableDatabase();
 
-        // 2. create ContentValues to add key "column"/value
         ContentValues curEntry = new ContentValues();
 
         curEntry.put("raname", pf.getRaName());
@@ -227,13 +203,8 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
             curEntry.put("isevent", 0);}
         curEntry.put("eventtime", pf.getEventTime());
 
-        // 3. updating row
-        int i = db.update(TABLE_PF, //table
-                curEntry, // column/value
-                KEY_ID+" = ?", // selections
-                new String[] { String.valueOf(pf.getId()) }); //selection args
+        int i = db.update(TABLE_PF, curEntry, KEY_ID+" = ?", new String[] { String.valueOf(pf.getId()) });
 
-        // 4. close
         db.close();
 
         return i;
@@ -263,15 +234,10 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 
     public void deleteDutyLog(DutyLog dl) {
 
-        // 1. get reference to writable DB
         SQLiteDatabase db = this.getWritableDatabase();
 
-        // 2. delete
-        db.delete(TABLE_DL, //table name
-                KEY_ID+" = ?",  // selections
-                new String[] { String.valueOf(dl.getId()) }); //selections args
+        db.delete(TABLE_DL, KEY_ID+" = ?", new String[] { String.valueOf(dl.getId()) });
 
-        // 3. close
         db.close();
 
     }
@@ -279,14 +245,11 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     public ArrayList<DutyLog> getAllDutyLogs() {
         ArrayList<DutyLog> dls = new ArrayList<DutyLog>();
 
-        // 1. build the query
         String query = "SELECT  * FROM " + TABLE_DL;
 
-        // 2. get reference to writable DB
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
 
-        // 3. go over each row, build book and add it to list
         DutyLog dl;
         if (cursor.moveToFirst()) {
             do {
@@ -311,10 +274,8 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 
     public int updateDutyLog(DutyLog dl) {
 
-        // 1. get reference to writable DB
         SQLiteDatabase db = this.getWritableDatabase();
 
-        // 2. create ContentValues to add key "column"/value
         ContentValues curEntry = new ContentValues();
 
         curEntry.put(KEY_RANAME, dl.getRaOnDuty());//1
@@ -328,65 +289,11 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         curEntry.put(KEY_POSITIONFORDELETE, dl.getPositionForDelete());//9
         curEntry.put(KEY_LOGDATE, dl.getLogDate());//10
 
-        // 3. updating row
-        int i = db.update(TABLE_DL, //table
-                curEntry, // column/value
-                KEY_ID+" = ?", // selections
-                new String[] { String.valueOf(dl.getId()) }); //selection args
+        int i = db.update(TABLE_DL, curEntry, KEY_ID+" = ?", new String[] { String.valueOf(dl.getId()) });
 
-        // 4. close
         db.close();
 
         return i;
 
     }
-
-    //    public ProgrammingForm getProgrammingForm(int id){
-//
-//        // 1. get reference to readable DB
-//        SQLiteDatabase db = this.getReadableDatabase();
-//
-//        // 2. build query
-//        Cursor cursor =
-//                db.query(TABLE_PF, // a. table
-//                        PF_COLUMNS, // b. column names
-//                        " id = ?", // c. selections
-//                        new String[] { String.valueOf(id) }, // d. selections args
-//                        null, // e. group by
-//                        null, // f. having
-//                        null, // g. order by
-//                        null); // h. limit
-//
-//        // 3. if we got results get the first one
-//        if (cursor != null)
-//            cursor.moveToFirst();
-//
-//        // 4. build book object
-//        ProgrammingForm pf = new ProgrammingForm();
-//        pf.setId(Integer.parseInt(cursor.getString(0)));
-//        pf.setRaName(cursor.getString(1));
-//        pf.setHallName(cursor.getString(2));
-//        pf.setHallFloor(cursor.getString(3));
-//        pf.setEventTitle(cursor.getString(4));
-//        pf.setEventReason(cursor.getString(5));
-//        pf.setEventDescription((cursor.getString(6)));
-//        pf.setEventPublicity(cursor.getString(7));
-//        pf.setEventDate(cursor.getString(8));
-//        pf.setCost(cursor.getString(9));
-//        pf.setAttendees(cursor.getString(10));
-//        pf.setGoals(cursor.getString(11));
-//        pf.setPositionForDelete(Integer.parseInt(cursor.getString(12)));
-//
-//        if(Integer.parseInt(cursor.getString(13) )== 1){
-//            pf.setIsEvent(true);}
-//        else{
-//            pf.setIsEvent(false);}
-//
-//        //log
-//        Log.d("getForm("+id+")", pf.toString());
-//
-//        // 5. return book
-//        return pf;
-//    }
-
 }
