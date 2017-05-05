@@ -1,29 +1,14 @@
 # README #
 
-This README would normally document whatever steps are necessary to get your application up and running.
-
 ### What is this repository for? ###
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+ResLife Toolkit is an application that allows Residential Assistants to fill out necessary paperwork on their mobile device and easily send it to their Hall Director or other supervisors.
 
-### How do I get set up? ###
+### How to run? ###
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
+If the repository is imported to Android Studio, the application can simply be run by plugging in a device or using the built in emulator. If difficulties are experienced, the repository owner can provide an Android APK of the latest version for easy installation.
 
-### Contribution guidelines ###
+### Contact ###
 
-* Writing tests
-* Code review
-* Other guidelines
-
-### Who do I talk to? ###
-
-* Repo owner or admin
-* Other community or team contact
+David Bruce
+DavidDouglasBruce@gmail.com
