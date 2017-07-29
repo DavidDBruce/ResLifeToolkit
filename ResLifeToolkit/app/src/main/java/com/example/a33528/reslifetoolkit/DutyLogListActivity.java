@@ -88,7 +88,7 @@ public class DutyLogListActivity extends AppCompatActivity {
     {
         DutyLog item = new DutyLog();
         item.setPositionForDelete(0);
-        mDbHelper.addDutyLog(item);
+        mDbHelper.createDutyLog(item);
         logList = mDbHelper.getAllDutyLogs();
         dutyLogLA.clear();
         dutyLogLA.addAll(logList);

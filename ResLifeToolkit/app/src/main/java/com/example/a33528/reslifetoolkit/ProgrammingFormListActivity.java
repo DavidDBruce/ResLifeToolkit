@@ -14,7 +14,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 public class ProgrammingFormListActivity extends AppCompatActivity {
 
@@ -31,7 +30,7 @@ public class ProgrammingFormListActivity extends AppCompatActivity {
 
         formsList = new ArrayList<>();
 
-        formsList = mDbHelper.getAllProgrammingForms();
+        formsList = mDbHelper.retrieveAllProgrammingForms();
 
         buildLV();
     }
@@ -64,7 +63,7 @@ public class ProgrammingFormListActivity extends AppCompatActivity {
                             public void onClick(DialogInterface dialog, int which)
                             {
                                 mDbHelper.deleteProgrammingForm(formsList.get(removePosition));
-                                formsList = mDbHelper.getAllProgrammingForms();
+                                formsList = mDbHelper.retrieveAllProgrammingForms();
                                 programmingListLA.clear();
                                 programmingListLA.addAll(formsList);
                                 programmingListLA.notifyDataSetChanged();
@@ -87,8 +86,8 @@ public class ProgrammingFormListActivity extends AppCompatActivity {
     {
         ProgrammingForm item = new ProgrammingForm();
         item.setPositionForDelete(0);
-        mDbHelper.addProgrammingForm(item);
-        formsList = mDbHelper.getAllProgrammingForms();
+        mDbHelper.createProgrammingForm(item);
+        formsList = mDbHelper.retrieveAllProgrammingForms();
         programmingListLA.clear();
         programmingListLA.addAll(formsList);
         Intent intent = new Intent(getApplicationContext(), ProgrammingFormActivity.class);
@@ -102,7 +101,7 @@ public class ProgrammingFormListActivity extends AppCompatActivity {
         if(requestCode == 42 && resultCode == RESULT_OK && data != null) {
             ProgrammingForm returnForm = (ProgrammingForm) data.getSerializableExtra("returnForm");
             mDbHelper.updateProgrammingForm(returnForm);
-            formsList = mDbHelper.getAllProgrammingForms();
+            formsList = mDbHelper.retrieveAllProgrammingForms();
             programmingListLA.clear();
             programmingListLA.addAll(formsList);
             programmingListLA.notifyDataSetChanged();
@@ -110,7 +109,7 @@ public class ProgrammingFormListActivity extends AppCompatActivity {
         else if(requestCode == 42 && resultCode == RESULT_CANCELED && data != null) {
             ProgrammingForm returnForm = (ProgrammingForm) data.getSerializableExtra("returnForm");
             mDbHelper.deleteProgrammingForm(returnForm);
-            formsList = mDbHelper.getAllProgrammingForms();
+            formsList = mDbHelper.retrieveAllProgrammingForms();
             programmingListLA.clear();
             programmingListLA.addAll(formsList);
             programmingListLA.notifyDataSetChanged();

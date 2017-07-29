@@ -55,13 +55,9 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     }
 
     public void onCreate(SQLiteDatabase db) {
-
         createRaTable(db);
-
         createBuildingTable(db);
-
         createProgrammingFormTable(db);
-
         createDutyLogTable(db);
     }
 
@@ -77,7 +73,8 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         onUpgrade(db, oldVersion, newVersion);
     }
 
-    public void addProgrammingForm(ProgrammingForm pf) {
+    //Create PF
+    public void createProgrammingForm(ProgrammingForm pf) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues curEntry = new ContentValues();
 
@@ -103,16 +100,8 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    public void deleteProgrammingForm(ProgrammingForm pf) {
-
-        SQLiteDatabase db = this.getWritableDatabase();
-
-        db.delete(TABLE_PF, KEY_ID+" = ?", new String[] { String.valueOf(pf.getId()) });
-
-        db.close();
-    }
-
-    public ArrayList<ProgrammingForm> getAllProgrammingForms() {
+    //Retrieve PF
+    public ArrayList<ProgrammingForm> retrieveAllProgrammingForms() {
         ArrayList<ProgrammingForm> pfs = new ArrayList<ProgrammingForm>();
 
         String query = "SELECT  * FROM " + TABLE_PF;
@@ -149,18 +138,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         return pfs;
     }
 
-    public void clearProgrammingForms() {
-        SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("DROP TABLE IF EXISTS programmingform");
-        onCreate(db);
-    }
-
-    public void clearDutyLogs() {
-        SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("DROP TABLE IF EXISTS dutylogs");
-        onCreate(db);
-    }
-
+    //Update PF
     public int updateProgrammingForm(ProgrammingForm pf) {
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -193,7 +171,18 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 
     }
 
-    public void addDutyLog(DutyLog dl) {
+    //Delete PF
+    public void deleteProgrammingForm(ProgrammingForm pf) {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        db.delete(TABLE_PF, KEY_ID+" = ?", new String[] { String.valueOf(pf.getId()) });
+
+        db.close();
+    }
+
+    //CREATE DL
+    public void createDutyLog(DutyLog dl) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues curEntry = new ContentValues();
 
@@ -214,17 +203,8 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 
     }
 
-    public void deleteDutyLog(DutyLog dl) {
-
-        SQLiteDatabase db = this.getWritableDatabase();
-
-        db.delete(TABLE_DL, KEY_ID+" = ?", new String[] { String.valueOf(dl.getId()) });
-
-        db.close();
-
-    }
-
-    public ArrayList<DutyLog> getAllDutyLogs() {
+    //RETRIEVE DL
+    public ArrayList<DutyLog> retrieveAllDutyLogs() {
         ArrayList<DutyLog> dls = new ArrayList<DutyLog>();
 
         String query = "SELECT  * FROM " + TABLE_DL;
@@ -254,6 +234,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         return dls;
     }
 
+    //UPDATE DL
     public int updateDutyLog(DutyLog dl) {
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -277,6 +258,29 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 
         return i;
 
+    }
+
+    //DELETE DL
+    public void deleteDutyLog(DutyLog dl) {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        db.delete(TABLE_DL, KEY_ID+" = ?", new String[] { String.valueOf(dl.getId()) });
+
+        db.close();
+
+    }
+
+    public void clearProgrammingForms() {
+        SQLiteDatabase db = getWritableDatabase();
+        db.execSQL("DROP TABLE IF EXISTS programmingform");
+        onCreate(db);
+    }
+
+    public void clearDutyLogs() {
+        SQLiteDatabase db = getWritableDatabase();
+        db.execSQL("DROP TABLE IF EXISTS dutylogs");
+        onCreate(db);
     }
 
     private void createRaTable(SQLiteDatabase db){
