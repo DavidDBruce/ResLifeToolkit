@@ -56,59 +56,20 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 
     public void onCreate(SQLiteDatabase db) {
 
-        String CREATE_RA_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_RA + " ( "
-                + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + KEY_NAME + " TEXT"
-                + " )";
-        db.execSQL(CREATE_RA_TABLE);
+        createRaTable(db);
 
-        String CREATE_BD_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_BD + " ( "
-                + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + KEY_NAME + " TEXT"
-                + " )";
-        db.execSQL(CREATE_BD_TABLE);
+        createBuildingTable(db);
 
-        String CREATE_PF_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_PF + " ( "
-                + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + KEY_RAID + " INT, "
-                + KEY_BUILDINGID +" INT, "
-                + KEY_FLOOR +" TEXT, "
-                + KEY_TITLE +" TEXT, "
-                + KEY_REASON +" TEXT, "
-                + KEY_DESCRIPTION +" TEXT, "
-                + KEY_PUBLICITY +" TEXT, "
-                + KEY_DATETIME +" TEXT, "
-                + KEY_COST +" TEXT, "
-                + KEY_ATTENDEES + " TEXT, "
-                + KEY_GOALS + " TEXT, "
-                + KEY_POSITIONFORDELETE + " INTEGER, "
-                + KEY_ISEVENT + " BIT, "
-                + "FOREIGN KEY(" + KEY_RAID + ") REFERENCES " + TABLE_RA + "(" + KEY_ID + "), "
-                + "FOREIGN KEY(" + KEY_BUILDINGID + ") REFERENCES " + TABLE_BD + "(" + KEY_ID + "), "
-                + " )";
-        db.execSQL(CREATE_PF_TABLE);
+        createProgrammingFormTable(db);
 
-        String CREATE_DL_TABLE = "CREATE TABLE IF NOT EXISTS "
-                + TABLE_DL + " ( "
-                + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " //0
-                + KEY_NAME + " TEXT, "                            //1
-                + KEY_8ROUNDS + " TEXT, "                         //2
-                + KEY_10ROUNDS + " TEXT, "                        //3
-                + KEY_12ROUNDS + " TEXT, "                        //4
-                + KEY_2ROUNDS + " TEXT, "                         //5
-                + KEY_DAYROUNDS + " TEXT, "                       //6
-                + KEY_DOCUMENTATIONS + " TEXT, "                  //7
-                + KEY_WORKORDERS + " TEXT, "                      //8
-                + KEY_POSITIONFORDELETE + " INTEGER, "            //9
-                + KEY_LOGDATE + " TEXT"                           //10
-                + ")";
-
-        db.execSQL(CREATE_DL_TABLE);
+        createDutyLogTable(db);
     }
 
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS programmingform");
         db.execSQL("DROP TABLE IF EXISTS dutylogs");
+        db.execSQL("DROP TABLE IF EXISTS ra");
+        db.execSQL("DROP TABLE IF EXISTS building");
         onCreate(db);
     }
 
@@ -316,5 +277,62 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 
         return i;
 
+    }
+
+    private void createRaTable(SQLiteDatabase db){
+        String CREATE_RA_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_RA + " ( "
+                + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + KEY_NAME + " TEXT"
+                + " )";
+        db.execSQL(CREATE_RA_TABLE);
+    }
+
+    private void createBuildingTable(SQLiteDatabase db){
+        String CREATE_BD_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_BD + " ( "
+                + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + KEY_NAME + " TEXT"
+                + " )";
+        db.execSQL(CREATE_BD_TABLE);
+    }
+
+    private void createProgrammingFormTable(SQLiteDatabase db){
+        String CREATE_PF_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_PF + " ( "
+                + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + KEY_RAID + " INT, "
+                + KEY_BUILDINGID +" INT, "
+                + KEY_FLOOR +" TEXT, "
+                + KEY_TITLE +" TEXT, "
+                + KEY_REASON +" TEXT, "
+                + KEY_DESCRIPTION +" TEXT, "
+                + KEY_PUBLICITY +" TEXT, "
+                + KEY_DATETIME +" TEXT, "
+                + KEY_COST +" TEXT, "
+                + KEY_ATTENDEES + " TEXT, "
+                + KEY_GOALS + " TEXT, "
+                + KEY_POSITIONFORDELETE + " INTEGER, "
+                + KEY_ISEVENT + " BIT, "
+                + "FOREIGN KEY(" + KEY_RAID + ") REFERENCES " + TABLE_RA + "(" + KEY_ID + "), "
+                + "FOREIGN KEY(" + KEY_BUILDINGID + ") REFERENCES " + TABLE_BD + "(" + KEY_ID + "), "
+                + " )";
+        db.execSQL(CREATE_PF_TABLE);
+    }
+
+    private void createDutyLogTable(SQLiteDatabase db){
+        String CREATE_DL_TABLE = "CREATE TABLE IF NOT EXISTS "
+                + TABLE_DL + " ( "
+                + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " //0
+                + KEY_NAME + " TEXT, "                            //1
+                + KEY_8ROUNDS + " TEXT, "                         //2
+                + KEY_10ROUNDS + " TEXT, "                        //3
+                + KEY_12ROUNDS + " TEXT, "                        //4
+                + KEY_2ROUNDS + " TEXT, "                         //5
+                + KEY_DAYROUNDS + " TEXT, "                       //6
+                + KEY_DOCUMENTATIONS + " TEXT, "                  //7
+                + KEY_WORKORDERS + " TEXT, "                      //8
+                + KEY_POSITIONFORDELETE + " INTEGER, "            //9
+                + KEY_LOGDATE + " TEXT"                           //10
+                + ")";
+
+        db.execSQL(CREATE_DL_TABLE);
     }
 }
