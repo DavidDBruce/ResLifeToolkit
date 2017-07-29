@@ -13,23 +13,29 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     // Table Name
     private static final String TABLE_PF = "programmingform";
     private static final String TABLE_DL = "dutylogs";
+    private static final String TABLE_RA = "ra";
+    private static final String TABLE_BD = "building";
+
+    //RA Column Names
+    private static final String KEY_RAID = "raid";
+
+    //Building Column Names
+    private static final String KEY_BUILDINGID = "buildingid";
 
     //Programming Form Column Names
     private static final String KEY_ID = "id";
-    private static final String KEY_RANAME = "raname";
-    private static final String KEY_HALLNAME = "hallname";
-    private static final String KEY_FLOORNUM = "floornum";
-    private static final String KEY_EVENTTITLE = "eventtitle";
-    private static final String KEY_EVENTREASON = "eventreason";
-    private static final String KEY_EVENTDESCRIPTION = "eventdescription";
-    private static final String KEY_EVENTPUBLICITY = "eventpublicity";
-    private static final String KEY_EVENTDATE = "eventdate";
+    private static final String KEY_NAME = "name";
+    private static final String KEY_FLOOR = "floor";
+    private static final String KEY_TITLE = "title";
+    private static final String KEY_REASON = "reason";
+    private static final String KEY_DESCRIPTION = "description";
+    private static final String KEY_PUBLICITY = "publicity";
+    private static final String KEY_DATETIME = "datetime";
     private static final String KEY_COST = "cost";
     private static final String KEY_ATTENDEES = "attendees";
     private static final String KEY_GOALS = "goals";
     private static final String KEY_POSITIONFORDELETE = "positionfordelete";
     private static final String KEY_ISEVENT = "isevent";
-    private static final String KEY_EVENTTIME = "eventtime";
 
     //Duty Log Column Names
     private static final String KEY_8ROUNDS = "eigthrounds";
@@ -50,28 +56,42 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 
     public void onCreate(SQLiteDatabase db) {
 
+        String CREATE_RA_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_RA + " ( "
+                + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + KEY_NAME + " TEXT"
+                + " )";
+        db.execSQL(CREATE_RA_TABLE);
+
+        String CREATE_BD_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_BD + " ( "
+                + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + KEY_NAME + " TEXT"
+                + " )";
+        db.execSQL(CREATE_BD_TABLE);
+
         String CREATE_PF_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_PF + " ( "
                 + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + KEY_RANAME + " TEXT, "
-                + KEY_HALLNAME +" TEXT, "
-                + KEY_FLOORNUM +" TEXT, "
-                + KEY_EVENTTITLE +" TEXT, "
-                + KEY_EVENTREASON +" TEXT, "
-                + KEY_EVENTDESCRIPTION +" TEXT, "
-                + KEY_EVENTPUBLICITY +" TEXT, "
-                + KEY_EVENTDATE +" TEXT, "
+                + KEY_RAID + " INT, "
+                + KEY_BUILDINGID +" INT, "
+                + KEY_FLOOR +" TEXT, "
+                + KEY_TITLE +" TEXT, "
+                + KEY_REASON +" TEXT, "
+                + KEY_DESCRIPTION +" TEXT, "
+                + KEY_PUBLICITY +" TEXT, "
+                + KEY_DATETIME +" TEXT, "
                 + KEY_COST +" TEXT, "
                 + KEY_ATTENDEES + " TEXT, "
                 + KEY_GOALS + " TEXT, "
                 + KEY_POSITIONFORDELETE + " INTEGER, "
-                + KEY_ISEVENT + " INTEGER,"
-                + KEY_EVENTTIME + " TEXT" + ")";
+                + KEY_ISEVENT + " BIT, "
+                + "FOREIGN KEY(" + KEY_RAID + ") REFERENCES " + TABLE_RA + "(" + KEY_ID + "), "
+                + "FOREIGN KEY(" + KEY_BUILDINGID + ") REFERENCES " + TABLE_BD + "(" + KEY_ID + "), "
+                + " )";
         db.execSQL(CREATE_PF_TABLE);
 
         String CREATE_DL_TABLE = "CREATE TABLE IF NOT EXISTS "
                 + TABLE_DL + " ( "
                 + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " //0
-                + KEY_RANAME + " TEXT, "                          //1
+                + KEY_NAME + " TEXT, "                            //1
                 + KEY_8ROUNDS + " TEXT, "                         //2
                 + KEY_10ROUNDS + " TEXT, "                        //3
                 + KEY_12ROUNDS + " TEXT, "                        //4
@@ -80,7 +100,8 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
                 + KEY_DOCUMENTATIONS + " TEXT, "                  //7
                 + KEY_WORKORDERS + " TEXT, "                      //8
                 + KEY_POSITIONFORDELETE + " INTEGER, "            //9
-                + KEY_LOGDATE + " TEXT" + ")";                    //10
+                + KEY_LOGDATE + " TEXT"                           //10
+                + ")";
 
         db.execSQL(CREATE_DL_TABLE);
     }
@@ -216,7 +237,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         ContentValues curEntry = new ContentValues();
 
 
-        curEntry.put(KEY_RANAME, dl.getRaOnDuty());//1
+        curEntry.put(KEY_NAME, dl.getRaOnDuty());//1
         curEntry.put(KEY_8ROUNDS,dl.getRound8());//2
         curEntry.put(KEY_10ROUNDS,dl.getRound10());//3
         curEntry.put(KEY_12ROUNDS,dl.getRound12());//4
@@ -278,7 +299,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 
         ContentValues curEntry = new ContentValues();
 
-        curEntry.put(KEY_RANAME, dl.getRaOnDuty());//1
+        curEntry.put(KEY_NAME, dl.getRaOnDuty());//1
         curEntry.put(KEY_8ROUNDS,dl.getRound8());//2
         curEntry.put(KEY_10ROUNDS,dl.getRound10());//3
         curEntry.put(KEY_12ROUNDS,dl.getRound12());//4
